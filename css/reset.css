@@ -1,0 +1,226 @@
+@charset "UTF-8";
+
+/**
+ * RESET MAESTRO UNIVERSAL v2.1 - "THE SHIELD"
+ * -------------------------------------------------------------------
+ * OBJETIVO: Crear un lienzo 100% neutro, eliminando inconsistencias 
+ * entre navegadores (Chrome, Safari, Firefox, Edge).
+ * FILOSOFÍA: 
+ * 1. Especificidad Cero (:where) para fácil sobrescritura.
+ * 2. Herencia total de tipografía y color.
+ * 3. Prevención de errores comunes de Layout (CLS y Desbordamiento).
+ * -------------------------------------------------------------------
+ */
+
+:root {
+  --font-principal: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+/* 1. RESET GLOBAL CON EXCLUSIONES CRÍTICAS */
+*:where(
+  :not(html, dialog, summary, iframe, canvas, img, svg, video, audio):not(
+    svg *,
+    symbol *
+  )
+) {
+  all: unset;
+  display: revert;
+}
+
+/* 2. BOX MODEL & ACCESIBILIDAD */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 3. RAÍZ Y BODY */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: none;
+}
+
+body {
+  min-height: 100vh;
+  font-size: 100%;
+  font-family: var(--font-principal);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: inherit;
+  background-color: transparent;
+}
+
+/* 4. MULTIMEDIA & ASSETS (Prevención de CLS) */
+img,
+picture,
+video,
+iframe,
+figure,
+canvas {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+svg {
+  width: 100%;
+  display: block;
+  fill: currentColor;
+}
+
+p svg,
+p img {
+  display: inline;
+  width: initial;
+}
+
+/* 5. TIPOGRAFÍA Y ENLACES */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+strong,
+blockquote,
+i,
+b,
+u,
+em,
+mark,
+del,
+ins,
+code,
+pre,
+kbd,
+samp,
+small,
+sub,
+sup,
+address {
+  font-size: 1em;
+  font-weight: inherit;
+  font-style: inherit;
+  text-decoration: none;
+  color: inherit;
+  overflow-wrap: break-word;
+}
+
+mark {
+  background-color: transparent;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+  content: "";
+  content: none;
+}
+
+a {
+  cursor: pointer;
+  display: inline-block;
+  color: inherit;
+}
+
+/* EXCEPCIÓN: Enlaces en bloques de texto deben ser inline para el flujo natural */
+p a,
+li a,
+blockquote a,
+span a {
+  display: inline;
+}
+
+/* 6. LISTAS Y TABLAS (Blindaje Estructural) */
+ol,
+ul,
+li,
+menu,
+summary {
+  list-style: none;
+}
+ol {
+  counter-reset: revert;
+}
+
+table,
+thead,
+tbody,
+tfoot,
+tr {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  font: inherit;
+}
+
+td,
+th {
+  padding: 0;
+  text-align: left;
+  font-weight: inherit;
+}
+
+/* 7. FORMULARIOS E INTERACCIÓN */
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+  appearance: none;
+}
+
+button,
+label,
+summary,
+[role="button"] {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  appearance: none;
+}
+
+textarea {
+  white-space: pre-wrap;
+  resize: vertical;
+}
+
+::placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
+
+/* 8. SELECCIÓN DE TEXTO */
+::selection {
+  background-color: Highlight;
+  color: HighlightText;
+}

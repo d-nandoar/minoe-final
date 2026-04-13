@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minoe | Exclusividad en Joyería, Accesorios y Gourmet</title>
+    <meta
+      name="description"
+      content="Descubre Minoe: Una curaduría de lujo donde la joyería artesanal, el diseño de accesorios y el brindis gourmet se unen para elevar cada uno de tus momentos."
+    />
+    <meta name="author" content="David" />
+    <!-- <meta name="robots" content="index, follow" /> -->
+    <link rel="shortcut icon" href="assets/icons/fav.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/typography.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- =====================
+         OVERLAY
+         ===================== -->
+
+    <div id="overlay" class="overlay"></div>
+
+    <!-- =======================
+         1. HEADER
+         ======================= -->
+
+    <header class="header">
+      <div class="header__contenedor">
+        <!-- hamb -->
+
+        <div class="header__hamb">
+          <button class="header__btn-hamb">
+            <span class="header__hamb-icon header__hamb-url"></span>
+          </button>
+        </div>
+
+        <!-- logo -->
+
+        <div class="header__logo">
+          <a class="header__logo-a" id="header__logo-a" href="#"
+            ><img
+              class="header__logo-img"
+              src="assets/img/milogo.png"
+              alt=""
+              srcset=""
+          /></a>
+        </div>
+
+        <!-- menú -->
+
+        <div class="nav__contenedor">
+          <!-- nav -->
+
+          <nav class="header__nav">
+            <!-- ul -->
+
+            <ul class="header__ul">
+              <!-- li -->
+
+              <li class="header__li">
+                <a class="header__a a--active" id="header__a" href="#hero"
+                  >Inicio</a
+                >
+              </li>
+              <li class="header__li">
+                <a class="header__a" href="#nosotros">Nosotros</a>
+              </li>
+
+              <!-- submenú -->
+
+              <li class="header__li header__li-contenedor">
+                <!-- btn submenú -->
+
+                <button class="header__btn-submenu">
+                  Categorías
+                  <span class="header__arrow-icon header__arrow-url"></span>
+                </button>
+
+                <!-- ul submenú-->
+
+                <ul class="header__submenu">
+                  <!-- li submenú-->
+
+                  <li class="header__li-submenu">
+                    <a href="#joyeria" class="header__a header__a-submenu"
+                      >Joyería</a
+                    >
+                  </li>
+                  <li class="header__li-submenu">
+                    <a href="#gourmet" class="header__a header__a-submenu"
+                      >Gourmet</a
+                    >
+                  </li>
+                  <li class="header__li-submenu">
+                    <a href="#studio" class="header__a header__a-submenu"
+                      >Studio</a
+                    >
+                  </li>
+                  <li class="header__li-submenu">
+                    <a href="#sets" class="header__a header__a-submenu"
+                      >Sets de Regalos</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="header__li">
+                <a class="header__a" href="#contacto">Contacto</a>
+              </li>
+            </ul>
+          </nav>
+
+          <!-- cart -->
+
+          <div class="header__cart">
+            <!-- btn cart -->
+
+            <button class="header__btn-cart">
+              <span class="header__cart-icon header__cart-url"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- =====================
+         MAIN - SECCIONES
+         ===================== -->
+
+    <main>
+      <!-- =====================
+         2. HERO
+         ======================= -->
+
+      <section class="hero" id="hero">
+        <!-- slider -->
+
+        <div class="hero__slider">
+          <!-- items - imágenes de fondo -->
+
+          <div id="category-filters" class="hero__list">
+            <!-- img studio-->
+
+            <div class="hero__item-list hero__item-list--active">
+              <img src="assets/img/studio.png" alt="" class="hero__img-list" />
+              <div class="hero__comtent-list">
+                <h2 class="hero__h2-list">Minoe Studio</h2>
+                <h6 class="hero__h6-list">By Leonela Alvarez</h6>
+                <p class="hero__p-list">
+                  <span class="hero__span-list"
+                    >Pasos con carácter, accesorios con alma.</span
+                  >
+                  Zapatos y carteras que no solo complementan tu outfit, sino
+                  que definen tu presencia. Calidad artesanal en cada costura y
+                  materiales seleccionados para la mujer que busca sofisticación
+                  y confort en su día a día.
+                </p>
+                <a id="filter-studio" href="#studio" class="hero__a-list"
+                  >[ Explora Minoe Studio ]
+                </a>
+              </div>
+            </div>
+
+            <!-- img jewelry -->
+
+            <div class="hero__item-list">
+              <img src="assets/img/jewelry.png" alt="" class="hero__img-list" />
+              <div class="hero__comtent-list">
+                <h2 class="hero__h2-list">Minoe Jewelry</h2>
+                <h6 class="hero__h6-list">By Leonela Alvarez</h6>
+                <p class="hero__p-list">
+                  <span class="hero__span-list"
+                    >Destellos que cuentan tu historia.</span
+                  >
+                  Piezas diseñadas para perdurar. Nuestra joyería combina
+                  metales nobles y diseños contemporáneos para que lleves
+                  contigo un detalle de elegancia en cada ocasión. Encuentra el
+                  regalo perfecto o ese capricho que mereces.
+                </p>
+                <a id="filter-joyeria" href="#joyeria" class="hero__a-list"
+                  >[ Explora Minoe Jewelry ]</a
+                >
+              </div>
+            </div>
+
+            <!-- img gourmet -->
+
+            <div class="hero__item-list">
+              <img src="assets/img/gourmet.png" alt="" class="hero__img-list" />
+              <div class="hero__comtent-list">
+                <h2 class="hero__h2-list">Minoe Gourmet</h2>
+                <h6 class="hero__h6-list">By Leonela Alvarez</h6>
+                <p class="hero__p-list">
+                  <span class="hero__span-list"
+                    >El sabor de la celebración perfecta.</span
+                  >
+                  Nuestros rompopes artesanales y cócteles gourmet son una
+                  caricia al paladar. Desde sabores clásicos hasta mezclas
+                  innovadoras, cada botella es una invitación a compartir,
+                  brindar y disfrutar de los placeres dulces de la vida.
+                </p>
+                <a id="filter-licores" href="#gourmet" class="hero__a-list"
+                  >[ Explora Minoe Gourmet ]</a
+                >
+              </div>
+            </div>
+
+            <!-- img sets -->
+
+            <div class="hero__item-list">
+              <img src="assets/img/sets.png" alt="" class="hero__img-list" />
+              <div class="hero__comtent-list">
+                <h2 class="hero__h2-list">Sets de Regalo</h2>
+                <h6 class="hero__h6-list">By Leonela Alvarez</h6>
+                <p class="hero__p-list">
+                  <span class="hero__span-list"
+                    >El regalo ideal, curado por Minoe.</span
+                  >
+                  ¿Buscas algo único? Hemos creado sets exclusivos que combinan
+                  nuestras tres pasiones: Una joya delicada, un accesorio de
+                  cuero impecable y un licor gourmet para celebrar. Elige una
+                  experiencia completa.
+                </p>
+                <a id="filter-regalos" href="#sets" class="hero__a-list"
+                  >[ Explora Minoe Sets ]</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- btn prev/next -->
+
+          <div class="hero__arrows">
+            <button class="hero__prev-arow" id="hero__prev-arow"><</button>
+            <button class="hero__next-arow" id="hero__next-arow">></button>
+          </div>
+
+          <!-- items - miniaturas -->
+
+          <div class="hero__thumbnail">
+            <!-- img studio -->
+
+            <div class="hero__item-thumbnail hero__item-thumbnail--active">
+              <img
+                src="assets/img/studio.png"
+                alt=""
+                class="hero__img--thumbnail"
+              />
+              <div class="hero__content-thumbnail">
+                <span class="hero__span-thumbnail">Studio</span>
+              </div>
+            </div>
+
+            <!-- img jewelry -->
+
+            <div class="hero__item-thumbnail">
+              <img
+                src="assets/img/jewelry.png"
+                alt=""
+                class="hero__img--thumbnail"
+              />
+              <div class="hero__content-thumbnail">
+                <span class="hero__span-thumbnail">Jewelry</span>
+              </div>
+            </div>
+
+            <!-- img gourmet -->
+
+            <div class="hero__item-thumbnail">
+              <img
+                src="assets/img/gourmet.png"
+                alt=""
+                class="hero__img--thumbnail"
+              />
+              <div class="hero__content-thumbnail">
+                <span class="hero__span-thumbnail">Gourmet</span>
+              </div>
+            </div>
+
+            <!-- img sets -->
+
+            <div class="hero__item-thumbnail">
+              <img
+                src="assets/img/sets.png"
+                alt=""
+                class="hero__img--thumbnail"
+              />
+              <div class="hero__content-thumbnail">
+                <span class="hero__span-thumbnail">Sets</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================
+         3. ASIDE CART
+         ======================= -->
+
+      <aside class="cart">
+        <div class="cart__contenedor"></div>
+      </aside>
+
+      <!-- =====================
+         4. NOSOTROS
+         ======================= -->
+
+      <section id="nosotros" class="nosotros">
+        <div class="nosotros-container">
+          <div class="nosotros-content">
+            <h2 class="titulo-nosotros">Detalles que elevan tus momentos</h2>
+            <p class="texto-nosotros">
+              Minoe nace de una visión clara: la elegancia no es un accesorio,
+              es una forma de habitar el mundo. Nuestra curaduría une la
+              <strong>Joyería</strong>, el diseño de <strong>Studio</strong> y
+              el sabor <strong>Gourmet</strong> en una sola experiencia de lujo.
+            </p>
+            <p class="texto-nosotros">
+              Cada pieza es seleccionada bajo estándares de calidad
+              excepcionales, pensada para quienes buscan distinguir lo ordinario
+              de lo extraordinario.
+            </p>
+          </div>
+          <div class="nosotros-imagen">
+            <img src="assets/img/nosot.png" alt="Esencia Minoe" />
+          </div>
+        </div>
+      </section>
+
+      <!-- otros -->
+
+      <section id="joyeria" class="joyeria" style="background-color: #509b8c">
+        <h1>Sección Jotería</h1>
+      </section>
+      <section id="gourmet" class="gourmet" style="background-color: #b8a174">
+        <h1>Sección Gourmet</h1>
+      </section>
+      <section id="studio" class="studio" style="background-color: #8693b2">
+        <h1>Sección Studio</h1>
+      </section>
+      <section id="sets" class="sets" style="background-color: #72927d">
+        <h1>Sección Sets de Regalo</h1>
+      </section>
+      <section id="contacto" class="contacto" style="background-color: #233f39">
+        <h1>Sección Contacto</h1>
+      </section>
+    </main>
+    <footer></footer>
+    <script src="js/menu.js"></script>
+    <script src="js/hero.js"></script>
+  </body>
+</html>
