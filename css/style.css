@@ -1856,8 +1856,9 @@ a,
   }
 
   .sidebar {
-    width: 85%;
-    /* right: -90%; */
+    width: 90%;
+    height: 95vh;
+    /* right: -85%; */
   }
 
   .qty-selector__btn {
