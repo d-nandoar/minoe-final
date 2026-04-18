@@ -3,30 +3,90 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Minoe | Exclusividad en Joyería, Accesorios y Gourmet</title>
     <meta
       name="description"
       content="Descubre Minoe: Una curaduría de lujo donde la joyería artesanal, el diseño de accesorios y el brindis gourmet se unen para elevar cada uno de tus momentos."
     />
+
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://d-nandoar.github.io/minoe-final/"
+    />
+    <meta
+      property="og:title"
+      content="Minoe | Detalles que elevan tus momentos"
+    />
+    <meta
+      property="og:description"
+      content="Diseño artesanal bajo la dirección de Leonela Alvarez."
+    />
+    <meta
+      property="og:image"
+      content="https://d-nandoar.github.io/minoe-final/assets/img/milogo.png"
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://d-nandoar.github.io/minoe-final/assets/img/milogo.png"
+    />
+
     <meta name="author" content="David" />
     <!-- <meta name="robots" content="index, follow" /> -->
     <link rel="shortcut icon" href="assets/icons/fav.png" type="image/x-icon" />
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/typography.css" />
+    <link rel="stylesheet" href="css/preloader.css" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
+  <body class="no-scroll">
+    <!-- =====================
+         PRELOADER
+         ===================== -->
+    <div id="preloader" class="preloader">
+      <div class="preloader__curtain"></div>
+      <div class="preloader__bg-crema"></div>
+
+      <div class="preloader__content">
+        <div class="logo-wrapper">
+          <svg class="circle-svg" viewBox="0 0 100 100">
+            <circle class="circle-path" cx="50" cy="50" r="48" />
+          </svg>
+          <div class="logo-img-container">
+            <img
+              src="assets/img/preloader.jpg"
+              alt="Minoe Logo"
+              class="logo-img"
+            />
+            <div class="logo-reveal-mask"></div>
+          </div>
+        </div>
+
+        <div class="brand-name-container">
+          <p class="brand-name">MINOE</p>
+        </div>
+        <p class="brand-tagline">JEWELRY • STUDIO • GOURMET</p>
+        <p class="brand-est">EST. 2026</p>
+      </div>
+    </div>
+
     <!-- =====================
          OVERLAY
          ===================== -->
 
-    <div id="overlay" class="overlay"></div>
+    <!-- <div id="overlay__cart" class="overlay__nav"></div> -->
+    <div class="overlay__nav"></div>
 
     <!-- =======================
-         1. HEADER
-         ======================= -->
+    1. HEADER
+    ======================= -->
 
     <header class="header">
+      <!-- <div id="overlay" class="overlay overlay--active"></div> -->
+
       <div class="header__contenedor">
         <!-- hamb -->
 
@@ -48,9 +108,11 @@
           /></a>
         </div>
 
+        <!-- <div id="toast-container" class="navbar__toast-container"></div> -->
+
         <!-- menú -->
 
-        <div class="nav__contenedor">
+        <div id="nav-category-filters" class="nav__contenedor">
           <!-- nav -->
 
           <nav class="header__nav">
@@ -84,22 +146,34 @@
                   <!-- li submenú-->
 
                   <li class="header__li-submenu">
-                    <a href="#joyeria" class="header__a header__a-submenu"
+                    <a
+                      href="#joyeria"
+                      id="nav__filter-joyeria"
+                      class="header__a header__a-submenu"
                       >Joyería</a
                     >
                   </li>
                   <li class="header__li-submenu">
-                    <a href="#gourmet" class="header__a header__a-submenu"
+                    <a
+                      href="#gourmet"
+                      id="nav__filter-gourmet"
+                      class="header__a header__a-submenu"
                       >Gourmet</a
                     >
                   </li>
                   <li class="header__li-submenu">
-                    <a href="#studio" class="header__a header__a-submenu"
+                    <a
+                      href="#studio"
+                      id="nav__filter-studio"
+                      class="header__a header__a-submenu"
                       >Studio</a
                     >
                   </li>
                   <li class="header__li-submenu">
-                    <a href="#sets" class="header__a header__a-submenu"
+                    <a
+                      href="#regalos"
+                      id="nav__filter-regalos"
+                      class="header__a header__a-submenu"
                       >Sets de Regalos</a
                     >
                   </li>
@@ -112,12 +186,20 @@
           </nav>
 
           <!-- cart -->
+          <!-- <div class="prueba">la bolsa esta vacia</div> -->
+          <div id="toast-container" class="navbar__toast-container"></div>
 
           <div class="header__cart">
             <!-- btn cart -->
 
-            <button class="header__btn-cart">
+            <button class="header__btn-cart" id="open-cart">
               <span class="header__cart-icon header__cart-url"></span>
+              <span class="navbar__cart-count" id="cart-count">0</span>
+              <div class="sparkles-container">
+                <span class="sparkle s1">✦</span>
+                <span class="sparkle s2">✦</span>
+                <span class="sparkle s3">✦</span>
+              </div>
             </button>
           </div>
         </div>
@@ -128,7 +210,7 @@
          MAIN - SECCIONES
          ===================== -->
 
-    <main>
+    <main class="main-content">
       <!-- =====================
          2. HERO
          ======================= -->
@@ -140,31 +222,9 @@
           <!-- items - imágenes de fondo -->
 
           <div id="category-filters" class="hero__list">
-            <!-- img studio-->
-
-            <div class="hero__item-list hero__item-list--active">
-              <img src="assets/img/studio.png" alt="" class="hero__img-list" />
-              <div class="hero__comtent-list">
-                <h2 class="hero__h2-list">Minoe Studio</h2>
-                <h6 class="hero__h6-list">By Leonela Alvarez</h6>
-                <p class="hero__p-list">
-                  <span class="hero__span-list"
-                    >Pasos con carácter, accesorios con alma.</span
-                  >
-                  Zapatos y carteras que no solo complementan tu outfit, sino
-                  que definen tu presencia. Calidad artesanal en cada costura y
-                  materiales seleccionados para la mujer que busca sofisticación
-                  y confort en su día a día.
-                </p>
-                <a id="filter-studio" href="#studio" class="hero__a-list"
-                  >[ Explora Minoe Studio ]
-                </a>
-              </div>
-            </div>
-
             <!-- img jewelry -->
 
-            <div class="hero__item-list">
+            <div class="hero__item-list hero__item-list--active">
               <img src="assets/img/jewelry.png" alt="" class="hero__img-list" />
               <div class="hero__comtent-list">
                 <h2 class="hero__h2-list">Minoe Jewelry</h2>
@@ -178,9 +238,30 @@
                   contigo un detalle de elegancia en cada ocasión. Encuentra el
                   regalo perfecto o ese capricho que mereces.
                 </p>
-                <a id="filter-joyeria" href="#joyeria" class="hero__a-list"
+                <a id="filter-joyeria" href="#catalogo" class="hero__a-list"
                   >[ Explora Minoe Jewelry ]</a
                 >
+              </div>
+            </div>
+            <!-- img studio-->
+
+            <div class="hero__item-list">
+              <img src="assets/img/studio.png" alt="" class="hero__img-list" />
+              <div class="hero__comtent-list">
+                <h2 class="hero__h2-list">Minoe Studio</h2>
+                <h6 class="hero__h6-list">By Leonela Alvarez</h6>
+                <p class="hero__p-list">
+                  <span class="hero__span-list"
+                    >Pasos con carácter, accesorios con alma.</span
+                  >
+                  Zapatos y carteras que no solo complementan tu outfit, sino
+                  que definen tu presencia. Calidad artesanal en cada costura y
+                  materiales seleccionados para la mujer que busca sofisticación
+                  y confort en su día a día.
+                </p>
+                <a id="filter-studio" href="#catalogo" class="hero__a-list"
+                  >[ Explora Minoe Studio ]
+                </a>
               </div>
             </div>
 
@@ -200,7 +281,7 @@
                   innovadoras, cada botella es una invitación a compartir,
                   brindar y disfrutar de los placeres dulces de la vida.
                 </p>
-                <a id="filter-licores" href="#gourmet" class="hero__a-list"
+                <a id="filter-gourmet" href="#catalogo" class="hero__a-list"
                   >[ Explora Minoe Gourmet ]</a
                 >
               </div>
@@ -222,7 +303,7 @@
                   cuero impecable y un licor gourmet para celebrar. Elige una
                   experiencia completa.
                 </p>
-                <a id="filter-regalos" href="#sets" class="hero__a-list"
+                <a id="filter-regalos" href="#catalogo" class="hero__a-list"
                   >[ Explora Minoe Sets ]</a
                 >
               </div>
@@ -239,22 +320,9 @@
           <!-- items - miniaturas -->
 
           <div class="hero__thumbnail">
-            <!-- img studio -->
-
-            <div class="hero__item-thumbnail hero__item-thumbnail--active">
-              <img
-                src="assets/img/studio.png"
-                alt=""
-                class="hero__img--thumbnail"
-              />
-              <div class="hero__content-thumbnail">
-                <span class="hero__span-thumbnail">Studio</span>
-              </div>
-            </div>
-
             <!-- img jewelry -->
 
-            <div class="hero__item-thumbnail">
+            <div class="hero__item-thumbnail hero__item-thumbnail--active">
               <img
                 src="assets/img/jewelry.png"
                 alt=""
@@ -262,6 +330,19 @@
               />
               <div class="hero__content-thumbnail">
                 <span class="hero__span-thumbnail">Jewelry</span>
+              </div>
+            </div>
+
+            <!-- img studio -->
+
+            <div class="hero__item-thumbnail">
+              <img
+                src="assets/img/studio.png"
+                alt=""
+                class="hero__img--thumbnail"
+              />
+              <div class="hero__content-thumbnail">
+                <span class="hero__span-thumbnail">Studio</span>
               </div>
             </div>
 
@@ -298,8 +379,69 @@
          3. ASIDE CART
          ======================= -->
 
-      <aside class="cart">
-        <div class="cart__contenedor"></div>
+      <div id="overlay__cart" class="overlay"></div>
+
+      <aside id="sidebar" class="sidebar">
+        <div class="sidebar__header">
+          <h5 class="sidebar__title">Carrito Minoe</h5>
+        </div>
+
+        <div class="sidebar__content">
+          <div id="cart-list" class="sidebar__list"></div>
+        </div>
+
+        <div class="sidebar__footer">
+          <div class="cart-form">
+            <p class="cart-form__legend">Datos del Cliente</p>
+            <input
+              type="text"
+              id="cust-id"
+              class="cart-form__input"
+              placeholder="Cédula (10) / RUC (13)"
+              inputmode="numeric"
+              maxlength="13"
+            />
+            <div class="cart-form__row">
+              <input
+                type="text"
+                id="cust-name"
+                class="cart-form__input"
+                placeholder="Nombre"
+                maxlength="30"
+              />
+              <input
+                type="text"
+                id="cust-lastname"
+                class="cart-form__input"
+                placeholder="Apellido"
+                maxlength="30"
+              />
+            </div>
+            <p id="form-error-msg" class="cart-form__error"></p>
+          </div>
+
+          <div class="sidebar__total-box">
+            <span class="sidebar__total-label">SUBTOTAL:</span>
+            <strong id="cart-total" class="sidebar__total-amount">$0.00</strong>
+          </div>
+
+          <div class="sidebar__actions">
+            <button
+              id="clear-cart"
+              class="btn-clear-inline"
+              title="Vaciar Carrito"
+            >
+              <span
+                class="cart__trash-allitems cart__trash-allitems--url"
+              ></span>
+            </button>
+
+            <button class="btn-pay" id="whatsapp-btn">
+              <span class="header__wapp-icon header__wapp-url"></span>
+              ENVIAR PEDIDO
+            </button>
+          </div>
+        </div>
       </aside>
 
       <!-- =====================
@@ -328,26 +470,26 @@
         </div>
       </section>
 
+      <!-- =====================
+         4. CATALOGO
+         ======================= -->
+
+      <section id="catalogo" class="catalog__container">
+        <h2 id="category-display" class="catalog__title">Minoe Studio</h2>
+        <div id="product-container" class="catalog__grid"></div>
+      </section>
+
       <!-- otros -->
 
-      <section id="joyeria" class="joyeria" style="background-color: #509b8c">
-        <h1>Sección Jotería</h1>
-      </section>
-      <section id="gourmet" class="gourmet" style="background-color: #b8a174">
-        <h1>Sección Gourmet</h1>
-      </section>
-      <section id="studio" class="studio" style="background-color: #8693b2">
-        <h1>Sección Studio</h1>
-      </section>
-      <section id="sets" class="sets" style="background-color: #72927d">
-        <h1>Sección Sets de Regalo</h1>
-      </section>
-      <section id="contacto" class="contacto" style="background-color: #233f39">
+      <section id="contacto" class="contacto" style="background-color: #1d8972">
         <h1>Sección Contacto</h1>
       </section>
     </main>
     <footer></footer>
+    <script src="js/preloader.js"></script>
     <script src="js/menu.js"></script>
     <script src="js/hero.js"></script>
+    <script src="js/catalogo.js"></script>
+    <script src="js/cart.js"></script>
   </body>
 </html>

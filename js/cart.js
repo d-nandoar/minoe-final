@@ -1,278 +1,15 @@
-/**
- * MINOE LUXURY CATALOG 2026
- * Módulo: Carrito de Compras Completo
- * Ajustes: Corrección de validación con focus automático y catálogo expandido.
- */
-
-// 1. BASE DE DATOS DE PRODUCTOS (10 por categoría)
-// Creamos un objeto llamado 'inventory' que actúa como un almacén de datos.
-// Cada "llave" (joyeria, studio, etc.) contiene un "arreglo" (lista) de objetos.
-const inventory = {
-  joyeria: [
-    {
-      id: "JW-01", // Un identificador único para que el código no se confunda de producto
-      name: "Anillo Diamante Real", // Nombre que verá el usuario
-      price: 1250, // Precio numérico para poder hacer cálculos matemáticos
-      img: "assets/img/jewelry.png", // La ruta de la imagen para mostrarla en el HTML
-    },
-    {
-      id: "JW-02",
-      name: "Collar Oro 18k",
-      price: 890,
-      img: "assets/img/jewelry.png",
-    },
-    {
-      id: "JW-03",
-      name: "Aretes Perla Lux",
-      price: 340,
-      img: "assets/img/jewelry.png",
-    },
-    {
-      id: "JW-04",
-      name: "Pulsera Tenis Diamantes",
-      price: 2100,
-      img: "assets/img/jewelry.png",
-    },
-    {
-      id: "JW-05",
-      name: "Reloj Gold Classic",
-      price: 560,
-      img: "assets/img/jewelry.png",
-    },
-    {
-      id: "JW-06",
-      name: "Anillo Esmeralda",
-      price: 950,
-      img: "assets/img/jewelry.png",
-    },
-    {
-      id: "JW-07",
-      name: "Gargantilla Plata",
-      price: 120,
-      img: "assets/img/jewelry.png",
-    },
-    {
-      id: "JW-08",
-      name: "Broche Vintage",
-      price: 280,
-      img: "assets/img/jewelry.png",
-    },
-    {
-      id: "JW-09",
-      name: "Reloj Black Limited",
-      price: 720,
-      img: "assets/img/jewelry.png",
-    },
-    {
-      id: "JW-10",
-      name: "Pendientes Zafiro",
-      price: 1100,
-      img: "assets/img/jewelry.png",
-    },
-  ],
-  studio: [
-    {
-      id: "ST-01",
-      name: "Cartera Cuero Grained",
-      price: 280,
-      img: "assets/img/studio.png",
-    },
-    {
-      id: "ST-02",
-      name: "Zapatos Oxford Piel",
-      price: 195,
-      img: "assets/img/studio.png",
-    },
-    {
-      id: "ST-03",
-      name: "Bolso Tote Black",
-      price: 150,
-      img: "assets/img/studio.png",
-    },
-    {
-      id: "ST-04",
-      name: "Cinturón Executive",
-      price: 85,
-      img: "assets/img/studio.png",
-    },
-    {
-      id: "ST-05",
-      name: "Portafolio Minimal",
-      price: 210,
-      img: "assets/img/studio.png  ",
-    },
-    {
-      id: "ST-06",
-      name: "Gafas de Sol Urban",
-      price: 120,
-      img: "assets/img/studio.png",
-    },
-    {
-      id: "ST-07",
-      name: "Clutch Gala Gold",
-      price: 320,
-      img: "assets/img/studio.png",
-    },
-    {
-      id: "ST-08",
-      name: "Sombrero Fedora Piel",
-      price: 95,
-      img: "assets/img/studio.png",
-    },
-    {
-      id: "ST-09",
-      name: "Mocasines Italianos",
-      price: 180,
-      img: "assets/img/studio.png",
-    },
-    {
-      id: "ST-10",
-      name: "Bufanda Cashmere",
-      price: 140,
-      img: "assets/img/studio.png",
-    },
-  ],
-  licores: [
-    {
-      id: "LC-01",
-      name: "Rompope Vainilla Real",
-      price: 35,
-      img: "assets/img/gourmet.png ",
-    },
-    {
-      id: "LC-02",
-      name: "Rompope Café Espresso",
-      price: 35,
-      img: "assets/img/gourmet.png",
-    },
-    {
-      id: "LC-03",
-      name: "Whisky Single Malt",
-      price: 120,
-      img: "assets/img/gourmet.png",
-    },
-    {
-      id: "LC-04",
-      name: "Vino Tinto Reserva",
-      price: 45,
-      img: "assets/img/gourmet.png",
-    },
-    {
-      id: "LC-05",
-      name: "Ginebra Premium Blue",
-      price: 65,
-      img: "assets/img/gourmet.png",
-    },
-    {
-      id: "LC-06",
-      name: "Licor de Cacao Lux",
-      price: 28,
-      img: "assets/img/gourmet.png",
-    },
-    {
-      id: "LC-07",
-      name: "Vodka Artesanal",
-      price: 50,
-      img: "assets/img/gourmet.png ",
-    },
-    {
-      id: "LC-08",
-      name: "Espumante Rosé",
-      price: 55,
-      img: "assets/img/gourmet.png",
-    },
-    {
-      id: "LC-09",
-      name: "Tequila Añejo Crystal",
-      price: 90,
-      img: "assets/img/gourmet.png",
-    },
-    {
-      id: "LC-10",
-      name: "Ron Añejo 12 años",
-      price: 75,
-      img: "assets/img/gourmet.png",
-    },
-  ],
-  regalos: [
-    {
-      id: "RG-01",
-      name: "Cesta Gourmet Minoe",
-      price: 180,
-      img: "assets/img/fondo.png",
-    },
-    {
-      id: "RG-02",
-      name: "Caja de Bombones Gold",
-      price: 45,
-      img: "assets/img/fondo.png",
-    },
-    {
-      id: "RG-03",
-      name: "Kit de Escritorio Piel",
-      price: 95,
-      img: "assets/img/fondo.png",
-    },
-    {
-      id: "RG-04",
-      name: "Vela Aromática Black",
-      price: 30,
-      img: "assets/img/fondo.png",
-    },
-    {
-      id: "RG-05",
-      name: "Set de Té Imperial",
-      price: 110,
-      img: "assets/img/fondo.png",
-    },
-    {
-      id: "RG-06",
-      name: "Agenda Cuero 2026",
-      price: 40,
-      img: "assets/img/fondo.png",
-    },
-    {
-      id: "RG-07",
-      name: "Caja de Té de Madera",
-      price: 65,
-      img: "assets/img/fondo.png",
-    },
-    {
-      id: "RG-08",
-      name: "Kit Sommelier Silver",
-      price: 130,
-      img: "assets/img/fondo.png",
-    },
-    {
-      id: "RG-09",
-      name: "Difusor Ultrasónico",
-      price: 75,
-      img: "assets/img/fondo.png",
-    },
-    {
-      id: "RG-10",
-      name: "Manta de Alpaca",
-      price: 220,
-      img: "assets/img/fondo.png",
-    },
-  ],
-};
-
-// 2. VARIABLES DE ESTADO
-// 'cart' almacena los productos que el usuario elige.
-// Intentamos cargar lo que hay en localStorage (memoria del navegador); si está vacío, usamos una lista vacía [].
-let cart = JSON.parse(localStorage.getItem("MINOE_CART")) || [];
 // Constante con el número de teléfono para el mensaje de WhatsApp.
 const WHATSAPP_NUM = "593994831087";
 
 // 3. REFERENCIAS AL DOM
 // Usamos 'document.getElementById' para "atrapar" los elementos del HTML y poder controlarlos con JS.
-const productContainer = document.getElementById("product-container"); // Donde se muestran los productos
 const cartList = document.getElementById("cart-list"); // Lista de ítems dentro del carrito
 const cartTotal = document.getElementById("cart-total"); // El precio total acumulado
 const cartCount = document.getElementById("cart-count"); // El circulito rojo con el número de productos
 const sidebar = document.getElementById("sidebar"); // El panel lateral del carrito
-const overlay = document.getElementById("overlay"); // El fondo oscuro detrás del carrito
+const cartOverlay = document.getElementById("overlay__cart"); // El fondo oscuro detrás del carrito
+console.log(cartOverlay);
+
 const toastContainer = document.getElementById("toast-container"); // Para mostrar notificaciones rápidas
 
 // Referencias a los inputs del formulario de facturación
@@ -303,11 +40,27 @@ function showToast(msg) {
 }
 
 // Quita las marcas rojas de error de los campos del formulario.
+
+// function resetFormErrors() {
+//   errorMsg.style.display = "none"; // Escondemos el mensaje de texto de error
+//   [inId, inNm, inLn].forEach((input) => {
+//     input.classList.remove("error-field"); // Quitamos el borde rojo a cada input
+//   });
+// }
+
 function resetFormErrors() {
-  errorMsg.style.display = "none"; // Escondemos el mensaje de texto de error
+  // Restaurar Placeholders originales
+  inId.placeholder = "Cédula (10) / RUC (13)";
+  inNm.placeholder = "Nombre";
+  inLn.placeholder = "Apellido";
+
+  // Quitar clases de error
   [inId, inNm, inLn].forEach((input) => {
-    input.classList.remove("error-field"); // Quitamos el borde rojo a cada input
+    input.classList.remove("error-field");
   });
+
+  // Ocultar el div ruidoso (ya no lo necesitaremos)
+  if (errorMsg) errorMsg.style.display = "none";
 }
 
 // Limpia el texto escrito en los inputs del formulario.
@@ -338,50 +91,105 @@ function setupInputConstraints() {
   inLn.addEventListener("input", lettersOnly);
 }
 
-// --- LÓGICA DEL CARRITO ---
-
-// Esta función dibuja las tarjetas de productos en el catálogo según la categoría elegida.
-function renderProducts(cat) {
-  productContainer.innerHTML = ""; // Vaciamos el catálogo antes de mostrar los nuevos
-  // Actualizamos el título de la sección (ej: "COLECCIÓN JOYERÍA")
-  document.getElementById("category-display").innerText =
-    `Colección ${cat.toUpperCase()}`;
-
-  // Si la categoría no existe en nuestro 'inventory', no hacemos nada más.
-  if (!inventory[cat]) return;
-
-  // Recorremos la lista de productos de esa categoría
-  inventory[cat].forEach((p) => {
-    // Por cada producto, inyectamos un bloque de código HTML al contenedor
-    productContainer.innerHTML += `
-      <article class="product-card">
-        <img src="${p.img}" class="product-card__img" alt="${p.name}">
-        <div class="product-card__content">
-          <p class="product-card__sku">SKU: ${p.id}</p>
-          <h4 class="product-card__name">${p.name}</h4>
-          <p class="product-card__price">${formatCurrency(p.price)}</p>
-          <button class="product-card__btn-add" data-id="${p.id}" data-name="${p.name}" data-price="${p.price}">AÑADIR A BOLSA</button>
-        </div>
-      </article>`;
-  });
-}
-
 // Abre o cierra el carrito lateral.
+/*
 function toggleCart() {
+  // 1. Si el menú de navegación está abierto, NO abras el carrito, solo cierra el menú
+  const navMenu = document.querySelector(".header__nav");
+  if (navMenu && navMenu.classList.contains("nav-visible")) {
+    return; // Salimos de la función sin hacer nada con el carrito
+  }
+
   const isActive = sidebar.classList.contains("sidebar--active");
-  // Si el carrito está cerrado y está vacío, no permitimos que se abra.
   if (!isActive && cart.length === 0) {
     showToast("LA BOLSA ESTÁ VACÍA");
     return;
   }
-  resetFormErrors(); // Limpia errores antes de abrir/cerrar
-  // 'toggle' pone la clase si no la tiene, y la quita si ya la tiene.
+
   sidebar.classList.toggle("sidebar--active");
-  overlay.classList.toggle("overlay--active");
-  document.body.classList.toggle("no-scroll"); // Evita que la página de atrás se mueva
+  cartOverlay.classList.toggle("overlay--active");
+  document.body.classList.toggle("no-scroll");
+}*/
+/*
+function toggleCart() {
+  const navMenu = document.querySelector(".header__nav");
+  const navOverlay = document.querySelector(".overlay__nav");
+
+  // --- EL CAMBIO ESTÁ AQUÍ ---
+  // Si el menú está abierto, lo cerramos pero NO detenemos la ejecución (quitamos el return)
+  if (navMenu?.classList.contains("nav-visible")) {
+    navMenu.classList.remove("nav-visible");
+    navOverlay?.classList.remove("overlay--active");
+    // Al no poner 'return', la función sigue y abre el carrito de inmediato
+  }
+
+  const isActive = sidebar.classList.contains("sidebar--active");
+
+  if (!isActive && cart.length === 0) {
+    showToast("Carrito vacío");
+    document.body.classList.remove("no-scroll");
+
+    document.body.style.paddingRight = "0px";
+    return;
+  }
+  resetFormErrors();
+  sidebar.classList.toggle("sidebar--active");
+
+  cartOverlay.classList.toggle("overlay--active");
+
+  if (sidebar.classList.contains("sidebar--active")) {
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+
+    document.body.classList.add("no-scroll");
+  } else {
+    document.body.classList.remove("no-scroll");
+
+    document.body.style.paddingRight = "0px";
+  }
+}*/
+
+function toggleCart() {
+  const navMenu = document.querySelector(".header__nav");
+  const navOverlay = document.querySelector(".overlay__nav");
+
+  // 1. Si el menú de navegación móvil está abierto, lo cerramos
+  if (navMenu?.classList.contains("nav-visible")) {
+    navMenu.classList.remove("nav-visible");
+    navOverlay?.classList.remove("overlay--active");
+    // No ponemos return para que pueda abrir el carrito inmediatamente
+  }
+
+  // 2. Limpiamos errores previos del formulario de facturación
+  if (typeof resetFormErrors === "function") {
+    resetFormErrors();
+  }
+
+  // 3. Alternamos las clases de activación del sidebar y el overlay
+  sidebar.classList.toggle("sidebar--active");
+  cartOverlay.classList.toggle("overlay--active");
+
+  // 4. Lógica de bloqueo de scroll y ajuste de ancho de pantalla
+  if (sidebar.classList.contains("sidebar--active")) {
+    // Calculamos el ancho de la barra de scroll para evitar el "salto" visual
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    document.body.classList.add("no-scroll");
+
+    // LLAMADA CLAVE: Forzamos la actualización de la interfaz
+    // para que aparezca el mensaje de "Bolsa vacía" si el carrito está en 0.
+    updateUI();
+  } else {
+    // Al cerrar, devolvemos el scroll y el padding a la normalidad
+    document.body.classList.remove("no-scroll");
+    document.body.style.paddingRight = "0px";
+  }
 }
 
 // Cambia la cantidad de un producto (delta puede ser 1 o -1).
+/*
 function updateQty(id, delta) {
   const item = cart.find((i) => i.id === id); // Busca el producto en el carrito
   if (item) {
@@ -389,14 +197,69 @@ function updateQty(id, delta) {
     // Si la cantidad llega a 0 o menos, borramos el producto del carrito.
     if (item.qty <= 0) cart = cart.filter((i) => i.id !== id);
   }
+  // --- NUEVA LÓGICA DE CIERRE AUTOMÁTICO ---
+  if (cart.length === 0) {
+    clearFormValues();
+    // Si el carrito se vació y está abierto, lo cerramos
+    if (sidebar.classList.contains("sidebar--active")) {
+      toggleCart();
+    }
+  }
+
   resetFormErrors();
   updateUI(); // Refrescamos lo que ve el usuario
+}*/
+
+function updateQty(id, delta) {
+  const item = cart.find((i) => i.id === id); // Busca el producto en el carrito
+
+  if (item) {
+    const nuevaCantidad = item.qty + delta;
+
+    // --- VALIDACIÓN DE LÍMITES ---
+    if (nuevaCantidad >= 1 && nuevaCantidad <= 99) {
+      // Si está en el rango permitido (1-99), actualizamos
+      item.qty = nuevaCantidad;
+    } else if (nuevaCantidad <= 0) {
+      // Si el usuario logra bajar de 1 (por ejemplo, con el tacho de basura o lógica extra),
+      // lo eliminamos directamente.
+      cart = cart.filter((i) => i.id !== id);
+    } else if (nuevaCantidad > 99) {
+      // Si intenta subir de 99, no hacemos nada (el botón ya debería estar disabled)
+      return;
+    }
+  }
+
+  // --- LÓGICA DE CIERRE AUTOMÁTICO ---
+  if (cart.length === 0) {
+    clearFormValues();
+    // Si el carrito se vació y está abierto, lo cerramos
+    if (sidebar.classList.contains("sidebar--active")) {
+      toggleCart();
+    }
+  }
+
+  // Persistimos el cambio en el almacenamiento local para que no se pierda al dar F5
+  // localStorage.setItem("MINOE_CART", JSON.stringify(cart));
+
+  resetFormErrors();
+  updateUI(); // Refrescamos lo que ve el usuario (aquí se activará el "99+" y los disabled)
 }
 
 // Elimina un producto específico del carrito sin importar la cantidad.
 function removeFromCart(id) {
   // 'filter' crea una nueva lista excluyendo al producto que tenga ese ID.
   cart = cart.filter((i) => i.id !== id);
+
+  // --- NUEVA LÓGICA DE CIERRE AUTOMÁTICO ---
+  if (cart.length === 0) {
+    clearFormValues();
+    // Si el carrito se vació y está abierto, lo cerramos
+    if (sidebar.classList.contains("sidebar--active")) {
+      toggleCart();
+    }
+  }
+
   resetFormErrors();
   updateUI();
 }
@@ -407,10 +270,11 @@ function addToCart(id, name, price) {
   // Si existe, le sumamos 1 a la cantidad. Si no, lo agregamos como un objeto nuevo.
   exist ? exist.qty++ : cart.push({ id, name, price, qty: 1 });
   updateUI();
-  showToast("AÑADIDO");
+  triggerCartAnimation();
 }
 
 // Esta función es el corazón visual: actualiza los totales, el contador y la lista del carrito.
+/*
 function updateUI() {
   cartList.innerHTML = ""; // Reseteamos la visual de la lista
   let total = 0;
@@ -421,9 +285,9 @@ function updateUI() {
     // Si estaba el panel abierto, lo cerramos por fuerza.
     if (sidebar.classList.contains("sidebar--active")) {
       sidebar.classList.remove("sidebar--active");
-      overlay.classList.remove("overlay--active");
+      cartOverlay.classList.remove("overlay--active");
       document.body.classList.remove("no-scroll");
-      showToast("BOLSA VACÍA");
+      showToast("Carrito vacío");
     }
     clearFormValues(); // Limpiamos el formulario
   }
@@ -445,8 +309,9 @@ function updateUI() {
             <button class="qty-selector__btn" onclick="updateQty('${i.id}', 1)">+</button>
           </div>
           <button class="cart-item__remove" onclick="removeFromCart('${i.id}')">
-            <svg class="cart-item__remove-svg" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
-          </button>
+            <span class="cart__trash-item cart__trash-item--url"></span>
+          
+            </button>
         </div>
       </div>`;
   });
@@ -456,12 +321,103 @@ function updateUI() {
   cartCount.innerText = count;
   // Guardamos la lista actualizada en el navegador para que no se pierda al recargar.
   localStorage.setItem("MINOE_CART", JSON.stringify(cart));
+}*/
+
+function updateUI() {
+  cartList.innerHTML = "";
+  let total = 0;
+  let count = 0;
+
+  const cartFooter = document.querySelector(".sidebar__footer");
+
+  // 1. LÓGICA DE CARRITO VACÍO
+  if (cart.length === 0) {
+    clearFormValues();
+    if (typeof resetFormErrors === "function") resetFormErrors();
+
+    cartList.innerHTML = `
+      <div class="cart-empty">
+        <p class="cart-empty__message">Tu carrito de compras está vacío</p>
+        <a href="#catalogo" class="cart-empty__link" onclick="toggleCart()">Explorar Colección</a>
+      </div>
+    `;
+
+    // OCULTAMOS AQUÍ SI ESTÁ VACÍO
+    cartCount.style.display = "none";
+    if (cartFooter) cartFooter.style.display = "none";
+
+    // Guardamos el estado vacío en LocalStorage
+    localStorage.setItem("MINOE_CART", JSON.stringify(cart));
+    return;
+  }
+
+  // 2. LÓGICA CUANDO HAY PRODUCTOS
+  if (cartFooter) cartFooter.style.display = "block";
+
+  cart.forEach((i) => {
+    total += i.price * i.qty;
+    count += i.qty; // Aquí es donde 'count' deja de ser 0
+
+    const btnMinusDisabled = i.qty <= 1 ? "disabled" : "";
+    const btnPlusDisabled = i.qty >= 99 ? "disabled" : "";
+
+    cartList.innerHTML += `
+      <div class="cart-item">
+        <div class="cart-item__info">
+          <p class="cart-item__name">${i.name}</p>
+          <p class="cart-item__price">${formatCurrency(i.price)}</p>
+        </div>
+        <div class="cart-item__controls">
+          <div class="qty-selector">
+            <button class="qty-selector__btn" onclick="updateQty('${i.id}', -1)" ${btnMinusDisabled}>−</button>
+            <span class="qty-selector__value">${i.qty}</span>
+            <button class="qty-selector__btn" onclick="updateQty('${i.id}', 1)" ${btnPlusDisabled}>+</button>
+          </div>
+          <button class="cart-item__remove" onclick="removeFromCart('${i.id}')">
+            <span class="cart__trash-item cart__trash-item--url"></span>
+          </button>
+        </div>
+      </div>`;
+  });
+
+  // 3. ACTUALIZACIÓN FINAL DEL CONTADOR (Movélo aquí abajo)
+  if (count > 0) {
+    cartCount.style.display = "flex"; // Mostramos el círculo
+
+    if (count > 99) {
+      cartCount.innerText = "99+";
+      cartCount.style.fontSize = "0.75em";
+    } else {
+      cartCount.innerText = count;
+      cartCount.style.fontSize = "0.85em";
+    }
+  } else {
+    cartCount.style.display = "none"; // Por si acaso llega a 0 aquí
+  }
+
+  cartTotal.innerText = formatCurrency(total);
+  localStorage.setItem("MINOE_CART", JSON.stringify(cart));
+}
+
+// animación del carrito (añadir)
+function triggerCartAnimation() {
+  const wrapper = document.getElementById("open-cart");
+  if (!wrapper) return; // Seguridad por si el elemento no existe
+
+  wrapper.classList.remove("animate-sparkles");
+  void wrapper.offsetWidth; // Truco técnico para reiniciar la animación
+  wrapper.classList.add("animate-sparkles");
+
+  setTimeout(() => {
+    wrapper.classList.remove("animate-sparkles");
+  }, 600);
 }
 
 // --- VALIDACIÓN Y ENVÍO (CORREGIDO FOCUS) ---
 
 // Esta función se activa al dar click en "FINALIZAR PEDIDO".
 function sendWhatsApp() {
+  /*
   resetFormErrors();
   const idVal = inId.value.trim(); // .trim() quita espacios accidentales al inicio/final
   const nameVal = inNm.value.trim();
@@ -492,6 +448,46 @@ function sendWhatsApp() {
     errorMsg.style.display = "block";
     inLn.focus();
     return;
+  }*/
+  resetFormErrors();
+
+  const idVal = inId.value.trim();
+  const nameVal = inNm.value.trim();
+  const lastVal = inLn.value.trim();
+
+  let hayErrores = false;
+  let primerCampoConError = null;
+
+  // 1. Validación de Identificación
+  if (idVal.length !== 10 && idVal.length !== 13) {
+    inId.value = ""; // Limpiamos para que se vea el placeholder
+    inId.placeholder = "ID debe tener 10 o 13 dígitos";
+    inId.classList.add("error-field");
+    hayErrores = true;
+    if (!primerCampoConError) primerCampoConError = inId;
+  }
+
+  // 2. Validación de Nombre
+  if (nameVal.length < 2) {
+    inNm.value = "";
+    inNm.placeholder = "Mínimo 2 letras";
+    inNm.classList.add("error-field");
+    hayErrores = true;
+    if (!primerCampoConError) primerCampoConError = inNm;
+  }
+
+  // 3. Validación de Apellido
+  if (lastVal.length < 2) {
+    inLn.value = "";
+    inLn.placeholder = "Mínimo 2 letras";
+    inLn.classList.add("error-field");
+    hayErrores = true;
+    if (!primerCampoConError) primerCampoConError = inLn;
+  }
+
+  if (hayErrores) {
+    if (primerCampoConError) primerCampoConError.focus();
+    return; // Detenemos el envío
   }
 
   // Definición de Emojis para que el mensaje de WhatsApp se vea elegante.
@@ -534,21 +530,11 @@ function sendWhatsApp() {
   // Una vez enviado, vaciamos el carrito y notificamos.
   cart = [];
   updateUI();
-  showToast("¡PEDIDO ENVIADO!");
+  showToast("¡Pedido Enviado!");
 }
 
 // --- EVENTOS ---
 // Aquí asignamos las funciones a los botones físicos de la página.
-
-// Escuchamos clicks en el menú de categorías
-document.getElementById("category-filters").addEventListener("click", (e) => {
-  // Si el elemento clickeado tiene un ID que empieza con "filter-"
-  if (e.target.id && e.target.id.startsWith("filter-")) {
-    e.preventDefault(); // Evitamos que la página recargue o salte
-    // Sacamos la palabra después del guion (ej: de "filter-joyeria" sacamos "joyeria")
-    renderProducts(e.target.id.split("-")[1]);
-  }
-});
 
 // Escuchamos clicks en el contenedor de productos (técnica de delegación de eventos)
 productContainer.addEventListener("click", (e) => {
@@ -560,14 +546,26 @@ productContainer.addEventListener("click", (e) => {
 });
 
 // Botón para abrir el carrito
-document.getElementById("open-cart").addEventListener("click", toggleCart);
+// document.getElementById("open-cart").addEventListener("click", toggleCart);
+document.getElementById("open-cart").addEventListener("click", (e) => {
+  e.preventDefault();
+  toggleCart();
+});
+
 // Click en el fondo oscuro para cerrar el carrito
-overlay.addEventListener("click", toggleCart);
+cartOverlay.addEventListener("click", toggleCart);
+
 // Botón de "Vaciar Bolsa" (el icono del tacho de basura grande)
 document.getElementById("clear-cart").addEventListener("click", () => {
   cart = []; // Vaciamos la lista
+
+  // SOBREESCRIBIMOS EL GUARDADO CON UN ARREGLO VACÍO
+  // localStorage.setItem("MINOE_CART", JSON.stringify(cart));
+
   updateUI(); // Refrescamos la pantalla
+  toggleCart();
 });
+
 // Botón de finalizar pedido
 document.getElementById("whatsapp-btn").addEventListener("click", sendWhatsApp);
 
@@ -577,3 +575,64 @@ window.onload = () => {
   renderProducts("joyeria"); // Mostramos joyería al inicio por defecto
   setupInputConstraints(); // Activamos las restricciones de escritura en los inputs
 };
+/*
+// Cerrar carrito al hacer click fuera (incluyendo el header)
+document.addEventListener("click", (event) => {
+  const isCartActive = sidebar.classList.contains("sidebar--active");
+
+  // Si el carrito no está abierto, no hacemos nada
+  if (!isCartActive) return;
+
+  // Verificamos si el click fue fuera del sidebar Y fuera del botón que lo abre
+  const clickInsideCart = sidebar.contains(event.target);
+  const clickOnCartBtn = document
+    .getElementById("open-cart")
+    .contains(event.target);
+
+  if (!clickInsideCart && !clickOnCartBtn) {
+    toggleCart(); // Esto cerrará el carrito y limpiará el overlay/scroll
+  }
+});*/
+
+document.addEventListener("click", (event) => {
+  const isCartActive = sidebar.classList.contains("sidebar--active");
+  if (!isCartActive) return;
+
+  // --- SOLUCIÓN AQUÍ ---
+  // Si el elemento que tocaste ya no tiene "padre" (porque updateUI lo borró)
+  // significa que fue un clic en un botón interno del carrito.
+  if (!event.target.isConnected) {
+    return; // No hacemos nada, dejamos el carrito abierto
+  }
+
+  const clickInsideCart = sidebar.contains(event.target);
+  const clickOnCartBtn = document
+    .getElementById("open-cart")
+    .contains(event.target);
+
+  // También verificamos si el clic fue en los botones que disparan funciones
+  const isActionButton =
+    event.target.closest(".qty-selector__btn") ||
+    event.target.closest(".cart-item__remove");
+
+  if (!clickInsideCart && !clickOnCartBtn && !isActionButton) {
+    toggleCart();
+  }
+});
+
+// Arreglo con tus inputs para automatizar la limpieza
+[inId, inNm, inLn].forEach((input) => {
+  input.addEventListener("input", () => {
+    // Si el input tiene la clase de error, se la quitamos al escribir
+    if (input.classList.contains("error-field")) {
+      input.classList.remove("error-field");
+    }
+
+    // Si ya no hay campos con errores, ocultamos el mensaje general
+    const hayErroresActivos =
+      document.querySelectorAll(".error-field").length > 0;
+    if (!hayErroresActivos) {
+      errorMsg.style.display = "none";
+    }
+  });
+});

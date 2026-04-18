@@ -2,7 +2,7 @@
     selección de elementos del DOM
 */
 
-const overlay = document.querySelector(".overlay"); //overlay
+const overlay = document.querySelector(".overlay__nav"); //overlay
 const navToggle = document.querySelector(".header__hamb"); //hamb
 const cartToggle = document.querySelector(".header__cart"); //cart
 const navMenu = document.querySelector(".header__nav"); //nav principal
@@ -20,21 +20,54 @@ let estaNavegandoPorClick = false;
     abrir el menú principal en móvil
     click en hamb
 */
-
+/*
 navToggle.addEventListener("click", () => {
   navMenu.classList.toggle("nav-visible");
-  overlay.classList.toggle("overlay-active");
+  overlay.classList.toggle("overlay--active");
+});*/
+
+// Al abrir el menú (click en hamb)
+// Modifica el evento del navToggle
+// Dentro de menu.js
+navToggle.addEventListener("click", () => {
+  // 1. LIMPIEZA: Si el carrito está abierto, lo cerramos antes de abrir el menú
+  const sidebar = document.getElementById("sidebar");
+  const cartOverlay = document.getElementById("overlay__cart");
+
+  if (sidebar && sidebar.classList.contains("sidebar--active")) {
+    sidebar.classList.remove("sidebar--active");
+    cartOverlay?.classList.remove("overlay--active");
+    // No quitamos no-scroll aquí porque el menú lo va a necesitar a continuación
+  }
+
+  // 2. Lógica normal de tu menú
+  navMenu.classList.toggle("nav-visible");
+  overlay.classList.toggle("overlay--active");
+
+  // 3. Gestión de scroll
+  if (navMenu.classList.contains("nav-visible")) {
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+
+    document.body.classList.add("no-scroll");
+  } else {
+    document.body.classList.remove("no-scroll");
+
+    document.body.style.paddingRight = "0px";
+  }
 });
 
-/*
+/*--------------------------------------------------------------
     abrir el carrito
     click en cart
-*/
+--------------------------------------------------------------*/
 
+/*
 cartToggle.addEventListener("click", () => {
   cartAside.classList.toggle("cart-visible");
   overlay.classList.toggle("overlay-active");
-});
+});*/
 
 /*
     abrir sub-menú en móvil y pantalla grande
@@ -62,7 +95,10 @@ btnSubmenu.addEventListener("click", () => {
 navLinks.forEach((link) => {
   link.addEventListener("click", () => {
     navMenu.classList.remove("nav-visible");
-    overlay.classList.remove("overlay-active");
+    // Al cerrar el menú (en el forEach de navLinks y el click en document)
+    // Asegúrate de incluir esta línea siempre que quites la clase 'nav-visible':
+    document.body.classList.remove("no-scroll");
+    overlay.classList.remove("overlay--active");
 
     // cierra el sub-menú para que esté cerrado la próxima vez
     subMenu.classList.remove("submenu-open");
@@ -86,7 +122,10 @@ document.addEventListener("click", (event) => {
     navMenu.classList.contains("nav-visible")
   ) {
     navMenu.classList.remove("nav-visible");
-    overlay.classList.remove("overlay-active");
+    // Al cerrar el menú (en el forEach de navLinks y el click en document)
+    // Asegúrate de incluir esta línea siempre que quites la clase 'nav-visible':
+    document.body.classList.remove("no-scroll");
+    overlay.classList.remove("overlay--active");
     subMenu.classList.remove("submenu-open");
     arrow.classList.remove("arrow-rotate");
   }
@@ -102,11 +141,12 @@ document.addEventListener("click", (event) => {
   }
 });
 
-/*
+/*--------------------------------------------------------------
     cierre del carrito al hacer click en cualquier
     lugar fuera del carrito y del cart
-*/
+----------------------------------------------------------------*/
 
+/*
 document.addEventListener("click", (event) => {
   const isClickInsideCart = cartAside.contains(event.target);
   const isClickOnToggle = cartToggle.contains(event.target);
@@ -120,7 +160,7 @@ document.addEventListener("click", (event) => {
     cartAside.classList.remove("cart-visible");
     overlay.classList.remove("overlay-active");
   }
-});
+});*/
 
 // marcar los links activos
 
@@ -167,7 +207,7 @@ window.addEventListener("load", () => {
 // links y logo ----------------------------
 
 // Función para navegar suavemente y limpiar rastro de URL
-
+/*
 function navegarA(idDestino, elementoLink) {
   const seccion = document.querySelector(idDestino);
 
@@ -179,6 +219,26 @@ function navegarA(idDestino, elementoLink) {
     activarLink(elementoLink);
 
     // 3. Actualizar URL de forma limpia
+    history.pushState(null, null, idDestino);
+  }
+}*/
+
+// menu.js
+function navegarA(idDestino, elementoLink) {
+  // Lista de tus categorías dinámicas
+  const categorias = ["#joyeria", "#studio", "#gourmet", "#regalos"];
+
+  // Si el destino es una categoría, el objetivo real del scroll es la sección #catalogo
+  let objetivoReal = idDestino;
+  if (categorias.includes(idDestino)) {
+    objetivoReal = "#catalogo";
+  }
+
+  const seccion = document.querySelector(objetivoReal);
+
+  if (seccion) {
+    seccion.scrollIntoView({ behavior: "smooth", block: "start" });
+    activarLink(elementoLink);
     history.pushState(null, null, idDestino);
   }
 }
@@ -211,7 +271,7 @@ navLinks.forEach((link) => {
 });
 
 //------------------------------------------
-
+/*
 window.addEventListener("scroll", () => {
   let seccionActual = "";
   const pixelesDeMargen = 150; // Ajusta este número según el alto de tu menú (header)
@@ -240,6 +300,50 @@ window.addEventListener("scroll", () => {
   // 3. Buscar el link que coincide con la sección detectada y activarlo
   navLinks.forEach((link) => {
     const href = link.getAttribute("href");
+    if (href === `#${seccionActual}`) {
+      activarLink(link);
+    }
+  });
+});*/
+
+window.addEventListener("scroll", () => {
+  let seccionActual = "";
+  const pixelesDeMargen = 150;
+  const secciones = document.querySelectorAll("section[id]");
+
+  // 1. Detección de secciones físicas (Inicio, Nosotros, Contacto, Catalogo)
+  secciones.forEach((seccion) => {
+    const seccionTop = seccion.offsetTop;
+    if (window.pageYOffset >= seccionTop - pixelesDeMargen) {
+      seccionActual = seccion.getAttribute("id");
+    }
+  });
+
+  // 2. Traducción de "Catalogo" a "Categoría Específica"
+  if (seccionActual === "catalogo") {
+    const catalogContainer = document.getElementById("catalogo");
+
+    // Buscamos la clase que termina en el nombre de la categoría (ej. catalog__container--joyeria)
+    const claseCategoria = Array.from(catalogContainer.classList).find((cls) =>
+      cls.includes("catalog__container--"),
+    );
+
+    if (claseCategoria) {
+      // Extraemos "joyeria", "studio", etc.
+      seccionActual = claseCategoria.split("--")[1];
+    }
+  }
+
+  // 3. Gestión de Inicio
+  if (window.pageYOffset < 100) {
+    activarLink(inicioLink);
+    return;
+  }
+
+  // 4. Activación visual del link
+  navLinks.forEach((link) => {
+    const href = link.getAttribute("href");
+    // Ahora, si seccionActual es "joyeria", coincidirá con el href="#joyeria" del submenú
     if (href === `#${seccionActual}`) {
       activarLink(link);
     }

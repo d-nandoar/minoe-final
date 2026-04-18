@@ -1,0 +1,192 @@
+:root {
+  --verde-minoe: #0e3b32; /* Tu color exacto */
+  --dorado: #d4af37;
+  --blanco: #ffffff;
+  --crema: #f2f1ed;
+  --bezier-lujo: cubic-bezier(0.65, 0, 0.35, 1);
+  /* VARIABLES PARA LA TEXTURA (OPCIÓN B) */
+  --textura-color: rgba(
+    255,
+    255,
+    255,
+    0.03
+  ); /* Color de los puntitos (blanco muy tenue) */
+  --textura-tamaño: 3px 3px; /* Qué tan fino es el grano */
+}
+
+/* --- CONTENEDOR MAESTRO --- */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--crema);
+}
+
+.preloader__bg-crema {
+  position: absolute;
+  inset: 0;
+  background-color: var(--crema);
+  z-index: 1;
+}
+
+/* --- TELÓN VERDE (RECTÁNGULO RECTO) --- */
+.preloader__curtain {
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  left: 0;
+  right: 0;
+  background-color: var(--crema);
+  z-index: 10;
+  opacity: 0;
+
+  /* GENERACIÓN DE TEXTURA POR CÓDIGO USANDO VARIABLES */
+  background-image:
+    linear-gradient(var(--textura-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--textura-color) 1px, transparent 1px);
+  background-size: var(--textura-tamaño);
+
+  /* Animaciones originales */
+  transition:
+    transform 2.2s var(--bezier-lujo),
+    opacity 2s var(--bezier-lujo);
+  will-change: transform, opacity;
+}
+
+.loaded .preloader__curtain {
+  top: 0;
+  bottom: 0;
+  opacity: 1;
+}
+
+.preloader__content {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+}
+
+/* --- LOGO Y CÍRCULO --- */
+.logo-wrapper {
+  position: relative;
+  width: 220px; /* Tamaño ligeramente mayor */
+  height: 220px;
+  margin: 0 auto;
+}
+
+.circle-svg {
+  position: absolute;
+  inset: 0;
+  transform: rotate(-90deg);
+}
+
+.circle-path {
+  fill: none;
+  stroke: var(--dorado);
+  stroke-width: 1.5;
+  stroke-dasharray: 302;
+  stroke-dashoffset: 302;
+  animation: draw 4s var(--bezier-lujo) forwards;
+}
+
+.logo-img-container {
+  position: absolute;
+  inset: 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  clip-path: circle(50%);
+}
+
+.logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: fadeIn 3s 2s var(--bezier-lujo) forwards;
+}
+
+.logo-reveal-mask {
+  position: absolute;
+  inset: 0;
+  background-color: var(--crema);
+  animation: reveal 3s 2s var(--bezier-lujo) forwards;
+}
+
+/* --- TEXTOS (TAMAÑO INCREMENTADO) --- */
+.brand-name-container {
+  overflow: hidden;
+  margin-top: 25px;
+}
+
+.brand-name {
+  font-size: 3em; /* Aumentado de 2.2rem */
+  color: var(--verde-minoe);
+  letter-spacing: 10px; /* Más espaciado para lujo */
+  font-weight: 300;
+  transform: translateY(100%);
+  animation: slideUp 2.5s 3.5s var(--bezier-lujo) forwards;
+}
+
+.brand-tagline {
+  font-size: 0.9em; /* Aumentado ligeramente */
+  color: var(--verde-minoe);
+  letter-spacing: 4px;
+  margin-top: 12px;
+  opacity: 0;
+  animation: fadeIn 2s 4.5s forwards;
+}
+
+.brand-est {
+  font-size: 0.75em; /* Aumentado ligeramente */
+  color: var(--dorado);
+  letter-spacing: 6px;
+  margin-top: 18px;
+  font-weight: bold;
+  opacity: 0;
+  font-style: italic;
+  animation: fadeIn 2s 5.2s forwards;
+}
+
+/* --- ANIMACIONES --- */
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes reveal {
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes slideUp {
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* --- REVELADO FINAL --- */
+.loaded .preloader__content {
+  opacity: 0;
+  transition: opacity 1s var(--bezier-lujo);
+}
+
+.loaded-complete .preloader {
+  display: none;
+}
+
+.main-content {
+  opacity: 0;
+  transition: opacity 2s 0.5s var(--bezier-lujo);
+}
+
+.loaded .main-content {
+  opacity: 1;
+}

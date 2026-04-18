@@ -106,4 +106,24 @@ function showSlider() {
 }
 
 // 8. ARRANQUE INICIAL
-iniciarAutoRun();
+// iniciarAutoRun();
+
+// 8. ARRANQUE EN ESPERA
+// El slider no se moverá hasta que el preloader le de la orden
+window.addEventListener("paginaRevelada", () => {
+  console.log("Minoe Luxury: Iniciando Slider...");
+  // iniciarAutoRun();
+
+  // 1. Seleccionamos el contenedor principal del hero
+  const heroContainer = document.querySelector(".hero");
+
+  // 2. Le ponemos la clase que quita la invisibilidad
+  if (heroContainer) {
+    heroContainer.classList.add("hero-revelado");
+  }
+
+  // 3. Iniciamos el movimiento automático después de que termine de aparecer
+  setTimeout(() => {
+    iniciarAutoRun();
+  }, 2000);
+});
