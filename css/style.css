@@ -1162,6 +1162,7 @@ a,
 
 .hero__slider {
   height: 100vh;
+  height: 100dvh;
   position: relative;
 }
 
