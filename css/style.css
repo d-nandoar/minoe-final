@@ -2269,11 +2269,11 @@ a,
 
   .hero__p-list {
     margin: 1rem 0 1.25rem 0;
-    line-height: 1;
+    line-height: 1.4;
   }
 
   .hero__arrows {
-    top: 93.5%;
+    top: 94%;
   }
 
   /* .hero__thumbnail {
@@ -2286,14 +2286,15 @@ a,
 
   .hero__thumbnail {
     left: calc(50% - 45%);
-    bottom: 6%;
+    bottom: 7%;
     /* flex-direction: row; */
     justify-content: space-evenly;
-    gap: 5px;
+    /* align-items: center; */
+    gap: 8px;
     flex-wrap: wrap;
     /* flex-direction: column; */
     width: 90%;
-    height: 28%;
+    min-height: 200px;
   }
 
   /* items */
