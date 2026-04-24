@@ -2254,7 +2254,7 @@ a,
    ========================================================== */
 @media (max-width: 480px) {
   .hero__comtent-list {
-    top: 15%;
+    top: 12%;
   }
 
   .hero__h2-list {
@@ -2285,11 +2285,11 @@ a,
     bottom: 8%;
     /* flex-direction: row; */
     justify-content: space-evenly;
-    gap: 10px;
+    gap: 5px;
     flex-wrap: wrap;
     /* flex-direction: column; */
     width: 90%;
-    height: 30%;
+    height: 28%;
   }
 
   /* items */
@@ -2301,7 +2301,7 @@ a,
 
   .hero__item-thumbnail {
     width: 48%;
-    max-height: 90%;
+    max-height: 100px;
   }
 
   /* img */
