@@ -25,10 +25,10 @@
     />
     <meta
       property="og:image"
-      content="https://d-nandoar.github.io/minoe-final/assets/img/milogo.png"
+      content="https://d-nandoar.github.io/minoe-final/assets/img/preloader.jpg"
     />
 
-    <meta name="author" content="David" />
+    <meta name="author" content="David Alvarez" />
     <!-- <meta name="robots" content="index, follow" /> -->
     <link rel="shortcut icon" href="assets/icons/fav.png" type="image/x-icon" />
     <link rel="stylesheet" href="css/reset.css" />
@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="css/preloader.css" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body class="no-scroll">
+  <body>
     <!-- =====================
          PRELOADER
          ===================== -->
@@ -67,26 +67,17 @@
       </div>
     </div>
 
-    <!-- =====================
-         OVERLAY
-         ===================== -->
-
-    <!-- <div id="overlay__cart" class="overlay__nav"></div> -->
-    <div class="overlay__nav"></div>
-
     <!-- =======================
     1. HEADER
     ======================= -->
 
     <header class="header">
-      <!-- <div id="overlay" class="overlay overlay--active"></div> -->
-
       <div class="header__contenedor">
         <!-- hamb -->
 
         <div class="header__hamb">
           <button class="header__btn-hamb">
-            <span class="header__hamb-icon header__hamb-url"></span>
+            <span class="header__hamb-icon"></span>
           </button>
         </div>
 
@@ -97,12 +88,10 @@
             ><img
               class="header__logo-img"
               src="assets/img/milogo.png"
-              alt=""
+              alt="logo minoe"
               srcset=""
           /></a>
         </div>
-
-        <!-- <div id="toast-container" class="navbar__toast-container"></div> -->
 
         <!-- menú -->
 
@@ -131,7 +120,7 @@
 
                 <button class="header__btn-submenu">
                   Categorías
-                  <span class="header__arrow-icon header__arrow-url"></span>
+                  <span class="header__arrow-icon"></span>
                 </button>
 
                 <!-- ul submenú-->
@@ -173,6 +162,9 @@
                   </li>
                 </ul>
               </li>
+
+              <!-- li menú -->
+
               <li class="header__li">
                 <a class="header__a" href="#contacto">Contacto</a>
               </li>
@@ -181,7 +173,7 @@
 
           <!-- cart -->
           <!-- <div class="prueba">la bolsa esta vacia</div> -->
-          <div id="toast-container" class="navbar__toast-container"></div>
+          <!-- <div id="toast-container" class="navbar__toast-container"></div> -->
 
           <div class="header__cart">
             <!-- btn cart -->
@@ -206,7 +198,85 @@
 
     <main class="main-content">
       <!-- =====================
-         2. HERO
+         2. ASIDE CART
+         ======================= -->
+
+      <!-- sidebar -->
+
+      <aside id="sidebar" class="sidebar">
+        <!-- header cart -->
+
+        <div class="sidebar__header">
+          <h5 class="sidebar__title">Carrito Minoe</h5>
+        </div>
+
+        <!-- main cart -->
+
+        <div class="sidebar__content">
+          <div id="cart-list" class="sidebar__list"></div>
+        </div>
+
+        <!-- footer cart -->
+
+        <div class="sidebar__footer">
+          <!-- datos de facturación -->
+
+          <div class="cart-form">
+            <p class="cart-form__legend">Datos del Cliente</p>
+            <input
+              type="text"
+              id="cust-id"
+              class="cart-form__input"
+              placeholder="Cédula (10) / RUC (13)"
+              inputmode="numeric"
+              maxlength="13"
+            />
+            <div class="cart-form__row">
+              <input
+                type="text"
+                id="cust-name"
+                class="cart-form__input"
+                placeholder="Nombre"
+                maxlength="30"
+              />
+              <input
+                type="text"
+                id="cust-lastname"
+                class="cart-form__input"
+                placeholder="Apellido"
+                maxlength="30"
+              />
+            </div>
+          </div>
+
+          <!-- subtotal -->
+
+          <div class="sidebar__total-box">
+            <span class="sidebar__total-label">Subtotal:</span>
+            <strong id="cart-total" class="sidebar__total-amount">$0.00</strong>
+          </div>
+
+          <!-- botones vaciar cart y enviar pedido -->
+
+          <div class="sidebar__actions">
+            <button
+              id="clear-cart"
+              class="btn-clear-inline"
+              title="Vaciar carrito"
+            >
+              <span class="cart__trash-allitems"></span>
+            </button>
+
+            <button class="btn-pay" id="whatsapp-btn">
+              <span class="header__wapp-icon"></span>
+              Enviar pedido
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- =====================
+         3. HERO
          ======================= -->
 
       <section class="hero" id="hero">
@@ -219,9 +289,13 @@
             <!-- img jewelry -->
 
             <div class="hero__item-list hero__item-list--active">
-              <img src="assets/img/jewelry.png" alt="" class="hero__img-list" />
+              <img
+                src="assets/img/jewelry.png"
+                alt="fondo de la sección joyería"
+                class="hero__img-list"
+              />
               <div class="hero__comtent-list">
-                <h2 class="hero__h2-list">Minoe Jewelry</h2>
+                <h2 class="hero__h2-list">Minoe Joyería</h2>
                 <h6 class="hero__h6-list">By Leonela Alvarez</h6>
                 <p class="hero__p-list">
                   <span class="hero__span-list"
@@ -237,10 +311,15 @@
                 >
               </div>
             </div>
+
             <!-- img studio-->
 
             <div class="hero__item-list">
-              <img src="assets/img/studio.png" alt="" class="hero__img-list" />
+              <img
+                src="assets/img/studio.png"
+                alt="fondo de la sección studio"
+                class="hero__img-list"
+              />
               <div class="hero__comtent-list">
                 <h2 class="hero__h2-list">Minoe Studio</h2>
                 <h6 class="hero__h6-list">By Leonela Alvarez</h6>
@@ -262,7 +341,11 @@
             <!-- img gourmet -->
 
             <div class="hero__item-list">
-              <img src="assets/img/gourmet.png" alt="" class="hero__img-list" />
+              <img
+                src="assets/img/gourmet.png"
+                alt="fondo de la sección gourmet"
+                class="hero__img-list"
+              />
               <div class="hero__comtent-list">
                 <h2 class="hero__h2-list">Minoe Gourmet</h2>
                 <h6 class="hero__h6-list">By Leonela Alvarez</h6>
@@ -284,7 +367,11 @@
             <!-- img sets -->
 
             <div class="hero__item-list">
-              <img src="assets/img/sets.png" alt="" class="hero__img-list" />
+              <img
+                src="assets/img/sets.png"
+                alt="fondo de la sección sets de regalo"
+                class="hero__img-list"
+              />
               <div class="hero__comtent-list">
                 <h2 class="hero__h2-list">Sets de Regalo</h2>
                 <h6 class="hero__h6-list">By Leonela Alvarez</h6>
@@ -323,7 +410,7 @@
                 class="hero__img--thumbnail"
               />
               <div class="hero__content-thumbnail">
-                <span class="hero__span-thumbnail">Jewelry</span>
+                <span class="hero__span-thumbnail">Joyería</span>
               </div>
             </div>
 
@@ -370,96 +457,112 @@
       </section>
 
       <!-- =====================
-         3. ASIDE CART
-         ======================= -->
-
-      <div id="overlay__cart" class="overlay"></div>
-
-      <aside id="sidebar" class="sidebar">
-        <div class="sidebar__header">
-          <h5 class="sidebar__title">Carrito Minoe</h5>
-        </div>
-
-        <div class="sidebar__content">
-          <div id="cart-list" class="sidebar__list"></div>
-        </div>
-
-        <div class="sidebar__footer">
-          <div class="cart-form">
-            <p class="cart-form__legend">Datos del Cliente</p>
-            <input
-              type="text"
-              id="cust-id"
-              class="cart-form__input"
-              placeholder="Cédula (10) / RUC (13)"
-              inputmode="numeric"
-              maxlength="13"
-            />
-            <div class="cart-form__row">
-              <input
-                type="text"
-                id="cust-name"
-                class="cart-form__input"
-                placeholder="Nombre"
-                maxlength="30"
-              />
-              <input
-                type="text"
-                id="cust-lastname"
-                class="cart-form__input"
-                placeholder="Apellido"
-                maxlength="30"
-              />
-            </div>
-            <p id="form-error-msg" class="cart-form__error"></p>
-          </div>
-
-          <div class="sidebar__total-box">
-            <span class="sidebar__total-label">SUBTOTAL:</span>
-            <strong id="cart-total" class="sidebar__total-amount">$0.00</strong>
-          </div>
-
-          <div class="sidebar__actions">
-            <button
-              id="clear-cart"
-              class="btn-clear-inline"
-              title="Vaciar Carrito"
-            >
-              <span
-                class="cart__trash-allitems cart__trash-allitems--url"
-              ></span>
-            </button>
-
-            <button class="btn-pay" id="whatsapp-btn">
-              <span class="header__wapp-icon header__wapp-url"></span>
-              ENVIAR PEDIDO
-            </button>
-          </div>
-        </div>
-      </aside>
-
-      <!-- =====================
          4. NOSOTROS
          ======================= -->
 
       <section id="nosotros" class="nosotros">
-        <div class="nosotros-container">
-          <div class="nosotros-content">
-            <h2 class="titulo-nosotros">Detalles que elevan tus momentos</h2>
-            <p class="texto-nosotros">
-              Minoe nace de una visión clara: la elegancia no es un accesorio,
-              es una forma de habitar el mundo. Nuestra curaduría une la
-              <strong>Joyería</strong>, el diseño de <strong>Studio</strong> y
-              el sabor <strong>Gourmet</strong> en una sola experiencia de lujo.
-            </p>
-            <p class="texto-nosotros">
-              Cada pieza es seleccionada bajo estándares de calidad
-              excepcionales, pensada para quienes buscan distinguir lo ordinario
-              de lo extraordinario.
-            </p>
+        <div class="nosotros__about">
+          <div class="nosotros__about-content">
+            <article class="nosotros__about-image">
+              <img
+                class="nosotros__about-img"
+                src="assets/img/nosotros.png"
+                alt="Esencia Minoe"
+              />
+            </article>
+
+            <article class="nosotros__about-minoe">
+              <h2 class="nosotros__about-h2">Nosotros</h2>
+              <h4 class="nosotros__about-h4">
+                "Detalles que elevan tus momentos: desde lo que vistes hasta lo
+                que brindas."
+              </h4>
+              <p class="nosotros__about-p nosotros__about-p--margin">
+                "En Minoe, entendemos que la verdadera elegancia no reside en lo
+                ostentoso, sino en la armonía de los pequeños detalles. Nacimos
+                en Guayaquil con el propósito de crear una curaduría donde el
+                diseño, el arte y el sabor convergen para acompañar a quienes
+                buscan distinguir lo ordinario de lo extraordinario."
+              </p>
+            </article>
           </div>
-          <div class="nosotros-imagen">
-            <img src="assets/img/nosot.png" alt="Esencia Minoe" />
+        </div>
+
+        <div class="nosotros-cards">
+          <div class="nosotros-cards__container">
+            <div class="nosotros-cards__grid">
+              <article class="card-flip">
+                <div class="card-flip__inner">
+                  <figure class="card-flip__front img-joyeria">
+                    <span class="card-flip__front-text">Minoe Joyería</span>
+                  </figure>
+                  <div class="card-flip__back">
+                    <div class="card-flip__content">
+                      <h3 class="card-flip__item-title">Minoe Joyería</h3>
+                      <p class="card-flip__text">
+                        Esculturas portables en oro de 18k y gemas preciosas. Un
+                        tributo a la eternidad hecho a mano.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="card-flip">
+                <div class="card-flip__inner">
+                  <figure class="card-flip__front img-studio">
+                    <span class="card-flip__front-text">Minoe Studio</span>
+                  </figure>
+                  <div class="card-flip__back">
+                    <div class="card-flip__content">
+                      <h3 class="card-flip__item-title">Minoe Studio</h3>
+                      <p class="card-flip__text">
+                        La nobleza del cuero transformada en diseño de autor.
+                        Marroquinería impecable y funcional.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="card-flip">
+                <div class="card-flip__inner">
+                  <figure class="card-flip__front img-gourmet">
+                    <span class="card-flip__front-text">Minoe Gourmet</span>
+                  </figure>
+                  <div class="card-flip__back">
+                    <div class="card-flip__content">
+                      <h3 class="card-flip__item-title">Minoe Gourmet</h3>
+                      <p class="card-flip__text">
+                        Nuestro emblemático rompope artesanal y delicias curadas
+                        para elevar el arte del brindis.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="card-flip">
+                <div class="card-flip__inner">
+                  <figure class="card-flip__front img-sets">
+                    <span class="card-flip__front-text"
+                      >Minoe Sets de Regalo</span
+                    >
+                  </figure>
+                  <div class="card-flip__back">
+                    <div class="card-flip__content">
+                      <h3 class="card-flip__item-title">
+                        Minoe Sets de Regalo
+                      </h3>
+                      <p class="card-flip__text">
+                        El arte de obsequiar. Combinaciones exclusivas que
+                        reúnen lo mejor de nuestras tres líneas.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -469,21 +572,140 @@
          ======================= -->
 
       <section id="catalogo" class="catalog__container">
-        <h2 id="category-display" class="catalog__title">Minoe Studio</h2>
-        <div id="product-container" class="catalog__grid"></div>
+        <div class="catalogo__content">
+          <!-- catálogo título -->
+
+          <h2 id="category-display" class="catalog__title"></h2>
+
+          <!-- catálogo grid -->
+
+          <div id="product-container" class="catalog__grid"></div>
+        </div>
       </section>
 
-      <!-- otros -->
+      <!-- =====================
+         5. CONTACTO
+         ======================= -->
 
-      <section id="contacto" class="contacto" style="background-color: #1d8972">
-        <h1>Sección Contacto</h1>
+      <section id="contacto" class="contacto__container">
+        <!-- 
+            BLOQUE: contact-form (Metodología BEM)
+            Este es el bloque principal que contiene todos los elementos del formulario.
+        -->
+        <div class="contacto__content">
+          <form id="whatsappForm" class="contact-form">
+            <!-- ELEMENTO: contact-form__title -->
+            <h2 class="contact-form__title">Contacto</h2>
+            <!-- 
+                  ELEMENTO: contact-form__group 
+                  Actúa como contenedor para cada par de etiqueta e input, 
+                  manteniendo el espaciado vertical.
+              -->
+            <div class="contact-form__group">
+              <!-- Etiqueta descriptiva vinculada al input mediante el atributo 'for' -->
+              <label for="nombre" class="contact-form__label">Nombre</label>
+              <!-- Input de texto para el nombre. 'required' obliga al usuario a llenarlo -->
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                class="contact-form__input"
+                placeholder="Tu nombre"
+                required
+              />
+            </div>
+
+            <div class="contact-form__group">
+              <label for="apellidos" class="contact-form__label"
+                >Apellidos</label
+              >
+              <input
+                type="text"
+                id="apellidos"
+                name="apellidos"
+                class="contact-form__input"
+                placeholder="Tus apellidos"
+                required
+              />
+            </div>
+
+            <div class="contact-form__group">
+              <label for="telefono" class="contact-form__label"
+                >Número de contacto</label
+              >
+              <!-- Input de tipo número para asegurar que solo se ingresen dígitos -->
+              <input
+                type="number"
+                id="telefono"
+                name="telefono"
+                class="contact-form__input"
+                placeholder="Ej: 123456789"
+                required
+              />
+            </div>
+
+            <div class="contact-form__group">
+              <label for="email" class="contact-form__label">Email</label>
+              <!-- Input de tipo email para validación automática de formato de correo -->
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="contact-form__input"
+                placeholder="correo@ejemplo.com"
+                required
+              />
+            </div>
+
+            <div class="contact-form__group">
+              <label for="motivo" class="contact-form__label"
+                >Motivo del contacto</label
+              >
+              <!-- Textarea para mensajes largos, permite múltiples líneas de texto -->
+              <textarea
+                id="motivo"
+                name="motivo"
+                class="contact-form__textarea"
+                placeholder="Escribe tu mensaje aquí..."
+                required
+              ></textarea>
+            </div>
+
+            <!-- Botón de envío que activará el evento 'submit' en JavaScript -->
+            <button type="submit" class="contact-form__button">
+              Enviar a WhatsApp
+            </button>
+          </form>
+        </div>
       </section>
     </main>
-    <footer></footer>
+
+    <!-- =====================
+         6. FOOTER
+         ======================= -->
+    <section
+      id="footer"
+      class="footer"
+      style="background-color: #000; color: #fff; height: 80px"
+    >
+      <h1>Sección footer</h1>
+    </section>
+
+    <!-- =====================
+         OVERLAY
+         ===================== -->
+
+    <div class="overlay__nav"></div>
+
+    <!-- overlay cart -->
+
+    <div id="overlay__cart" class="overlay"></div>
+
     <script src="js/preloader.js"></script>
     <script src="js/menu.js"></script>
     <script src="js/hero.js"></script>
     <script src="js/catalogo.js"></script>
     <script src="js/cart.js"></script>
+    <script src="js/contacto.js"></script>
   </body>
 </html>

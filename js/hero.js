@@ -105,9 +105,6 @@ function showSlider() {
   iniciarAutoRun();
 }
 
-// 8. ARRANQUE INICIAL
-// iniciarAutoRun();
-
 // 8. ARRANQUE EN ESPERA
 // El slider no se moverá hasta que el preloader le de la orden
 window.addEventListener("paginaRevelada", () => {

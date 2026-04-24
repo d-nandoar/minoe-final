@@ -293,7 +293,23 @@ function renderProducts(cat) {
   // 3. RENDERIZADO NORMAL:
   productContainer.innerHTML = "";
   const titleElem = document.getElementById("category-display");
-  if (titleElem) titleElem.innerText = `Colección ${cat.toUpperCase()}`;
+
+  if (titleElem) {
+    // 1. Definimos las equivalencias (mapeo)
+    const nombresCategorias = {
+      joyeria: "Joyería",
+      regalos: "Sets de regalo",
+      gourmet: "Gourmet",
+      studio: "Studio",
+    };
+
+    // 2. Buscamos el nombre formateado.
+    // Si no existe en el objeto, usamos el valor original (por seguridad)
+    const nombreFormateado = nombresCategorias[cat.toLowerCase()] || cat;
+
+    // 3. Lo inyectamos en el título
+    titleElem.innerText = `Minoe ${nombreFormateado}`;
+  }
 
   if (!inventory[cat]) return;
 

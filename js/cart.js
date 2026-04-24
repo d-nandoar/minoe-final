@@ -29,24 +29,7 @@ function formatCurrency(num) {
   }).format(num);
 }
 
-// Muestra una pequeña notificación que se borra sola después de 2.5 segundos.
-function showToast(msg) {
-  toastContainer.innerHTML = ""; // Limpiamos notificaciones viejas
-  const t = document.createElement("div"); // Creamos un nuevo elemento DIV
-  t.className = "navbar__toast-item"; // Le ponemos la clase de CSS para que se vea bien
-  t.innerText = msg; // Escribimos el mensaje (ej: "AÑADIDO")
-  toastContainer.appendChild(t); // Lo metemos al contenedor en la pantalla
-  setTimeout(() => t.remove(), 2500); // Esperamos 2500 milisegundos y lo borramos
-}
-
 // Quita las marcas rojas de error de los campos del formulario.
-
-// function resetFormErrors() {
-//   errorMsg.style.display = "none"; // Escondemos el mensaje de texto de error
-//   [inId, inNm, inLn].forEach((input) => {
-//     input.classList.remove("error-field"); // Quitamos el borde rojo a cada input
-//   });
-// }
 
 function resetFormErrors() {
   // Restaurar Placeholders originales
@@ -92,63 +75,6 @@ function setupInputConstraints() {
 }
 
 // Abre o cierra el carrito lateral.
-/*
-function toggleCart() {
-  // 1. Si el menú de navegación está abierto, NO abras el carrito, solo cierra el menú
-  const navMenu = document.querySelector(".header__nav");
-  if (navMenu && navMenu.classList.contains("nav-visible")) {
-    return; // Salimos de la función sin hacer nada con el carrito
-  }
-
-  const isActive = sidebar.classList.contains("sidebar--active");
-  if (!isActive && cart.length === 0) {
-    showToast("LA BOLSA ESTÁ VACÍA");
-    return;
-  }
-
-  sidebar.classList.toggle("sidebar--active");
-  cartOverlay.classList.toggle("overlay--active");
-  document.body.classList.toggle("no-scroll");
-}*/
-/*
-function toggleCart() {
-  const navMenu = document.querySelector(".header__nav");
-  const navOverlay = document.querySelector(".overlay__nav");
-
-  // --- EL CAMBIO ESTÁ AQUÍ ---
-  // Si el menú está abierto, lo cerramos pero NO detenemos la ejecución (quitamos el return)
-  if (navMenu?.classList.contains("nav-visible")) {
-    navMenu.classList.remove("nav-visible");
-    navOverlay?.classList.remove("overlay--active");
-    // Al no poner 'return', la función sigue y abre el carrito de inmediato
-  }
-
-  const isActive = sidebar.classList.contains("sidebar--active");
-
-  if (!isActive && cart.length === 0) {
-    showToast("Carrito vacío");
-    document.body.classList.remove("no-scroll");
-
-    document.body.style.paddingRight = "0px";
-    return;
-  }
-  resetFormErrors();
-  sidebar.classList.toggle("sidebar--active");
-
-  cartOverlay.classList.toggle("overlay--active");
-
-  if (sidebar.classList.contains("sidebar--active")) {
-    const scrollbarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
-    document.body.style.paddingRight = `${scrollbarWidth}px`;
-
-    document.body.classList.add("no-scroll");
-  } else {
-    document.body.classList.remove("no-scroll");
-
-    document.body.style.paddingRight = "0px";
-  }
-}*/
 
 function toggleCart() {
   const navMenu = document.querySelector(".header__nav");
@@ -165,50 +91,28 @@ function toggleCart() {
   if (typeof resetFormErrors === "function") {
     resetFormErrors();
   }
-
-  // 3. Alternamos las clases de activación del sidebar y el overlay
-  sidebar.classList.toggle("sidebar--active");
+  const isActive = sidebar.classList.toggle("sidebar--active");
   cartOverlay.classList.toggle("overlay--active");
 
-  // 4. Lógica de bloqueo de scroll y ajuste de ancho de pantalla
-  if (sidebar.classList.contains("sidebar--active")) {
-    // Calculamos el ancho de la barra de scroll para evitar el "salto" visual
-    const scrollbarWidth =
+  // Lógica simplificada
+  if (isActive) {
+    // 1. Calculamos el ancho real de la barra
+    const scrollBarWidth =
       window.innerWidth - document.documentElement.clientWidth;
-    document.body.style.paddingRight = `${scrollbarWidth}px`;
+
+    // 2. Aplicamos bloqueo y compensación
+    document.body.style.paddingRight = `${scrollBarWidth}px`;
     document.body.classList.add("no-scroll");
 
-    // LLAMADA CLAVE: Forzamos la actualización de la interfaz
-    // para que aparezca el mensaje de "Bolsa vacía" si el carrito está en 0.
     updateUI();
   } else {
-    // Al cerrar, devolvemos el scroll y el padding a la normalidad
+    // 3. Restauramos todo al cerrar
     document.body.classList.remove("no-scroll");
     document.body.style.paddingRight = "0px";
   }
 }
 
 // Cambia la cantidad de un producto (delta puede ser 1 o -1).
-/*
-function updateQty(id, delta) {
-  const item = cart.find((i) => i.id === id); // Busca el producto en el carrito
-  if (item) {
-    item.qty += delta; // Suma o resta la cantidad
-    // Si la cantidad llega a 0 o menos, borramos el producto del carrito.
-    if (item.qty <= 0) cart = cart.filter((i) => i.id !== id);
-  }
-  // --- NUEVA LÓGICA DE CIERRE AUTOMÁTICO ---
-  if (cart.length === 0) {
-    clearFormValues();
-    // Si el carrito se vació y está abierto, lo cerramos
-    if (sidebar.classList.contains("sidebar--active")) {
-      toggleCart();
-    }
-  }
-
-  resetFormErrors();
-  updateUI(); // Refrescamos lo que ve el usuario
-}*/
 
 function updateQty(id, delta) {
   const item = cart.find((i) => i.id === id); // Busca el producto en el carrito
@@ -274,54 +178,6 @@ function addToCart(id, name, price) {
 }
 
 // Esta función es el corazón visual: actualiza los totales, el contador y la lista del carrito.
-/*
-function updateUI() {
-  cartList.innerHTML = ""; // Reseteamos la visual de la lista
-  let total = 0;
-  let count = 0;
-
-  // Si el carrito está vacío:
-  if (cart.length === 0) {
-    // Si estaba el panel abierto, lo cerramos por fuerza.
-    if (sidebar.classList.contains("sidebar--active")) {
-      sidebar.classList.remove("sidebar--active");
-      cartOverlay.classList.remove("overlay--active");
-      document.body.classList.remove("no-scroll");
-      showToast("Carrito vacío");
-    }
-    clearFormValues(); // Limpiamos el formulario
-  }
-
-  // Dibujamos cada ítem que esté en la variable 'cart'
-  cart.forEach((i) => {
-    total += i.price * i.qty; // Calculamos el precio total acumulado
-    count += i.qty; // Sumamos la cantidad total de piezas
-    cartList.innerHTML += `
-      <div class="cart-item">
-        <div class="cart-item__info">
-          <p class="cart-item__name">${i.name}</p>
-          <p class="cart-item__price">${formatCurrency(i.price)}</p>
-        </div>
-        <div class="cart-item__controls">
-          <div class="qty-selector">
-            <button class="qty-selector__btn" onclick="updateQty('${i.id}', -1)">−</button>
-            <span class="qty-selector__value">${i.qty}</span>
-            <button class="qty-selector__btn" onclick="updateQty('${i.id}', 1)">+</button>
-          </div>
-          <button class="cart-item__remove" onclick="removeFromCart('${i.id}')">
-            <span class="cart__trash-item cart__trash-item--url"></span>
-          
-            </button>
-        </div>
-      </div>`;
-  });
-
-  // Actualizamos los textos finales en la pantalla
-  cartTotal.innerText = formatCurrency(total);
-  cartCount.innerText = count;
-  // Guardamos la lista actualizada en el navegador para que no se pierda al recargar.
-  localStorage.setItem("MINOE_CART", JSON.stringify(cart));
-}*/
 
 function updateUI() {
   cartList.innerHTML = "";
@@ -337,8 +193,8 @@ function updateUI() {
 
     cartList.innerHTML = `
       <div class="cart-empty">
-        <p class="cart-empty__message">Tu carrito de compras está vacío</p>
-        <a href="#catalogo" class="cart-empty__link" onclick="toggleCart()">Explorar Colección</a>
+        <p class="cart-empty__message">Tu carrito está vacío</p>
+        <a href="#catalogo" class="cart-empty__link" onclick="toggleCart()">Explorar catálogo</a>
       </div>
     `;
 
@@ -389,7 +245,7 @@ function updateUI() {
       cartCount.style.fontSize = "0.75em";
     } else {
       cartCount.innerText = count;
-      cartCount.style.fontSize = "0.85em";
+      cartCount.style.fontSize = "0.9em";
     }
   } else {
     cartCount.style.display = "none"; // Por si acaso llega a 0 aquí
@@ -417,38 +273,6 @@ function triggerCartAnimation() {
 
 // Esta función se activa al dar click en "FINALIZAR PEDIDO".
 function sendWhatsApp() {
-  /*
-  resetFormErrors();
-  const idVal = inId.value.trim(); // .trim() quita espacios accidentales al inicio/final
-  const nameVal = inNm.value.trim();
-  const lastVal = inLn.value.trim();
-
-  // Validación de Identificación: Debe ser Cédula (10) o RUC (13).
-  if (idVal.length !== 10 && idVal.length !== 13) {
-    inId.classList.add("error-field"); // Ponemos borde rojo
-    errorMsg.innerText = "ID debe tener 10 o 13 dígitos";
-    errorMsg.style.display = "block";
-    inId.focus(); // Ponemos el cursor automáticamente aquí para que el usuario corrija
-    return; // Detenemos la función aquí (no se envía nada)
-  }
-
-  // Validación de Nombre: Mínimo 2 letras.
-  if (nameVal.length < 2) {
-    inNm.classList.add("error-field");
-    errorMsg.innerText = "Complete nombre";
-    errorMsg.style.display = "block";
-    inNm.focus();
-    return;
-  }
-
-  // Validación de Apellido: Mínimo 2 letras.
-  if (lastVal.length < 2) {
-    inLn.classList.add("error-field");
-    errorMsg.innerText = "Complete apellido";
-    errorMsg.style.display = "block";
-    inLn.focus();
-    return;
-  }*/
   resetFormErrors();
 
   const idVal = inId.value.trim();
@@ -530,7 +354,7 @@ function sendWhatsApp() {
   // Una vez enviado, vaciamos el carrito y notificamos.
   cart = [];
   updateUI();
-  showToast("¡Pedido Enviado!");
+  // showToast("¡Pedido Enviado!");
 }
 
 // --- EVENTOS ---
@@ -575,24 +399,6 @@ window.onload = () => {
   renderProducts("joyeria"); // Mostramos joyería al inicio por defecto
   setupInputConstraints(); // Activamos las restricciones de escritura en los inputs
 };
-/*
-// Cerrar carrito al hacer click fuera (incluyendo el header)
-document.addEventListener("click", (event) => {
-  const isCartActive = sidebar.classList.contains("sidebar--active");
-
-  // Si el carrito no está abierto, no hacemos nada
-  if (!isCartActive) return;
-
-  // Verificamos si el click fue fuera del sidebar Y fuera del botón que lo abre
-  const clickInsideCart = sidebar.contains(event.target);
-  const clickOnCartBtn = document
-    .getElementById("open-cart")
-    .contains(event.target);
-
-  if (!clickInsideCart && !clickOnCartBtn) {
-    toggleCart(); // Esto cerrará el carrito y limpiará el overlay/scroll
-  }
-});*/
 
 document.addEventListener("click", (event) => {
   const isCartActive = sidebar.classList.contains("sidebar--active");

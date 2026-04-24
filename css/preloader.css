@@ -12,13 +12,14 @@
     0.03
   ); /* Color de los puntitos (blanco muy tenue) */
   --textura-tamaño: 3px 3px; /* Qué tan fino es el grano */
+  --z-preloader: 2000;
 }
 
 /* --- CONTENEDOR MAESTRO --- */
 .preloader {
   position: fixed;
   inset: 0;
-  z-index: 10000;
+  z-index: var(--z-preloader);
   display: flex;
   justify-content: center;
   align-items: center;

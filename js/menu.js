@@ -16,16 +16,6 @@ const inicioLink = document.getElementById("header__a"); //id inicio
 const sections = document.querySelectorAll("section"); //class sections
 let estaNavegandoPorClick = false;
 
-/*
-    abrir el menú principal en móvil
-    click en hamb
-*/
-/*
-navToggle.addEventListener("click", () => {
-  navMenu.classList.toggle("nav-visible");
-  overlay.classList.toggle("overlay--active");
-});*/
-
 // Al abrir el menú (click en hamb)
 // Modifica el evento del navToggle
 // Dentro de menu.js
@@ -57,17 +47,6 @@ navToggle.addEventListener("click", () => {
     document.body.style.paddingRight = "0px";
   }
 });
-
-/*--------------------------------------------------------------
-    abrir el carrito
-    click en cart
---------------------------------------------------------------*/
-
-/*
-cartToggle.addEventListener("click", () => {
-  cartAside.classList.toggle("cart-visible");
-  overlay.classList.toggle("overlay-active");
-});*/
 
 /*
     abrir sub-menú en móvil y pantalla grande
@@ -141,27 +120,6 @@ document.addEventListener("click", (event) => {
   }
 });
 
-/*--------------------------------------------------------------
-    cierre del carrito al hacer click en cualquier
-    lugar fuera del carrito y del cart
-----------------------------------------------------------------*/
-
-/*
-document.addEventListener("click", (event) => {
-  const isClickInsideCart = cartAside.contains(event.target);
-  const isClickOnToggle = cartToggle.contains(event.target);
-
-  //   menú y sub-menú en móvil
-  if (
-    !isClickInsideCart &&
-    !isClickOnToggle &&
-    cartAside.classList.contains("cart-visible")
-  ) {
-    cartAside.classList.remove("cart-visible");
-    overlay.classList.remove("overlay-active");
-  }
-});*/
-
 // marcar los links activos
 
 function activarLink(target) {
@@ -207,21 +165,6 @@ window.addEventListener("load", () => {
 // links y logo ----------------------------
 
 // Función para navegar suavemente y limpiar rastro de URL
-/*
-function navegarA(idDestino, elementoLink) {
-  const seccion = document.querySelector(idDestino);
-
-  if (seccion) {
-    // 1. Scroll suave
-    seccion.scrollIntoView({ behavior: "smooth", block: "start" });
-
-    // 2. Marcar visualmente (tu función actual)
-    activarLink(elementoLink);
-
-    // 3. Actualizar URL de forma limpia
-    history.pushState(null, null, idDestino);
-  }
-}*/
 
 // menu.js
 function navegarA(idDestino, elementoLink) {
@@ -271,40 +214,6 @@ navLinks.forEach((link) => {
 });
 
 //------------------------------------------
-/*
-window.addEventListener("scroll", () => {
-  let seccionActual = "";
-  const pixelesDeMargen = 150; // Ajusta este número según el alto de tu menú (header)
-
-  // 1. Detectar qué sección está cruzando la línea de visión
-  const secciones = document.querySelectorAll("section[id]"); // Busca todas las secciones con ID
-
-  secciones.forEach((seccion) => {
-    const seccionTop = seccion.offsetTop;
-    // Si el scroll bajó más allá del inicio de la sección (menos el margen del header)
-    if (window.pageYOffset >= seccionTop - pixelesDeMargen) {
-      seccionActual = seccion.getAttribute("id");
-    }
-  });
-
-  // 2. Si estamos muy arriba, marcar siempre "Inicio"
-  if (window.pageYOffset < 100) {
-    activarLink(inicioLink);
-    // Opcional: Limpiar el hash de la URL si el usuario sube manualmente
-    if (window.location.hash) {
-      history.replaceState(null, null, window.location.pathname);
-    }
-    return;
-  }
-
-  // 3. Buscar el link que coincide con la sección detectada y activarlo
-  navLinks.forEach((link) => {
-    const href = link.getAttribute("href");
-    if (href === `#${seccionActual}`) {
-      activarLink(link);
-    }
-  });
-});*/
 
 window.addEventListener("scroll", () => {
   let seccionActual = "";
