@@ -2247,6 +2247,10 @@ a,
   .contact-form__title::after {
     max-width: 5px;
   } */
+
+  .contacto__content {
+    justify-content: center;
+  }
 }
 
 /* ==========================================================
@@ -2254,18 +2258,18 @@ a,
    ========================================================== */
 @media (max-width: 480px) {
   .hero__comtent-list {
-    top: 12%;
+    top: 13%;
   }
 
   .hero__h2-list {
-    font-size: 2em;
+    font-size: 1.6em;
   }
 
   /* p */
 
   .hero__p-list {
     margin: 1rem 0 1.25rem 0;
-    line-height: 1.25;
+    line-height: 1;
   }
 
   .hero__arrows {
@@ -2282,7 +2286,7 @@ a,
 
   .hero__thumbnail {
     left: calc(50% - 45%);
-    bottom: 8%;
+    bottom: 6%;
     /* flex-direction: row; */
     justify-content: space-evenly;
     gap: 5px;
