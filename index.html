@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="css/preloader.css" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
+  <body class="no-scroll">
     <!-- =====================
          PRELOADER
          ===================== -->
@@ -290,7 +290,7 @@
 
             <div class="hero__item-list hero__item-list--active">
               <img
-                src="assets/img/jewelry.png"
+                src="assets/img/joy.png"
                 alt="fondo de la sección joyería"
                 class="hero__img-list"
               />
@@ -316,7 +316,7 @@
 
             <div class="hero__item-list">
               <img
-                src="assets/img/studio.png"
+                src="assets/img/stud.png"
                 alt="fondo de la sección studio"
                 class="hero__img-list"
               />
@@ -342,7 +342,7 @@
 
             <div class="hero__item-list">
               <img
-                src="assets/img/gourmet.png"
+                src="assets/img/gour.png"
                 alt="fondo de la sección gourmet"
                 class="hero__img-list"
               />
@@ -368,7 +368,7 @@
 
             <div class="hero__item-list">
               <img
-                src="assets/img/sets.png"
+                src="assets/img/setreg.png"
                 alt="fondo de la sección sets de regalo"
                 class="hero__img-list"
               />
@@ -405,7 +405,7 @@
 
             <div class="hero__item-thumbnail hero__item-thumbnail--active">
               <img
-                src="assets/img/jewelry.png"
+                src="assets/img/joy.png"
                 alt=""
                 class="hero__img--thumbnail"
               />
@@ -418,7 +418,7 @@
 
             <div class="hero__item-thumbnail">
               <img
-                src="assets/img/studio.png"
+                src="assets/img/stud.png"
                 alt=""
                 class="hero__img--thumbnail"
               />
@@ -431,7 +431,7 @@
 
             <div class="hero__item-thumbnail">
               <img
-                src="assets/img/gourmet.png"
+                src="assets/img/gour.png"
                 alt=""
                 class="hero__img--thumbnail"
               />
@@ -444,7 +444,7 @@
 
             <div class="hero__item-thumbnail">
               <img
-                src="assets/img/sets.png"
+                src="assets/img/setreg.png"
                 alt=""
                 class="hero__img--thumbnail"
               />
@@ -463,6 +463,7 @@
       <section id="nosotros" class="nosotros">
         <div class="nosotros__about">
           <div class="nosotros__about-content">
+
             <article class="nosotros__about-image">
               <img
                 class="nosotros__about-img"
@@ -485,12 +486,14 @@
                 buscan distinguir lo ordinario de lo extraordinario."
               </p>
             </article>
+          
           </div>
         </div>
 
         <div class="nosotros-cards">
           <div class="nosotros-cards__container">
             <div class="nosotros-cards__grid">
+
               <article class="card-flip">
                 <div class="card-flip__inner">
                   <figure class="card-flip__front img-joyeria">
@@ -562,6 +565,7 @@
                   </div>
                 </div>
               </article>
+              
             </div>
           </div>
         </div>
@@ -592,91 +596,95 @@
             BLOQUE: contact-form (Metodología BEM)
             Este es el bloque principal que contiene todos los elementos del formulario.
         -->
+
         <div class="contacto__content">
-          <form id="whatsappForm" class="contact-form">
-            <!-- ELEMENTO: contact-form__title -->
-            <h2 class="contact-form__title">Contacto</h2>
-            <!-- 
+         
+              <form id="whatsappForm" class="contact-form">
+                <!-- ELEMENTO: contact-form__title -->
+                <h2 class="contact-form__title">Contacto</h2>
+                <!-- 
                   ELEMENTO: contact-form__group 
                   Actúa como contenedor para cada par de etiqueta e input, 
                   manteniendo el espaciado vertical.
               -->
-            <div class="contact-form__group">
-              <!-- Etiqueta descriptiva vinculada al input mediante el atributo 'for' -->
-              <label for="nombre" class="contact-form__label">Nombre</label>
-              <!-- Input de texto para el nombre. 'required' obliga al usuario a llenarlo -->
-              <input
-                type="text"
-                id="nombre"
-                name="nombre"
-                class="contact-form__input"
-                placeholder="Tu nombre"
-                required
-              />
-            </div>
+                <div class="contact-form__group">
+                  <!-- Etiqueta descriptiva vinculada al input mediante el atributo 'for' -->
+                  <label for="nombre" class="contact-form__label">Nombre</label>
+                  <!-- Input de texto para el nombre. 'required' obliga al usuario a llenarlo -->
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    class="contact-form__input"
+                    placeholder="Tu nombre"
+                    required
+                  />
+                </div>
 
-            <div class="contact-form__group">
-              <label for="apellidos" class="contact-form__label"
-                >Apellidos</label
-              >
-              <input
-                type="text"
-                id="apellidos"
-                name="apellidos"
-                class="contact-form__input"
-                placeholder="Tus apellidos"
-                required
-              />
-            </div>
+                <div class="contact-form__group">
+                  <label for="apellidos" class="contact-form__label"
+                    >Apellidos</label
+                  >
+                  <input
+                    type="text"
+                    id="apellidos"
+                    name="apellidos"
+                    class="contact-form__input"
+                    placeholder="Tus apellidos"
+                    required
+                  />
+                </div>
 
-            <div class="contact-form__group">
-              <label for="telefono" class="contact-form__label"
-                >Número de contacto</label
-              >
-              <!-- Input de tipo número para asegurar que solo se ingresen dígitos -->
-              <input
-                type="number"
-                id="telefono"
-                name="telefono"
-                class="contact-form__input"
-                placeholder="Ej: 123456789"
-                required
-              />
-            </div>
+                <div class="contact-form__group">
+                  <label for="telefono" class="contact-form__label"
+                    >Número de contacto</label
+                  >
+                  <!-- Input de tipo número para asegurar que solo se ingresen dígitos -->
+                  <input
+                    type="number"
+                    id="telefono"
+                    name="telefono"
+                    class="contact-form__input"
+                    placeholder="Ej: 123456789"
+                    required
+                  />
+                </div>
 
-            <div class="contact-form__group">
-              <label for="email" class="contact-form__label">Email</label>
-              <!-- Input de tipo email para validación automática de formato de correo -->
-              <input
-                type="email"
-                id="email"
-                name="email"
-                class="contact-form__input"
-                placeholder="correo@ejemplo.com"
-                required
-              />
-            </div>
+                <div class="contact-form__group">
+                  <label for="email" class="contact-form__label">Email</label>
+                  <!-- Input de tipo email para validación automática de formato de correo -->
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="contact-form__input"
+                    placeholder="correo@ejemplo.com"
+                    required
+                  />
+                </div>
 
-            <div class="contact-form__group">
-              <label for="motivo" class="contact-form__label"
-                >Motivo del contacto</label
-              >
-              <!-- Textarea para mensajes largos, permite múltiples líneas de texto -->
-              <textarea
-                id="motivo"
-                name="motivo"
-                class="contact-form__textarea"
-                placeholder="Escribe tu mensaje aquí..."
-                required
-              ></textarea>
-            </div>
+                <div class="contact-form__group">
+                  <label for="motivo" class="contact-form__label"
+                    >Motivo del contacto</label
+                  >
+                  <!-- Textarea para mensajes largos, permite múltiples líneas de texto -->
+                  <textarea
+                    id="motivo"
+                    name="motivo"
+                    class="contact-form__textarea"
+                    placeholder="Escribe tu mensaje aquí..."
+                    required
+                  ></textarea>
+                </div>
 
-            <!-- Botón de envío que activará el evento 'submit' en JavaScript -->
-            <button type="submit" class="contact-form__button">
-              Enviar a WhatsApp
-            </button>
-          </form>
+                <!-- Botón de envío que activará el evento 'submit' en JavaScript -->
+                <button type="submit" class="contact-form__button">
+                  Enviar a WhatsApp
+                </button>
+              </form>
+           
         </div>
+            </div>
       </section>
     </main>
 
