@@ -289,7 +289,7 @@ body {
 /* sidebar cart - bloqueo scroll */
 body.no-scroll {
   overflow: hidden !important;
-  /* height: 100svh; */
+  height: 100vh;
 }
 
 h1,
