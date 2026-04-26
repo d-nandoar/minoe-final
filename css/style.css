@@ -830,7 +830,7 @@ a,
   width: 90%; /* En móviles pequeños aprovecha el espacio */
   max-width: 26.25rem;
 
-  height: 100svh;
+  height: 100dvh;
 
   padding: 0 0.9375rem;
   background-color: var(--color-crema);
@@ -2337,7 +2337,7 @@ a,
 
   .hero__p-list {
     margin: 1rem 0 1.25rem 0;
-    /* line-height: 1.4; */
+    line-height: 1.2;
   }
 
   .hero__arrows {
