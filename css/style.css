@@ -290,6 +290,8 @@ body {
 body.no-scroll {
   overflow: hidden !important;
   height: 100dvh;
+  position: fixed;
+  width: 100%;
 }
 
 h1,
@@ -815,7 +817,7 @@ a,
   z-index: var(--z-sidebar);
   width: 90%; /* En móviles pequeños aprovecha el espacio */
   max-width: 26.25rem;
-  height: 100dvh;
+  height: 100svh;
   padding: 0 0.9375rem;
   background-color: var(--color-crema);
   box-shadow: var(--sombra-nav);
