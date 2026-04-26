@@ -2372,6 +2372,18 @@ a,
     /* font-size: 1.1em; */
   }
 
+  .cart-empty {
+    padding: 0rem;
+  }
+
+  .cart-empty__message {
+    font-size: 1em;
+  }
+
+  .cart-empty__link {
+    font-size: 0.9em;
+  }
+
   .nosotros__about-h2,
   .catalog__title {
     font-size: 1.8em; /* Tamaño más manejable para pantallas de 320px */
