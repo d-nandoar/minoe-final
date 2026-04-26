@@ -276,10 +276,9 @@
    ========================================= */
 
 * {
-    -webkit-tap-highlight-color: transparent;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-
 
 body {
   background-color: var(--color-blanco);
@@ -1188,7 +1187,7 @@ a,
 
 .hero__slider {
   /* height: 100vh; */
-  height: 100dvh;
+  height: 100svh;
   margin-top: -4.5rem;
   position: relative;
 }
@@ -1569,7 +1568,7 @@ a,
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
 }
 
 .nosotros-cards__grid {
