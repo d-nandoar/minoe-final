@@ -830,7 +830,7 @@ a,
   width: 90%; /* En móviles pequeños aprovecha el espacio */
   max-width: 26.25rem;
 
-  height: 100dvh;
+  height: 100svh;
 
   padding: 0 0.9375rem;
   background-color: var(--color-crema);
@@ -870,6 +870,7 @@ a,
 .sidebar__content {
   flex: 1;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
   padding: 0.625rem 0.9375rem;
   border: 1px solid var(--borde-verde-tenue);
   border-radius: 0.9375rem;
