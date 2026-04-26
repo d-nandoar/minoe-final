@@ -78,8 +78,6 @@ function setupInputConstraints() {
 
 // Abre o cierra el carrito lateral.
 
-/*
-
 function toggleCart() {
   const navMenu = document.querySelector(".header__nav");
   const navOverlay = document.querySelector(".overlay__nav");
@@ -114,41 +112,8 @@ function toggleCart() {
     document.body.classList.remove("no-scroll");
     document.body.style.paddingRight = "0px";
   }
-} */
-
-function toggleCart() {
-  const navMenu = document.querySelector(".header__nav");
-  const navOverlay = document.querySelector(".overlay__nav");
-
-  if (navMenu?.classList.contains("nav-visible")) {
-    navMenu.classList.remove("nav-visible");
-    navOverlay?.classList.remove("overlay--active");
-  }
-
-  if (typeof resetFormErrors === "function") {
-    resetFormErrors();
-  }
-
-  const isActive = sidebar.classList.toggle("sidebar--active");
-  cartOverlay.classList.toggle("overlay--active");
-
-  if (isActive) {
-    const scrollBarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
-
-    // Bloqueamos ambos elementos raíz
-    document.documentElement.classList.add("no-scroll");
-    document.body.classList.add("no-scroll");
-
-    document.body.style.paddingRight = `${scrollBarWidth}px`;
-    updateUI();
-  } else {
-    // Restauramos sin necesidad de scrollTo
-    document.documentElement.classList.remove("no-scroll");
-    document.body.classList.remove("no-scroll");
-    document.body.style.paddingRight = "0px";
-  }
 }
+
 // Cambia la cantidad de un producto (delta puede ser 1 o -1).
 
 function updateQty(id, delta) {
