@@ -814,7 +814,7 @@ a,
   position: fixed;
   right: -26.875rem;
   top: 0;
-  /* bottom: 0; */
+  bottom: 0;
   z-index: var(--z-sidebar);
   width: 90%; /* En móviles pequeños aprovecha el espacio */
   max-width: 26.25rem;
