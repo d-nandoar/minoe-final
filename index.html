@@ -463,7 +463,6 @@
       <section id="nosotros" class="nosotros">
         <div class="nosotros__about">
           <div class="nosotros__about-content">
-
             <article class="nosotros__about-image">
               <img
                 class="nosotros__about-img"
@@ -486,14 +485,12 @@
                 buscan distinguir lo ordinario de lo extraordinario."
               </p>
             </article>
-          
           </div>
         </div>
 
         <div class="nosotros-cards">
           <div class="nosotros-cards__container">
             <div class="nosotros-cards__grid">
-
               <article class="card-flip">
                 <div class="card-flip__inner">
                   <figure class="card-flip__front img-joyeria">
@@ -565,7 +562,6 @@
                   </div>
                 </div>
               </article>
-              
             </div>
           </div>
         </div>
@@ -598,93 +594,90 @@
         -->
 
         <div class="contacto__content">
-         
-              <form id="whatsappForm" class="contact-form">
-                <!-- ELEMENTO: contact-form__title -->
-                <h2 class="contact-form__title">Contacto</h2>
-                <!-- 
+          <form id="whatsappForm" class="contact-form">
+            <!-- ELEMENTO: contact-form__title -->
+            <h2 class="contact-form__title">Contacto</h2>
+            <!-- 
                   ELEMENTO: contact-form__group 
                   Actúa como contenedor para cada par de etiqueta e input, 
                   manteniendo el espaciado vertical.
               -->
-                <div class="contact-form__group">
-                  <!-- Etiqueta descriptiva vinculada al input mediante el atributo 'for' -->
-                  <label for="nombre" class="contact-form__label">Nombre</label>
-                  <!-- Input de texto para el nombre. 'required' obliga al usuario a llenarlo -->
-                  <input
-                    type="text"
-                    id="nombre"
-                    name="nombre"
-                    class="contact-form__input"
-                    placeholder="Tu nombre"
-                    required
-                  />
-                </div>
-
-                <div class="contact-form__group">
-                  <label for="apellidos" class="contact-form__label"
-                    >Apellidos</label
-                  >
-                  <input
-                    type="text"
-                    id="apellidos"
-                    name="apellidos"
-                    class="contact-form__input"
-                    placeholder="Tus apellidos"
-                    required
-                  />
-                </div>
-
-                <div class="contact-form__group">
-                  <label for="telefono" class="contact-form__label"
-                    >Número de contacto</label
-                  >
-                  <!-- Input de tipo número para asegurar que solo se ingresen dígitos -->
-                  <input
-                    type="number"
-                    id="telefono"
-                    name="telefono"
-                    class="contact-form__input"
-                    placeholder="Ej: 123456789"
-                    required
-                  />
-                </div>
-
-                <div class="contact-form__group">
-                  <label for="email" class="contact-form__label">Email</label>
-                  <!-- Input de tipo email para validación automática de formato de correo -->
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    class="contact-form__input"
-                    placeholder="correo@ejemplo.com"
-                    required
-                  />
-                </div>
-
-                <div class="contact-form__group">
-                  <label for="motivo" class="contact-form__label"
-                    >Motivo del contacto</label
-                  >
-                  <!-- Textarea para mensajes largos, permite múltiples líneas de texto -->
-                  <textarea
-                    id="motivo"
-                    name="motivo"
-                    class="contact-form__textarea"
-                    placeholder="Escribe tu mensaje aquí..."
-                    required
-                  ></textarea>
-                </div>
-
-                <!-- Botón de envío que activará el evento 'submit' en JavaScript -->
-                <button type="submit" class="contact-form__button">
-                  Enviar a WhatsApp
-                </button>
-              </form>
-           
-        </div>
+            <div class="contact-form__group">
+              <!-- Etiqueta descriptiva vinculada al input mediante el atributo 'for' -->
+              <label for="nombre" class="contact-form__label">Nombre</label>
+              <!-- Input de texto para el nombre. 'required' obliga al usuario a llenarlo -->
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                class="contact-form__input"
+                placeholder="Tu nombre"
+                required
+              />
             </div>
+
+            <div class="contact-form__group">
+              <label for="apellidos" class="contact-form__label"
+                >Apellidos</label
+              >
+              <input
+                type="text"
+                id="apellidos"
+                name="apellidos"
+                class="contact-form__input"
+                placeholder="Tus apellidos"
+                required
+              />
+            </div>
+
+            <div class="contact-form__group">
+              <label for="telefono" class="contact-form__label"
+                >Número de contacto</label
+              >
+              <!-- Input de tipo número para asegurar que solo se ingresen dígitos -->
+              <input
+                type="number"
+                id="telefono"
+                name="telefono"
+                class="contact-form__input"
+                placeholder="Ej: 123456789"
+                required
+              />
+            </div>
+
+            <div class="contact-form__group">
+              <label for="email" class="contact-form__label">Email</label>
+              <!-- Input de tipo email para validación automática de formato de correo -->
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="contact-form__input"
+                placeholder="correo@ejemplo.com"
+                required
+              />
+            </div>
+
+            <div class="contact-form__group">
+              <label for="motivo" class="contact-form__label"
+                >Motivo del contacto</label
+              >
+              <!-- Textarea para mensajes largos, permite múltiples líneas de texto -->
+              <textarea
+                id="motivo"
+                name="motivo"
+                class="contact-form__textarea"
+                placeholder="Escribe tu mensaje aquí..."
+                required
+              ></textarea>
+            </div>
+
+            <!-- Botón de envío que activará el evento 'submit' en JavaScript -->
+            <button type="submit" class="contact-form__button">
+              Enviar a WhatsApp
+            </button>
+          </form>
+        </div>
       </section>
     </main>
 

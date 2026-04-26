@@ -287,12 +287,19 @@ body {
 }
 
 /* sidebar cart - bloqueo scroll */
-body.no-scroll {
-  width: 100%;
-  position: fixed;
-
+/* body.no-scroll {
+ 
   overflow: hidden !important;
-  /* height: 100dvh; */
+  height: 100dvh;
+} */
+
+/* Aplicar a ambos para un bloqueo total */
+html.no-scroll,
+body.no-scroll {
+  overflow: hidden !important;
+  height: 100svh !important; /* Forzamos a que no pueda crecer */
+  touch-action: none; /* Desactiva gestos de scroll en móviles */
+  position: relative;
 }
 
 h1,

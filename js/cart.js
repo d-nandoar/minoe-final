@@ -133,30 +133,22 @@ function toggleCart() {
   cartOverlay.classList.toggle("overlay--active");
 
   if (isActive) {
-    // 1. Guardamos la posición actual del scroll antes de bloquearlo
-    scrollPos = window.pageYOffset;
-
-    // 2. Calculamos el ancho de la barra para evitar el salto lateral
     const scrollBarWidth =
       window.innerWidth - document.documentElement.clientWidth;
 
-    // 3. Bloqueamos el body usando position fixed (esto congela la barra de direcciones)
+    // Bloqueamos ambos elementos raíz
+    document.documentElement.classList.add("no-scroll");
     document.body.classList.add("no-scroll");
-    document.body.style.top = `-${scrollPos}px`;
-    document.body.style.paddingRight = `${scrollBarWidth}px`;
 
+    document.body.style.paddingRight = `${scrollBarWidth}px`;
     updateUI();
   } else {
-    // 4. Restauramos todo al cerrar
+    // Restauramos sin necesidad de scrollTo
+    document.documentElement.classList.remove("no-scroll");
     document.body.classList.remove("no-scroll");
-    document.body.style.top = "";
     document.body.style.paddingRight = "0px";
-
-    // 5. Devolvemos al usuario a la posición donde estaba
-    window.scrollTo(0, scrollPos);
   }
 }
-
 // Cambia la cantidad de un producto (delta puede ser 1 o -1).
 
 function updateQty(id, delta) {
