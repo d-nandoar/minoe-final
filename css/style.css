@@ -818,7 +818,7 @@ a,
   z-index: var(--z-sidebar);
   width: 90%; /* En móviles pequeños aprovecha el espacio */
   max-width: 26.25rem;
-  height: 100svh;
+  height: 100dvh;
   padding: 0 0.9375rem;
   background-color: var(--color-crema);
   box-shadow: var(--sombra-nav);
