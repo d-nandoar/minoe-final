@@ -18,6 +18,8 @@ const inNm = document.getElementById("cust-name");
 const inLn = document.getElementById("cust-lastname");
 const errorMsg = document.getElementById("form-error-msg"); // El texto de error que aparece si falta algo
 
+let scrollPos = 0; // Variable global necesaria al inicio de tu cart.js
+
 // --- UTILIDADES ---
 // Funciones pequeñas que realizan tareas repetitivas o específicas.
 
@@ -113,8 +115,6 @@ function toggleCart() {
     document.body.style.paddingRight = "0px";
   }
 } */
-
-let scrollPos = 0; // Variable global necesaria al inicio de tu cart.js
 
 function toggleCart() {
   const navMenu = document.querySelector(".header__nav");
