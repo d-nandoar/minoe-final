@@ -76,36 +76,37 @@ function setupInputConstraints() {
 
 // Abre o cierra el carrito lateral.
 
-// - Localiza esta función en tu cart.js
 function toggleCart() {
   const navMenu = document.querySelector(".header__nav");
   const navOverlay = document.querySelector(".overlay__nav");
 
+  // 1. Si el menú de navegación móvil está abierto, lo cerramos
   if (navMenu?.classList.contains("nav-visible")) {
     navMenu.classList.remove("nav-visible");
     navOverlay?.classList.remove("overlay--active");
+    // No ponemos return para que pueda abrir el carrito inmediatamente
   }
 
+  // 2. Limpiamos errores previos del formulario de facturación
   if (typeof resetFormErrors === "function") {
     resetFormErrors();
   }
-
   const isActive = sidebar.classList.toggle("sidebar--active");
   cartOverlay.classList.toggle("overlay--active");
 
+  // Lógica simplificada
   if (isActive) {
-    // --- CAMBIO AQUÍ PARA EVITAR EL SALTO ---
-    // En lugar de resetear el scroll, solo bloqueamos el overflow
+    // 1. Calculamos el ancho real de la barra
     const scrollBarWidth =
       window.innerWidth - document.documentElement.clientWidth;
-    document.body.style.paddingRight = `${scrollBarWidth}px`;
 
-    // Asegúrate de que en tu CSS, .no-scroll NO tenga "position: fixed"
-    // Si tu CSS tiene position: fixed, el salto es inevitable a menos que uses JS para compensar.
+    // 2. Aplicamos bloqueo y compensación
+    document.body.style.paddingRight = `${scrollBarWidth}px`;
     document.body.classList.add("no-scroll");
 
     updateUI();
   } else {
+    // 3. Restauramos todo al cerrar
     document.body.classList.remove("no-scroll");
     document.body.style.paddingRight = "0px";
   }
