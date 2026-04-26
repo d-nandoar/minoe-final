@@ -289,7 +289,7 @@ body {
 /* sidebar cart - bloqueo scroll */
 body.no-scroll {
   overflow: hidden !important;
-  height: 100dvh !important;
+  height: 100svh;
 }
 
 h1,
@@ -400,6 +400,7 @@ a,
 .overlay__nav {
   position: fixed;
   inset: 0;
+  height: 100svh;
   background: var(--color-overlay);
   z-index: var(--z-overlay);
   backdrop-filter: blur(2px);
