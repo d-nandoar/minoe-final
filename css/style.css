@@ -848,9 +848,48 @@ a,
   transition: right var(--transition-open-curve);
 }
 
+/* x cerrar carrito */
+
+/* --- BOTÓN DE CIERRE CARRITO --- */
+.sidebar__close {
+  position: absolute;
+  top: -4px;
+  right: 17px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 101; /* Por encima del contenido */
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s var(--bezier-lujo);
+}
+
+.sidebar__close-icon {
+  font-size: 2rem; /* Tamaño elegante */
+  color: var(
+    --color-crema
+  ); /* Color crema para resaltar sobre el verde minoe */
+  line-height: 1;
+  font-family: Arial, sans-serif; /* Para una X más limpia */
+  font-weight: 200;
+  transition: color 0.3s ease;
+}
+
+@media (hover: hover) {
+  .sidebar__close:hover {
+    transform: rotate(90deg); /* Efecto sutil de giro al hover */
+  }
+}
+/* 
+.sidebar__close:hover .sidebar__close-icon {
+  color: var(--color-dorado); } */
+
 /* header cart */
 
 .sidebar__header {
+  position: relative;
   width: 100%;
   padding: 0.625rem 0;
   margin-top: 0.625rem;

@@ -76,6 +76,18 @@ function setupInputConstraints() {
   inLn.addEventListener("input", lettersOnly);
 }
 
+// carrar carrito con la X
+
+// Referencia al nuevo botón
+const btnCloseCart = document.getElementById("close-cart");
+
+// Evento para cerrar el carrito
+if (btnCloseCart) {
+  btnCloseCart.addEventListener("click", () => {
+    toggleCart();
+  });
+}
+
 // Abre o cierra el carrito lateral.
 /*
 function toggleCart() {
