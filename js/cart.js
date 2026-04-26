@@ -77,7 +77,7 @@ function setupInputConstraints() {
 }
 
 // Abre o cierra el carrito lateral.
-
+/*
 function toggleCart() {
   const navMenu = document.querySelector(".header__nav");
   const navOverlay = document.querySelector(".overlay__nav");
@@ -111,6 +111,48 @@ function toggleCart() {
     // 3. Restauramos todo al cerrar
     document.body.classList.remove("no-scroll");
     document.body.style.paddingRight = "0px";
+  }
+}*/
+
+// Variable para controlar el evento de bloqueo
+const preventDefault = (e) => e.preventDefault();
+
+function toggleCart() {
+  const navMenu = document.querySelector(".header__nav");
+  const navOverlay = document.querySelector(".overlay__nav");
+
+  if (navMenu?.classList.contains("nav-visible")) {
+    navMenu.classList.remove("nav-visible");
+    navOverlay?.classList.remove("overlay--active");
+  }
+
+  if (typeof resetFormErrors === "function") {
+    resetFormErrors();
+  }
+
+  const isActive = sidebar.classList.toggle("sidebar--active");
+  cartOverlay.classList.toggle("overlay--active");
+
+  if (isActive) {
+    const scrollBarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+
+    document.body.style.paddingRight = `${scrollBarWidth}px`;
+    document.documentElement.classList.add("no-scroll");
+    document.body.classList.add("no-scroll");
+
+    // BLOQUEO RADICAL: Evita que el navegador detecte el arrastre táctil
+    // 'passive: false' es necesario para que preventDefault() funcione
+    window.addEventListener("touchmove", preventDefault, { passive: false });
+
+    updateUI();
+  } else {
+    document.documentElement.classList.remove("no-scroll");
+    document.body.classList.remove("no-scroll");
+    document.body.style.paddingRight = "0px";
+
+    // LIBERACIÓN: Permitimos el scroll de nuevo
+    window.removeEventListener("touchmove", preventDefault);
   }
 }
 

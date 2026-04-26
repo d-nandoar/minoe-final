@@ -280,6 +280,16 @@
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+/* sidebar cart - bloqueo total */
+html.no-scroll,
+body.no-scroll {
+  overflow: hidden !important;
+  height: 100svh !important;
+  position: fixed; /* Mantiene el fondo anclado */
+  width: 100%;
+  touch-action: none; /* Desactiva gestos nativos del navegador */
+}
+
 body {
   background-color: var(--color-blanco);
   color: var(--color-gris-oscuro);
@@ -287,10 +297,11 @@ body {
 }
 
 /* sidebar cart - bloqueo scroll */
-body.no-scroll {
+
+/* body.no-scroll {
   overflow: hidden !important;
   height: 100svh;
-}
+} */
 
 h1,
 h2,
@@ -400,7 +411,6 @@ a,
 .overlay__nav {
   position: fixed;
   inset: 0;
-  height: 100svh;
   background: var(--color-overlay);
   z-index: var(--z-overlay);
   backdrop-filter: blur(2px);
@@ -419,6 +429,8 @@ a,
   opacity: 1;
   visibility: visible;
   pointer-events: auto; /* Permite detectar el clic para cerrar el carrito */
+
+  touch-action: none; /* Bloquea cualquier intento de scroll en el fondo */
 }
 
 /* títulos nosotros - catálogo */
@@ -818,7 +830,7 @@ a,
   width: 90%; /* En móviles pequeños aprovecha el espacio */
   max-width: 26.25rem;
 
-  height: 100svh;
+  height: 100dvh;
 
   padding: 0 0.9375rem;
   background-color: var(--color-crema);
