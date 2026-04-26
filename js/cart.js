@@ -76,6 +76,8 @@ function setupInputConstraints() {
 
 // Abre o cierra el carrito lateral.
 
+/*
+
 function toggleCart() {
   const navMenu = document.querySelector(".header__nav");
   const navOverlay = document.querySelector(".overlay__nav");
@@ -109,6 +111,49 @@ function toggleCart() {
     // 3. Restauramos todo al cerrar
     document.body.classList.remove("no-scroll");
     document.body.style.paddingRight = "0px";
+  }
+} */
+
+let scrollPos = 0; // Variable global necesaria al inicio de tu cart.js
+
+function toggleCart() {
+  const navMenu = document.querySelector(".header__nav");
+  const navOverlay = document.querySelector(".overlay__nav");
+
+  if (navMenu?.classList.contains("nav-visible")) {
+    navMenu.classList.remove("nav-visible");
+    navOverlay?.classList.remove("overlay--active");
+  }
+
+  if (typeof resetFormErrors === "function") {
+    resetFormErrors();
+  }
+
+  const isActive = sidebar.classList.toggle("sidebar--active");
+  cartOverlay.classList.toggle("overlay--active");
+
+  if (isActive) {
+    // 1. Guardamos la posición actual del scroll antes de bloquearlo
+    scrollPos = window.pageYOffset;
+
+    // 2. Calculamos el ancho de la barra para evitar el salto lateral
+    const scrollBarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+
+    // 3. Bloqueamos el body usando position fixed (esto congela la barra de direcciones)
+    document.body.classList.add("no-scroll");
+    document.body.style.top = `-${scrollPos}px`;
+    document.body.style.paddingRight = `${scrollBarWidth}px`;
+
+    updateUI();
+  } else {
+    // 4. Restauramos todo al cerrar
+    document.body.classList.remove("no-scroll");
+    document.body.style.top = "";
+    document.body.style.paddingRight = "0px";
+
+    // 5. Devolvemos al usuario a la posición donde estaba
+    window.scrollTo(0, scrollPos);
   }
 }
 
