@@ -159,7 +159,21 @@ function toggleCart() {
 // }
 
 // Variable para controlar el evento de bloqueo
-const preventDefault = (e) => e.preventDefault();
+// const preventDefault = (e) => e.preventDefault();
+
+// Versión inteligente que permite el scroll interno
+const preventDefault = (e) => {
+  // Verificamos si el toque ocurre dentro de la zona de productos
+  const isInsideScrollable = e.target.closest(".sidebar__content");
+
+  if (isInsideScrollable) {
+    // Si es dentro del contenido, permitimos que el evento siga su curso (haga scroll)
+    return;
+  }
+
+  // Si toca el total, el header del cart o el overlay, bloqueamos el movimiento
+  e.preventDefault();
+};
 
 function toggleCart() {
   if (typeof resetFormErrors === "function") {

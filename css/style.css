@@ -944,6 +944,7 @@ a,
 .sidebar__content {
   flex: 1;
   overflow-y: auto;
+  overscroll-behavior: contain; /* CRUCIAL: evita que el scroll "salte" al body cuando llegas al final *
   -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
   padding: 0.625rem 0.9375rem;
   border: 1px solid var(--borde-verde-tenue);
