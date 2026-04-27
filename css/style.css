@@ -283,11 +283,12 @@
 /* sidebar cart - bloqueo total */
 html.no-scroll,
 body.no-scroll {
-  overflow: hidden !important;
-  height: 100svh !important;
-  position: fixed; /* Mantiene el fondo anclado */
-  width: 100%;
   touch-action: none; /* Desactiva gestos nativos del navegador */
+  overflow: hidden !important;
+  scroll-behavior: auto !important; /* Fuerza el salto instantáneo */
+  /* height: 100svh !important; */
+  /* position: fixed; */
+  /* width: 100%; */
 }
 
 body {
@@ -555,6 +556,40 @@ a,
 }
 
 /* nav */
+
+/* --- BOTÓN DE CIERRE MENÚ (Móviles) --- */
+.header__nav {
+  position: relative;
+}
+.header__close-menu {
+  display: none;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 101;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s var(--bezier-lujo);
+}
+
+.header__close-menu-icon {
+  font-size: 2.2rem;
+  color: var(--color-gris-oscuro); /* Resalta sobre el verde esmeralda */
+  line-height: 1;
+  font-family: Arial, sans-serif;
+  font-weight: 200;
+}
+
+/* Efecto hover (solo en dispositivos que lo soporten) */
+@media (hover: hover) {
+  .header__close-menu:hover {
+    transform: rotate(90deg);
+  }
+}
 
 .nav__contenedor,
 .header__ul {
@@ -2164,6 +2199,10 @@ a,
   }
 
   .header__hamb {
+    display: block;
+  }
+
+  .header__close-menu {
     display: block;
   }
 

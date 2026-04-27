@@ -18,8 +18,36 @@ const inNm = document.getElementById("cust-name");
 const inLn = document.getElementById("cust-lastname");
 const errorMsg = document.getElementById("form-error-msg"); // El texto de error que aparece si falta algo
 
-let scrollPos = 0; // Variable global necesaria al inicio de tu cart.js
+// --- GESTIÓN DE SCROLL LOCAL PARA CARRITO ---
+let scrollPosCart = 0; // Variable exclusiva para el carrito
 
+function gestionBloqueoScrollCart(bloquear) {
+  const body = document.body;
+
+  if (bloquear) {
+    scrollPosCart = window.pageYOffset || document.documentElement.scrollTop;
+    body.style.position = "fixed";
+    body.style.top = `-${scrollPosCart}px`;
+    body.style.width = "100%";
+    body.style.overflowY = "scroll";
+    const scrollBarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    body.style.paddingRight = `${scrollBarWidth}px`;
+  } else {
+    body.style.removeProperty("position");
+    body.style.removeProperty("top");
+    body.style.removeProperty("width");
+    body.style.removeProperty("overflow-y");
+    body.style.removeProperty("padding-right");
+
+    // Aplica la misma corrección aquí
+    window.scrollTo({
+      top: scrollPosCart,
+      behavior: "instant",
+    });
+    body.style.removeProperty("padding-right");
+  }
+}
 // --- UTILIDADES ---
 // Funciones pequeñas que realizan tareas repetitivas o específicas.
 
@@ -126,44 +154,30 @@ function toggleCart() {
   }
 }*/
 
+// function preventDefault(e) {
+//   e.preventDefault();
+// }
+
 // Variable para controlar el evento de bloqueo
 const preventDefault = (e) => e.preventDefault();
 
 function toggleCart() {
-  const navMenu = document.querySelector(".header__nav");
-  const navOverlay = document.querySelector(".overlay__nav");
-
-  if (navMenu?.classList.contains("nav-visible")) {
-    navMenu.classList.remove("nav-visible");
-    navOverlay?.classList.remove("overlay--active");
-  }
-
   if (typeof resetFormErrors === "function") {
     resetFormErrors();
   }
 
-  const isActive = sidebar.classList.toggle("sidebar--active");
+  const isOpening = !sidebar.classList.contains("sidebar--active");
+
+  sidebar.classList.toggle("sidebar--active");
   cartOverlay.classList.toggle("overlay--active");
 
-  if (isActive) {
-    const scrollBarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
+  // Esta función debe existir arriba en tu archivo
+  gestionBloqueoScrollCart(isOpening);
 
-    document.body.style.paddingRight = `${scrollBarWidth}px`;
-    document.documentElement.classList.add("no-scroll");
-    document.body.classList.add("no-scroll");
-
-    // BLOQUEO RADICAL: Evita que el navegador detecte el arrastre táctil
-    // 'passive: false' es necesario para que preventDefault() funcione
+  if (isOpening) {
     window.addEventListener("touchmove", preventDefault, { passive: false });
-
-    updateUI();
+    if (typeof updateUI === "function") updateUI();
   } else {
-    document.documentElement.classList.remove("no-scroll");
-    document.body.classList.remove("no-scroll");
-    document.body.style.paddingRight = "0px";
-
-    // LIBERACIÓN: Permitimos el scroll de nuevo
     window.removeEventListener("touchmove", preventDefault);
   }
 }
@@ -460,23 +474,17 @@ document.addEventListener("click", (event) => {
   const isCartActive = sidebar.classList.contains("sidebar--active");
   if (!isCartActive) return;
 
-  // --- SOLUCIÓN AQUÍ ---
-  // Si el elemento que tocaste ya no tiene "padre" (porque updateUI lo borró)
-  // significa que fue un clic en un botón interno del carrito.
-  if (!event.target.isConnected) {
-    return; // No hacemos nada, dejamos el carrito abierto
-  }
+  if (!event.target.isConnected) return;
 
   const clickInsideCart = sidebar.contains(event.target);
   const clickOnCartBtn = document
     .getElementById("open-cart")
     .contains(event.target);
-
-  // También verificamos si el clic fue en los botones que disparan funciones
   const isActionButton =
     event.target.closest(".qty-selector__btn") ||
     event.target.closest(".cart-item__remove");
 
+  // CORRECCIÓN: Un solo IF, un solo llamado
   if (!clickInsideCart && !clickOnCartBtn && !isActionButton) {
     toggleCart();
   }

@@ -16,36 +16,60 @@ const inicioLink = document.getElementById("header__a"); //id inicio
 const sections = document.querySelectorAll("section"); //class sections
 let estaNavegandoPorClick = false;
 
+// guardar posición
+
+let scrollPos = 0; // Debe estar fuera de la función
+
+function gestionBloqueoScroll(bloquear, esNavegacion = false) {
+  const body = document.body;
+
+  if (bloquear) {
+    scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+    body.style.position = "fixed";
+    body.style.top = `-${scrollPos}px`;
+    body.style.width = "100%";
+    body.style.overflowY = "scroll";
+    const scrollBarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    body.style.paddingRight = `${scrollBarWidth}px`;
+  } else {
+    body.style.removeProperty("position");
+    body.style.removeProperty("top");
+    body.style.removeProperty("width");
+    body.style.removeProperty("overflow-y");
+    body.style.removeProperty("padding-right");
+
+    // CORRECCIÓN AQUÍ: Usamos un objeto de configuración para forzar el scroll instantáneo
+    window.scrollTo({
+      top: scrollPos,
+      behavior: "instant", // Esto evita el efecto de "subida y bajada"
+    });
+
+    body.style.removeProperty("padding-right");
+  }
+}
+
 // Al abrir el menú (click en hamb)
 // Modifica el evento del navToggle
 // Dentro de menu.js
 navToggle.addEventListener("click", () => {
-  // 1. LIMPIEZA: Si el carrito está abierto, lo cerramos antes de abrir el menú
   const sidebar = document.getElementById("sidebar");
   const cartOverlay = document.getElementById("overlay__cart");
 
+  // 1. Si el carrito está abierto, lo cerramos
   if (sidebar && sidebar.classList.contains("sidebar--active")) {
     sidebar.classList.remove("sidebar--active");
     cartOverlay?.classList.remove("overlay--active");
-    // No quitamos no-scroll aquí porque el menú lo va a necesitar a continuación
+    // No ejecutamos gestionBloqueoScroll(false) aquí para que el menú tome el control
   }
 
-  // 2. Lógica normal de tu menú
-  navMenu.classList.toggle("nav-visible");
+  // 2. Togleamos el menú
+  const esApertura = navMenu.classList.toggle("nav-visible");
   overlay.classList.toggle("overlay--active");
 
-  // 3. Gestión de scroll
-  if (navMenu.classList.contains("nav-visible")) {
-    const scrollbarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
-    document.body.style.paddingRight = `${scrollbarWidth}px`;
-
-    document.body.classList.add("no-scroll");
-  } else {
-    document.body.classList.remove("no-scroll");
-
-    document.body.style.paddingRight = "0px";
-  }
+  // 3. Gestión de scroll basada en el estado final del menú
+  // Usamos 'esApertura' que guarda el resultado del toggle
+  gestionBloqueoScroll(esApertura);
 });
 
 /*
@@ -66,22 +90,58 @@ btnSubmenu.addEventListener("click", () => {
   arrow.classList.toggle("arrow-rotate");
 });
 
+// carrar carrito con la X
+
+// 1. Referencia al botón de cierre por ID
+const btnCloseMenu = document.getElementById("close-menu");
+
+// 2. Lógica de cierre
+if (btnCloseMenu) {
+  btnCloseMenu.addEventListener("click", () => {
+    // Cerramos el menú visualmente
+    navMenu.classList.remove("nav-visible");
+    overlay.classList.remove("overlay--active");
+
+    // Ejecutamos tu función de bloqueo de scroll pasándole 'false'
+    // Esto restaurará la posición original de forma instantánea
+    if (typeof gestionBloqueoScroll === "function") {
+      gestionBloqueoScroll(false);
+    }
+  });
+}
+
 /*
     cierre del menú al hacer click en cualquier link
     que no sea el de abrir sub-menú (.btn-submenu)
 */
+// --- EVENTO PARA LOS LINKS ---
 
 navLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    navMenu.classList.remove("nav-visible");
-    // Al cerrar el menú (en el forEach de navLinks y el click en document)
-    // Asegúrate de incluir esta línea siempre que quites la clase 'nav-visible':
-    document.body.classList.remove("no-scroll");
-    overlay.classList.remove("overlay--active");
+  link.addEventListener("click", (e) => {
+    const href = link.getAttribute("href");
 
-    // cierra el sub-menú para que esté cerrado la próxima vez
-    subMenu.classList.remove("submenu-open");
-    arrow.classList.remove("arrow-rotate");
+    if (href && href.startsWith("#")) {
+      e.preventDefault();
+
+      estaNavegandoPorClick = true; // ACTIVAMOS ESCUDO
+
+      if (typeof gestionBloqueoScroll === "function") {
+        gestionBloqueoScroll(false, true);
+      }
+
+      navegarA(href, link);
+
+      // Cerramos el menú
+      navMenu.classList.remove("nav-visible");
+      overlay.classList.remove("overlay--active");
+      subMenu.classList.remove("submenu-open");
+      arrow.classList.remove("arrow-rotate");
+
+      // Esperamos un poco más para que la página se detenga totalmente
+      setTimeout(() => {
+        estaNavegandoPorClick = false; // DESACTIVAMOS ESCUDO
+      }, 1200);
+    }
   });
 });
 
@@ -94,22 +154,28 @@ document.addEventListener("click", (event) => {
   const isClickInsideMenu = navMenu.contains(event.target);
   const isClickOnToggle = navToggle.contains(event.target);
 
-  //   menú y sub-menú en móvil
+  // NUEVO: Detectar si el clic fue en un link o dentro de uno
+  const isLink = event.target.closest("a");
+
+  // Si el menú está abierto y hacemos clic fuera (y no es un link)
   if (
     !isClickInsideMenu &&
     !isClickOnToggle &&
-    navMenu.classList.contains("nav-visible")
+    navMenu.classList.contains("nav-visible") &&
+    !isLink // <--- Esta es la clave
   ) {
     navMenu.classList.remove("nav-visible");
-    // Al cerrar el menú (en el forEach de navLinks y el click en document)
-    // Asegúrate de incluir esta línea siempre que quites la clase 'nav-visible':
-    document.body.classList.remove("no-scroll");
     overlay.classList.remove("overlay--active");
     subMenu.classList.remove("submenu-open");
     arrow.classList.remove("arrow-rotate");
+
+    // Desbloqueo normal (sin saltar)
+    if (typeof gestionBloqueoScroll === "function") {
+      gestionBloqueoScroll(false);
+    }
   }
 
-  // sub-menú en pantalla grande
+  // Cierre del sub-menú en desktop
   if (
     !isClickInsideMenu &&
     !isClickOnToggle &&
@@ -123,16 +189,21 @@ document.addEventListener("click", (event) => {
 // marcar los links activos
 
 function activarLink(target) {
-  if (!target) return; // Seguridad: Si no hay target, no hacemos nada
+  if (!target) return;
 
-  navLinks.forEach((l) => l.classList.remove("a--active"));
+  // 1. Limpiamos absolutamente todos los activos previos
+  navLinks.forEach((l) => {
+    l.classList.remove("a--active");
+    l.removeAttribute("aria-current"); // Opcional: para mejor accesibilidad
+  });
+
   btnSubmenu.classList.remove("a--active");
   arrow.classList.remove("arrow--active");
 
-  // console.log(target);
+  // 2. Aplicamos la clase al link actual
+  target.classList.add("a--active");
 
-  target.classList.add("a--active"); //target contiene el link a activar
-
+  // 3. Si es parte del submenú, marcamos también el padre
   if (target.classList.contains("header__a-submenu")) {
     btnSubmenu.classList.add("a--active");
     arrow.classList.add("arrow--active");
@@ -168,11 +239,9 @@ window.addEventListener("load", () => {
 
 // menu.js
 function navegarA(idDestino, elementoLink) {
-  // Lista de tus categorías dinámicas
   const categorias = ["#joyeria", "#studio", "#gourmet", "#regalos"];
-
-  // Si el destino es una categoría, el objetivo real del scroll es la sección #catalogo
   let objetivoReal = idDestino;
+
   if (categorias.includes(idDestino)) {
     objetivoReal = "#catalogo";
   }
@@ -180,8 +249,12 @@ function navegarA(idDestino, elementoLink) {
   const seccion = document.querySelector(objetivoReal);
 
   if (seccion) {
-    seccion.scrollIntoView({ behavior: "smooth", block: "start" });
+    // 1. Primero marcamos el link
     activarLink(elementoLink);
+
+    // 2. Luego hacemos el scroll
+    seccion.scrollIntoView({ behavior: "smooth", block: "start" });
+
     history.pushState(null, null, idDestino);
   }
 }
@@ -190,13 +263,16 @@ function navegarA(idDestino, elementoLink) {
 
 logo.addEventListener("click", (e) => {
   e.preventDefault();
-  // Navegamos al inicio (puedes usar un ID #inicio o simplemente subir al 0,0)
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  estaNavegandoPorClick = true; // Bloqueamos detector
 
-  // Limpiamos la URL (quitamos el #contacto, etc)
+  window.scrollTo({ top: 0, behavior: "smooth" });
   history.pushState(null, null, window.location.pathname);
 
-  activarLink(inicioLink);
+  activarLink(inicioLink); // Marcamos Inicio
+
+  setTimeout(() => {
+    estaNavegandoPorClick = false;
+  }, 1000);
 });
 
 // --- EVENTO PARA LOS LINKS ---
@@ -216,6 +292,10 @@ navLinks.forEach((link) => {
 //------------------------------------------
 
 window.addEventListener("scroll", () => {
+  if (estaNavegandoPorClick || navMenu.classList.contains("nav-visible")) {
+    return;
+  }
+
   let seccionActual = "";
   const pixelesDeMargen = 150;
   const secciones = document.querySelectorAll("section[id]");
