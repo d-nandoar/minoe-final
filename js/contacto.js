@@ -1,62 +1,93 @@
-/**
- * LÓGICA PARA EL ENVÍO DE FORMULARIO A WHATSAPP
- * 
- * Este script escucha el evento de envío del formulario, recolecta los datos,
- * los formatea en un mensaje legible y redirige al usuario a la API de WhatsApp.
- */
+const contactForm = document.getElementById("whatsappForm");
+const contactErrorMsg = document.getElementById("contact-error-msg");
+const charCount = document.getElementById("char-count");
 
-// 1. Seleccionamos el formulario por su ID y añadimos un "escuchador de eventos" (EventListener)
-// El evento 'submit' ocurre cuando el usuario hace clic en el botón de enviar.
-document.getElementById('whatsappForm').addEventListener('submit', function(event) {
-    
-    // 2. Prevenimos el comportamiento por defecto del formulario.
-    // Por defecto, un formulario recarga la página al enviarse. 'preventDefault' evita esto
-    // para que podamos manejar el envío con nuestra propia lógica de JavaScript.
-    event.preventDefault();
+const inPhone = document.getElementById("telefono");
+const inEmail = document.getElementById("email");
+const contactInputs = [
+  document.getElementById("nombre"),
+  document.getElementById("apellidos"),
+  inPhone,
+  inEmail,
+  document.getElementById("motivo"),
+];
 
-    /**
-     * 3. RECOLECCIÓN DE DATOS
-     * Usamos document.getElementById('id').value para obtener el texto que el usuario escribió.
-     */
-    const nombre = document.getElementById('nombre').value;       // Captura el nombre
-    const apellidos = document.getElementById('apellidos').value; // Captura los apellidos
-    const telefono = document.getElementById('telefono').value;   // Captura el número de contacto
-    const email = document.getElementById('email').value;         // Captura el correo electrónico
-    const motivo = document.getElementById('motivo').value;       // Captura el mensaje del textarea
+// Emojis en formato Unicode (igual que usas en el carrito)
+const iconSpark = "\u2728";
+const iconUser = "\uD83D\uDC64";
+const iconMail = "\uD83D\uDCE7";
+const iconPhone = "\uD83D\uDCDE";
+const iconMsg = "\uD83D\uDCAC";
 
-    /**
-     * 4. CONFIGURACIÓN DEL DESTINATARIO
-     * Aquí se define el número de teléfono que recibirá el mensaje.
-     * IMPORTANTE: Debe incluir el código de país (ej: 34 para España, 52 para México) 
-     * y NO debe incluir el signo '+' ni espacios.
-     */
-    const numeroWhatsApp = "+593994831087"; // <-- REEMPLAZAR CON TU NÚMERO REAL
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
 
-    /**
-     * 5. FORMATEO DEL MENSAJE
-     * Creamos una cadena de texto (string) con el formato deseado.
-     * - Usamos asteriscos (*) para que WhatsApp ponga el texto en negrita.
-     * - '%0A' es el código de codificación URL para un "salto de línea" (Enter).
-     */
-    const mensaje = `*Nuevo Contacto*%0A%0A` +
-                    `*Nombre:* ${nombre} ${apellidos}%0A` +
-                    `*Teléfono:* ${telefono}%0A` +
-                    `*Email:* ${email}%0A` +
-                    `*Motivo:* ${motivo}`;
+function setupContactConstraints() {
+  inPhone.addEventListener("input", (e) => {
+    e.target.value = e.target.value.replace(/\D/g, "").substring(0, 10);
+    inPhone.classList.remove("error-field");
+  });
 
-    /**
-     * 6. CONSTRUCCIÓN DE LA URL DE WHATSAPP
-     * La API de WhatsApp utiliza una URL con parámetros:
-     * - 'wa.me/numero' indica a quién enviar.
-     * - '?text=mensaje' indica el contenido del mensaje.
-     */
-    const url = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
+  contactInputs.forEach((input) => {
+    input.addEventListener("input", () => {
+      input.classList.remove("error-field");
+      if (input.id === "motivo") {
+        charCount.innerText = `${input.value.length} / 1000`;
+      }
+      if (!document.querySelector(".error-field")) {
+        contactErrorMsg.style.visibility = "hidden";
+      }
+    });
+  });
+}
 
-    /**
-     * 7. REDIRECCIÓN
-     * window.open abre la URL generada. 
-     * El parámetro '_blank' asegura que se abra en una nueva pestaña o ventana,
-     * permitiendo que el usuario no pierda de vista tu sitio web original.
-     */
-    window.open(url, '_blank');
+contactForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  let firstError = null;
+  let hasError = false;
+
+  contactInputs.forEach((input) => {
+    let isInvalid = false;
+    if (!input.value.trim()) isInvalid = true;
+    if (input === inPhone && input.value.length < 10) isInvalid = true;
+    if (input === inEmail && !validateEmail(input.value)) isInvalid = true;
+
+    if (isInvalid) {
+      input.classList.add("error-field");
+      hasError = true;
+      if (!firstError) firstError = input;
+    }
+  });
+
+  if (hasError) {
+    contactErrorMsg.style.visibility = "visible";
+    if (firstError) firstError.focus();
+    return;
+  }
+
+  const textoMensaje =
+    `${iconSpark} *MINOE - NUEVA CONSULTA*\n` +
+    `--------------------------------\n` +
+    `${iconUser} *Cliente:* ${contactInputs[0].value.toUpperCase()} ${contactInputs[1].value.toUpperCase()}\n` +
+    `${iconPhone} *WhatsApp:* ${inPhone.value}\n` +
+    `${iconMail} *Email:* ${inEmail.value}\n` +
+    `--------------------------------\n` +
+    `${iconMsg} *Mensaje:*\n${contactInputs[4].value}\n` +
+    `--------------------------------\n` +
+    `_Enviado desde el sitio web oficial_`;
+
+  window.open(
+    `https://wa.me/593994831087?text=${encodeURIComponent(textoMensaje)}`,
+    "_blank",
+  );
+
+  setTimeout(() => {
+    contactForm.reset();
+    charCount.innerText = "0 / 1000";
+    contactErrorMsg.style.visibility = "hidden";
+  }, 1000);
 });
+
+setupContactConstraints();
