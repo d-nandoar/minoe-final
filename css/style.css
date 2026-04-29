@@ -1559,33 +1559,39 @@ a,
 .nosotros__about {
   width: 90%;
   max-width: 1200px;
-  /* border: 1px solid #ccc; */
   /* height: 100px; */
   margin: 0 auto;
+  /* border: 1px solid #ccc; */
 }
 
 /* --- Contenedor Principal --- */
 .nosotros__about-content {
   display: grid;
-  /* Desktop: Dos columnas iguales */
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  justify-content: center;
-  align-items: center;
+  /* Definimos dos filas: la primera (imagen) se ajusta al contenido, 
+     la segunda (texto) ocupa el resto */
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 40px; /* Reducimos un poco el gap para compactar */
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* --- Contenedor de la Imagen (Mantiene tus estilos) --- */
+/* --- Contenedor de la Imagen --- */
 .nosotros__about-image {
   position: relative;
-  border-radius: 40px;
-  width: 100%; /* Se ajusta al 100% de su columna del grid */
+  /* border-radius: 40px 40px 0 0; */
+  width: 100%;
   overflow: hidden;
-  height: 100%;
-  /* max-height: 520px; */
-  /* Eliminamos el aspect-ratio fijo aquí para que no desborde en desktop */
+
+  /* CAMBIO CLAVE: Para que sea mucho más delgada (75% menos de altura visual), 
+     ajustamos el ratio. Un 32/9 o similar la hace tipo "banner" delgado. */
+  aspect-ratio: 32 / 9;
+
+  /* Evitamos que crezca demasiado en pantallas grandes */
+  max-height: 250px;
+
+  /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
@@ -1593,8 +1599,10 @@ a,
   display: block;
   width: 100%;
   height: 100%;
+  /* Con 'cover' la imagen no se deforma, se recorta para llenar el espacio */
   object-fit: cover;
-  /* object-position: 0px -12px; */
+  /* Ajusta esto para centrar lo más importante de la joya/modelo */
+  object-position: center;
 }
 
 /* --- Tu Gradiente (Se mantiene intacto) --- */
@@ -1613,21 +1621,32 @@ a,
 }
 
 /* --- Contenedor del Texto --- */
+/* --- Contenedor del Texto --- */
 .nosotros__about-minoe {
-  margin: 0;
-  text-align: center;
+  display: flex; /* Cambiamos a flex para mejor control de centrado vertical del texto */
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
   width: 100%;
-  /* Eliminamos el max-width de 900px que causaba el desborde en la columna */
-  max-width: 100%;
+  max-width: 85%; /* Estrechar el texto lo hace ver más elegante/lujo */
+  margin: 0 auto;
 }
 
 .nosotros__about-p {
-  text-align: center;
-  font-size: 1.2em;
-  line-height: 1.8;
-  margin-top: 1.5rem;
+  text-align: center; /* Mucho más elegante que el justificado */
+  font-size: 1.1rem;
+  line-height: 1.8; /* Un interlineado amplio respira lujo */
   color: var(--color-gris-oscuro);
-  text-align: justify;
+
+  max-width: 750px; /* Evita que el texto se estire demasiado a lo ancho */
+  margin: 0 auto; /* Centra el bloque de texto */
+
+  text-wrap: pretty; /* Mejora la distribución de las palabras */
+}
+
+.nosotros__about-h2 {
+  padding-bottom: 0;
 }
 
 .nosotros__about-h2::before,
@@ -1637,11 +1656,13 @@ a,
 
 .nosotros__about-h4 {
   text-align: center;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
+  font-size: 1.25em;
   font-style: italic;
   max-width: 80%; /* Estrecha un poco la frase para que respire */
   margin-left: auto;
   margin-right: auto;
+  margin-top: 20px;
 }
 
 /* info */
@@ -1661,6 +1682,7 @@ a,
   max-width: 1200px;
   margin: 0 auto;
   /* border: 1px solid #ccc; */
+  /* border: 1px solid #ccc; */
 }
 
 .nosotros-cards__grid {
@@ -1671,7 +1693,7 @@ a,
 }
 
 .card-flip {
-  height: 350px;
+  height: 320px;
   width: 100%;
   cursor: pointer;
 }
@@ -1698,8 +1720,8 @@ a,
   backface-visibility: hidden;
   border-radius: 15px;
   overflow: hidden;
-  /* box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidad */
+  /* box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); */
 }
 
 /* FRENTE */
@@ -1937,35 +1959,48 @@ a,
 
 .contact__container {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Imagen 60% - Formulario 40% */
+  grid-template-columns: 1fr; /* Imagen 60% - Formulario 40% */
+  grid-template-rows: auto 1fr; /* Imagen 60% - Formulario 40% */
   align-items: center;
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
   gap: 2rem;
+  overflow: hidden;
+
   background-color: var(--color-blanco);
-  padding: 20px 20px;
+  padding: 0 0 20px 0;
   border-radius: 25px;
-  border: 1px solid var(--borde-dorado-tenue);
+  /* border: 1px solid var(--borde-dorado-tenue); */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* --- CONTENEDOR DE IMAGEN (CLON NOSOTROS) --- */
 .contact__image-container {
-  position: relative; /* Necesario para el gradiente ::before */
-  border-radius: 40px; /* Radio exacto de tu código */
+  position: relative;
+  /* border-radius: 40px; */
   width: 100%;
-  height: 100%;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Sombra exacto de tu código */
+
+  /* CAMBIO CLAVE: Para que sea mucho más delgada (75% menos de altura visual), 
+     ajustamos el ratio. Un 32/9 o similar la hace tipo "banner" delgado. */
+  aspect-ratio: 32 / 9;
+
+  /* Evitamos que crezca demasiado en pantallas grandes */
+  max-height: 300px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .contact__image {
   display: block;
   width: 100%;
   height: 100%;
+  /* Con 'cover' la imagen no se deforma, se recorta para llenar el espacio */
   object-fit: cover;
-  transition: transform 0.8s ease;
+  /* Ajusta esto para centrar lo más importante de la joya/modelo */
+  object-position: center;
+  /* transition: transform 0.8s ease; */
 }
 
 /* --- EL GRADIENTE OSCURO (CLON NOSOTROS) --- */
@@ -1984,7 +2019,7 @@ a,
 }
 
 .contact__image-container:hover .contact__image {
-  transform: scale(1.08);
+  /* transform: scale(1.08); */
 }
 
 /* --- FORMULARIO --- */
@@ -1992,6 +2027,7 @@ a,
   width: 100%;
   max-width: 426px; /* Formulario ocupa menos de la mitad */
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 .contact__title {
@@ -2000,6 +2036,7 @@ a,
   margin-bottom: 2.5rem;
   text-transform: uppercase;
   letter-spacing: 4px;
+  text-align: center;
 }
 
 .contact__row {
@@ -2232,7 +2269,7 @@ a,
 
 .footer__divider {
   width: 40px;
-  height: 1px;
+  height: 2px;
   background-color: rgba(255, 255, 255, 0.2);
   margin: 10px 0;
 }
@@ -2242,6 +2279,7 @@ a,
   color: rgba(255, 255, 255, 0.5); /* Gris tenue para el copyright */
   letter-spacing: 2px;
   text-transform: uppercase;
+  text-align: center;
 }
 
 /* =========================================
@@ -2317,22 +2355,30 @@ a,
   }
 
   .nosotros__about {
-    width: 100%; /* Ocupa todo el ancho del viewport */
-    max-width: none; /* Elimina la restricción de los 1200px */
-    margin: 0; /* Opcional: quita el margen si quieres pegarlo al borde */
+    /* width: 100%; Ocupa todo el ancho del viewport */
+    /* max-width: none; Elimina la restricción de los 1200px */
+    /* margin: 0; Opcional: quita el margen si quieres pegarlo al borde */
   }
 
   .nosotros__about-content {
     /* Cambia a una sola columna: Imagen arriba, Texto abajo */
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    padding: 0 1rem;
+    /* grid-template-columns: 1fr; */
+    /* gap: 2rem; */
+    /* padding: 0 1rem; */
   }
 
   .nosotros__about-image {
     /* En móvil sí aplicamos un aspecto para que no sea infinita */
-    aspect-ratio: 21 / 9;
-    width: 100%;
+    /* aspect-ratio: 21 / 9; */
+    /* width: 100%; */
+  }
+
+  .nosotros__about-minoe {
+    flex-direction: column;
+  }
+
+  .nosotros__about-p {
+    line-height: 1.4; /* Un interlineado amplio respira lujo */
   }
 }
 
