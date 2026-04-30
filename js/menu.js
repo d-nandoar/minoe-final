@@ -20,35 +20,24 @@ let estaNavegandoPorClick = false;
 
 let scrollPos = 0; // Debe estar fuera de la función
 
-function gestionBloqueoScroll(bloquear, esNavegacion = false) {
+function gestionBloqueoScroll(bloquear) {
+  const html = document.documentElement;
   const body = document.body;
 
   if (bloquear) {
-    scrollPos = window.pageYOffset || document.documentElement.scrollTop;
-    body.style.position = "fixed";
-    body.style.top = `-${scrollPos}px`;
-    body.style.width = "100%";
-    body.style.overflowY = "scroll";
-    const scrollBarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
+    // Calculamos el ancho del scroll antes de bloquear para evitar el salto lateral
+    const scrollBarWidth = window.innerWidth - html.clientWidth;
+
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
     body.style.paddingRight = `${scrollBarWidth}px`;
   } else {
-    body.style.removeProperty("position");
-    body.style.removeProperty("top");
-    body.style.removeProperty("width");
-    body.style.removeProperty("overflow-y");
-    body.style.removeProperty("padding-right");
-
-    // CORRECCIÓN AQUÍ: Usamos un objeto de configuración para forzar el scroll instantáneo
-    window.scrollTo({
-      top: scrollPos,
-      behavior: "instant", // Esto evita el efecto de "subida y bajada"
-    });
-
-    body.style.removeProperty("padding-right");
+    // Restauramos todo de forma limpia
+    html.style.overflow = "";
+    body.style.overflow = "";
+    body.style.paddingRight = "";
   }
 }
-
 // Al abrir el menú (click en hamb)
 // Modifica el evento del navToggle
 // Dentro de menu.js
@@ -115,7 +104,7 @@ if (btnCloseMenu) {
     que no sea el de abrir sub-menú (.btn-submenu)
 */
 // --- EVENTO PARA LOS LINKS ---
-
+/*
 navLinks.forEach((link) => {
   link.addEventListener("click", (e) => {
     const href = link.getAttribute("href");
@@ -143,7 +132,7 @@ navLinks.forEach((link) => {
       }, 1200);
     }
   });
-});
+});*/
 
 /*
     cierre del menú al hacer click en cualquier
@@ -238,6 +227,8 @@ window.addEventListener("load", () => {
 // Función para navegar suavemente y limpiar rastro de URL
 
 // menu.js
+// menu_23.js - Función principal de navegación
+// Actualiza esta parte de tu función navegarA[cite: 15]
 function navegarA(idDestino, elementoLink) {
   const categorias = ["#joyeria", "#studio", "#gourmet", "#regalos"];
   let objetivoReal = idDestino;
@@ -249,46 +240,78 @@ function navegarA(idDestino, elementoLink) {
   const seccion = document.querySelector(objetivoReal);
 
   if (seccion) {
-    // 1. Primero marcamos el link
     activarLink(elementoLink);
 
-    // 2. Luego hacemos el scroll
-    seccion.scrollIntoView({ behavior: "smooth", block: "start" });
+    // Usamos offsetTop menos la altura del header (aprox 72px o 4.5rem)
+    const offsetHeader = 72;
+    const posicionFinal =
+      idDestino === "#hero" ? 0 : seccion.offsetTop - offsetHeader;
 
-    history.pushState(null, null, idDestino);
+    window.scrollTo({
+      top: posicionFinal,
+      behavior: "smooth",
+    });
+
+    // Actualizar URL sin recargar
+    if (idDestino === "#hero") {
+      history.pushState(null, null, window.location.pathname);
+    } else {
+      history.pushState(null, null, idDestino);
+    }
   }
 }
 
 // --- EVENTO PARA EL LOGO ---
 
+// menu_23.js - Evento para el logo
 logo.addEventListener("click", (e) => {
   e.preventDefault();
-  estaNavegandoPorClick = true; // Bloqueamos detector
-
-  window.scrollTo({ top: 0, behavior: "smooth" });
-  history.pushState(null, null, window.location.pathname);
-
-  activarLink(inicioLink); // Marcamos Inicio
-
-  setTimeout(() => {
-    estaNavegandoPorClick = false;
-  }, 1000);
+  // Simplemente llamamos a nuestra función unificada
+  navegarA("#hero", inicioLink);
 });
 
 // --- EVENTO PARA LOS LINKS ---
 
+// menu_23.js - Evento para los links
+// Busca este bloque en tu menu.js
+// Busca este bloque en tu menu.js
+// Localiza este bloque en tu archivo menu.js
+// Localiza este bloque en tu archivo y reemplázalo
 navLinks.forEach((link) => {
   link.addEventListener("click", (e) => {
     const href = link.getAttribute("href");
 
-    // Solo si es un link interno que empieza con #
     if (href && href.startsWith("#")) {
       e.preventDefault();
-      navegarA(href, link);
+      estaNavegandoPorClick = true;
+
+      // 1. Si el menú está abierto, lo cerramos primero
+      if (navMenu.classList.contains("nav-visible")) {
+        navMenu.classList.remove("nav-visible");
+        overlay.classList.remove("overlay--active");
+        subMenu.classList.remove("submenu-open");
+        arrow.classList.remove("arrow-rotate");
+
+        // 2. Desbloqueamos el scroll indicando que es navegación (true)
+        gestionBloqueoScroll(false, true);
+
+        // 3. PAUSA CRÍTICA: Esperamos 350ms para que el DOM se estabilice
+        // tras quitar el 'position: fixed' del body.
+        setTimeout(() => {
+          navegarA(href, link);
+        }, 350);
+      } else {
+        // Si el menú ya estaba cerrado (ej. en desktop), navegamos directo
+        navegarA(href, link);
+      }
+
+      // Escudo para que el scroll automático no marque otros links mientras se mueve
+      setTimeout(() => {
+        estaNavegandoPorClick = false;
+      }, 2000);
     }
   });
 });
-
 //------------------------------------------
 
 window.addEventListener("scroll", () => {

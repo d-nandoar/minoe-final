@@ -1597,7 +1597,7 @@ a,
   aspect-ratio: 32 / 9;
 
   /* Evitamos que crezca demasiado en pantallas grandes */
-  max-height: 380px;
+  max-height: 424px;
 
   /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); */
   /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); */
@@ -2600,6 +2600,15 @@ a,
   .catalog__title {
     font-size: 2.2em; /* Reducimos el tamaño para que no empuje las líneas */
     gap: 1rem; /* Reducimos el espacio entre el texto y la línea */
+  }
+
+  .nosotros__about-content {
+    gap: 30px; /* Reducimos un poco el gap para compactar */
+  }
+
+  /* --- Contenedor de la Imagen --- */
+  .nosotros__about-image {
+    aspect-ratio: 32 / 14;
   }
 
   /* .catalog__title {
