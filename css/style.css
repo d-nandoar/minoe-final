@@ -1554,13 +1554,20 @@ a,
   scroll-margin-top: 4.5rem;
 }
 
+.nosotros__content {
+  width: 80%;
+  max-width: 1524px;
+  /* height: 100px; */
+  margin: 0 auto;
+}
+
 /* about */
 
 .nosotros__about {
-  width: 90%;
-  max-width: 1200px;
+  width: 100%;
+  /* max-width: 1524px; */
   /* height: 100px; */
-  margin: 0 auto;
+  /* margin: 0 auto; */
   /* border: 1px solid #ccc; */
 }
 
@@ -1571,9 +1578,9 @@ a,
      la segunda (texto) ocupa el resto */
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
-  gap: 40px; /* Reducimos un poco el gap para compactar */
+  gap: 60px; /* Reducimos un poco el gap para compactar */
   width: 100%;
-  max-width: 1200px;
+  max-width: 1524px;
   margin: 0 auto;
 }
 
@@ -1583,16 +1590,34 @@ a,
   /* border-radius: 40px 40px 0 0; */
   width: 100%;
   overflow: hidden;
+  border-radius: 40px 40px 0 0;
 
   /* CAMBIO CLAVE: Para que sea mucho más delgada (75% menos de altura visual), 
      ajustamos el ratio. Un 32/9 o similar la hace tipo "banner" delgado. */
   aspect-ratio: 32 / 9;
 
   /* Evitamos que crezca demasiado en pantallas grandes */
-  max-height: 250px;
+  max-height: 380px;
 
   /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); */
+
+  /* Perfeccionamos la máscara: la clave es empezar el "negro" mucho más tarde */
+  /* Máscara ultra-suave mejorada */
+  -webkit-mask-image: linear-gradient(
+    to top,
+    transparent 0%,
+    rgba(0, 0, 0, 0.01) 5%,
+    rgba(0, 0, 0, 0.1) 20%,
+    black 80%
+  );
+  mask-image: linear-gradient(
+    to top,
+    transparent 0%,
+    rgba(0, 0, 0, 0.01) 5%,
+    rgba(0, 0, 0, 0.1) 20%,
+    black 80%
+  );
 }
 
 .nosotros__about-img {
@@ -1606,7 +1631,7 @@ a,
 }
 
 /* --- Tu Gradiente (Se mantiene intacto) --- */
-.nosotros__about-image::before {
+/* .nosotros__about-image::before {
   content: "";
   position: absolute;
   top: 0;
@@ -1617,8 +1642,8 @@ a,
   height: 100%;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 60%);
   pointer-events: none;
-  z-index: 1; /* Asegura que el gradiente se vea */
-}
+  z-index: 1;
+} */
 
 /* --- Contenedor del Texto --- */
 /* --- Contenedor del Texto --- */
@@ -1670,17 +1695,17 @@ a,
 /* Contenedor Maestro */
 
 .nosotros-cards {
-  /* width: 100%; */
+  width: 100%;
   /* display: flex;
   flex-direction: column;
   align-items: center; */
-  margin-top: 40px;
+  /* max-width: 1524px; */
+  /* margin: 0 auto; */
+  margin-top: 60px;
 }
 
 .nosotros-cards__container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
+  /* width: 100%; */
   /* border: 1px solid #ccc; */
   /* border: 1px solid #ccc; */
 }
@@ -1827,8 +1852,8 @@ a,
 }
 
 .catalogo__content {
-  width: 90%;
-  max-width: 1200px;
+  width: 80%;
+  max-width: 1524px;
   margin: 0 auto;
 }
 
@@ -1953,7 +1978,20 @@ a,
   scroll-margin-top: 4.5rem;
 
   padding: 80px 0;
-  background-color: var(--color-dorado);
+  /* background-color: var(--color-dorado); */
+  background-color: #e9d8a3;
+  /* Degradado ultra-suave con puntos de control estratégicos */
+  background: linear-gradient(
+    to bottom,
+    #e9d8a3 0%,
+    #e9d8a3 20%,
+    /* Empezamos a degradar un poco antes */ #e3d3a0 40%,
+    /* Transición extremadamente sutil */ #c9be95 60%,
+    /* Punto medio más suave */ #8a8266 75%,
+    /* Aquí el negro empieza a ganar terreno */ #4a4637 88%,
+    /* Penumbra sutil */ #1a1914 95%,
+    /* Casi negro */ #000000 100% /* Negro puro */
+  );
   letter-spacing: 1px;
 }
 
@@ -1962,8 +2000,8 @@ a,
   grid-template-columns: 1fr; /* Imagen 60% - Formulario 40% */
   grid-template-rows: auto 1fr; /* Imagen 60% - Formulario 40% */
   align-items: center;
-  width: 90%;
-  max-width: 1200px;
+  width: 80%;
+  max-width: 1524px;
   margin: 0 auto;
   gap: 2rem;
   overflow: hidden;
@@ -2171,26 +2209,47 @@ a,
   justify-content: center;
   gap: 15px;
   letter-spacing: 1px;
+  /* color: #e9d8a3; */
 }
 
 .footer__h3 {
   letter-spacing: 4px;
 }
 
-.footer__h3-span {
+.footer__social {
+  display: flex;
+  /* flex-direction: column; */
+  /* justify-content: flex-start; */
+  /* align-items: flex-start; */
+  gap: 40px;
   font-size: 0.5em;
 }
 
-.footer__social {
+.footer__social-ig {
   display: flex;
-  gap: 20px;
+  gap: 5px;
+}
+.footer__social-redes {
+  display: flex;
+  gap: 5px;
 }
 
 .footer__link {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 0px;
 }
+
+.footer__link--ig {
+  /* display: flex; */
+}
+
+/* .footer__link--redes {
+  display: flex;
+  flex-direction: column;
+} */
 
 .footer__icon {
   display: block;
@@ -2206,28 +2265,31 @@ a,
   height: 2.2rem; */
 }
 
-.footer__icon:hover {
-  transform: translateY(-3px); /* Pequeño salto al pasar el mouse */
-  background-color: var(--color-dorado); /* Ejemplo: un tono dorado suave */
-}
-
 .footer__ig-icon {
   width: 1.8rem;
   height: 1.8rem;
-  /* background-color: #9f388d; */
   background-color: var(--color-blanco);
+  /* background-color: #e9d8a3; */
   -webkit-mask-image: url("../assets/icons/instagram.svg");
   mask-image: url("../assets/icons/instagram.svg");
   -webkit-mask-size: 79%; /* Un toque de aire */
   mask-size: 79%;
   transition:
     background-color var(--transition-main),
-    transform var(--transition-main);
+    transform var(--transition-main),
+    color var(--transition-main);
 }
 
-.footer__ig-icon:hover {
-  transform: translateY(-3px); /* Pequeño salto al pasar el mouse */
-  background-color: #fd1d1d; /* Ejemplo: un tono dorado suave */
+@media (hover: hover) {
+  .footer__link--ig:hover {
+    /* background-color: #fd1d1d; */
+    color: #e9d8a3;
+  }
+
+  .footer__link--ig:hover .footer__ig-icon {
+    transform: translateY(-3px); /* Pequeño salto al pasar el mouse */
+    background-color: #e9d8a3; /* Ejemplo: un tono dorado suave */
+  }
 }
 
 .footer__fb-icon {
@@ -2235,6 +2297,7 @@ a,
   height: 1.7rem;
   /* background-color: #0766ff; */
   background-color: var(--color-blanco);
+  /* background-color: #e9d8a3; */
   -webkit-mask-image: url("../assets/icons/facebook.svg");
   mask-image: url("../assets/icons/facebook.svg");
   -webkit-mask-size: 77%;
@@ -2244,15 +2307,22 @@ a,
     transform var(--transition-main);
 }
 
-.footer__fb-icon:hover {
-  transform: translateY(-3px); /* Pequeño salto al pasar el mouse */
-  background-color: #0766ff; /* Ejemplo: un tono dorado suave */
+@media (hover: hover) {
+  .footer__link--fb:hover {
+    color: #e9d8a3;
+  }
+
+  .footer__link--fb:hover .footer__fb-icon {
+    transform: translateY(-3px); /* Pequeño salto al pasar el mouse */
+    background-color: #e9d8a3; /* Ejemplo: un tono dorado suave */
+  }
 }
 
 .footer__wapp-icon {
   width: 2rem;
-  height: 2rem;
+  height: 1.6875rem;
   background-color: var(--color-blanco);
+  /* background-color: #e9d8a3; */
   -webkit-mask-image: url("../assets/icons/wapp.svg");
   mask-image: url("../assets/icons/wapp.svg");
   -webkit-mask-size: 100%; /* Si se ve muy grande, prueba con 95% */
@@ -2261,10 +2331,14 @@ a,
     background-color var(--transition-main),
     transform var(--transition-main);
 }
-
-.footer__wapp-icon:hover {
-  transform: translateY(-3px); /* Pequeño salto al pasar el mouse */
-  background-color: var(--color-wapp); /* Ejemplo: un tono dorado suave */
+@media (hover: hover) {
+  .footer__link--wapp:hover {
+    color: #e9d8a3;
+  }
+  .footer__link--wapp:hover .footer__wapp-icon {
+    transform: translateY(-3px); /* Pequeño salto al pasar el mouse */
+    background-color: #e9d8a3; /* Ejemplo: un tono dorado suave */
+  }
 }
 
 .footer__divider {
