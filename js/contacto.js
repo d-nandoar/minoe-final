@@ -17,6 +17,12 @@ const iconMail = "\uD83D\uDCE7";
 const iconMap = "\uD83D\uDCCD";
 const iconMsg = "\uD83D\uDCAC";
 
+// const iconSpark = "\u{2728}"; // ✨
+// const iconUser = "\u{1F464}"; // 👤
+// const iconMail = "\u{1F4E7}"; // 📧
+// const iconMap = "\u{1F4CC}"; // 📍
+// const iconMsg = "\u{1F4AC}"; // 💬
+
 function validateEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
@@ -58,17 +64,22 @@ contactForm.addEventListener("submit", function (e) {
   let firstError = null;
   let hasError = false;
 
-  // Limpiar estados de error visuales antes de validar
+  // 1. LIMPIEZA INICIAL
+  // Ocultamos el mensaje y quitamos bordes rojos antes de validar
+  contactErrorMsg.style.visibility = "hidden";
+  contactErrorMsg.innerText = "";
   allInputs.forEach((i) => i.classList.remove("error-field"));
 
-  // 1. Validar Nombre
+  // --- VALIDACIONES ---
+
+  // Validar Nombre (Obligatorio)
   if (!inNombre.value.trim()) {
     showError(inNombre, "* Campo obligatorio.");
     hasError = true;
     firstError = inNombre;
   }
 
-  // 2. Validar Email
+  // Validar Email (Obligatorio + Formato)
   if (!hasError) {
     if (!inEmail.value.trim()) {
       showError(inEmail, "* Campo obligatorio.");
@@ -81,19 +92,22 @@ contactForm.addEventListener("submit", function (e) {
     }
   }
 
-  // 3. Validar Mensaje
+  // Validar Mensaje (Obligatorio)
   if (!hasError && !inMotivo.value.trim()) {
     showError(inMotivo, "* Campo obligatorio.");
     hasError = true;
     firstError = inMotivo;
   }
 
+  // Si hay errores, detenemos el envío
   if (hasError) {
     if (firstError) firstError.focus();
     return;
   }
 
-  // --- PREPARACIÓN DE DATOS ---
+  // --- PROCESO DE ENVÍO (Si todo está OK) ---
+
+  // 2. LIMPIEZA PRE-ENVÍO
   const apellidos = inApellidos.value.trim()
     ? ` ${inApellidos.value.toUpperCase()}`
     : "";
@@ -101,6 +115,7 @@ contactForm.addEventListener("submit", function (e) {
     ? inCiudad.value.toUpperCase()
     : "NO ESPECIFICADA";
 
+  // Construcción del mensaje
   const textoMensaje =
     `${iconSpark} *MINOE - NUEVA CONSULTA*\n` +
     `--------------------------------\n` +
@@ -112,21 +127,17 @@ contactForm.addEventListener("submit", function (e) {
     `--------------------------------\n` +
     `_Enviado desde el sitio web oficial_`;
 
-  // --- SOLUCIÓN AL BORRADO DE CAMPOS ---
-
-  // 1. Abrimos WhatsApp
+  // El secreto está en aplicar el encodeURIComponent a TODO el bloque al final
   window.open(
     `https://wa.me/593994831087?text=${encodeURIComponent(textoMensaje)}`,
     "_blank",
   );
 
-  // 2. Borramos los campos inmediatamente
+  // Borramos los datos del formulario inmediatamente
   contactForm.reset();
 
-  // 3. Limpiamos contadores y mensajes de error residuales
+  // Reiniciamos el contador visual de caracteres
   charCount.innerText = "0 / 1000";
-  contactErrorMsg.style.visibility = "hidden";
-  allInputs.forEach((input) => input.classList.remove("error-field"));
 });
 
 setupContactConstraints();
