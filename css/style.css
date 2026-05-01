@@ -276,7 +276,7 @@
    ========================================= */
 
 * {
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent !important;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
@@ -291,6 +291,10 @@ textarea:invalid {
 input,
 textarea {
   -webkit-tap-highlight-color: transparent !important;
+  /* Añade esto para evitar que iOS cambie el diseño de los inputs */
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0.9375rem; /* Mantén el radio de tus bordes */
 }
 
 /* sidebar cart - bloqueo total */

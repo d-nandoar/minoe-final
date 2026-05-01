@@ -61,17 +61,13 @@ function setupContactConstraints() {
 contactForm.addEventListener("submit", function (e) {
   e.preventDefault();
 
+  // 1. OCULTAR TODO ANTES DE VALIDAR
+  // Esto evita que cualquier mensaje (nativo o tuyo) parpadee
+  contactErrorMsg.style.visibility = "hidden";
+  allInputs.forEach((i) => i.classList.remove("error-field"));
+
   let firstError = null;
   let hasError = false;
-
-  // 1. LIMPIEZA INICIAL
-  // Ocultamos el mensaje y quitamos bordes rojos antes de validar
-  contactErrorMsg.style.visibility = "hidden";
-  contactErrorMsg.innerText = "";
-  allInputs.forEach((i) => {
-    i.classList.remove("error-field");
-    i.style.backgroundColor = "white"; // Refuerzo manual
-  });
 
   // --- VALIDACIONES ---
 
@@ -102,8 +98,9 @@ contactForm.addEventListener("submit", function (e) {
     firstError = inMotivo;
   }
 
-  // Si hay errores, detenemos el envío
   if (hasError) {
+    // Si realmente hay un error, lo mostramos nosotros
+    contactErrorMsg.style.visibility = "visible";
     if (firstError) firstError.focus();
     return;
   }
