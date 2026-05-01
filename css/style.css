@@ -1492,23 +1492,35 @@ a,
 
 .hero__item-thumbnail {
   width: 24%; /* contenedor imagen */
-  filter: brightness(0.4);
+
+  /* filter: brightness(0.4); */
+  filter: grayscale(60%);
+
   border-radius: 0.9375rem;
   overflow: hidden;
   cursor: pointer;
-  border: 2px solid var(--color-crema);
+  /* border: 2px solid var(--color-crema); */
+
+  border: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: var(--sombra-nav);
+
   transition:
     filter var(--transition-main),
-    border var(--transition-main);
+    border var(--transition-main),
+    transform var(--transition-main),
+    box-shadow var(--transition-main); /* Y esto para que la sombra suave acompañe al salto */
 }
 
 /* miniaturas active */
 
 .hero__item-thumbnail--active {
-  filter: brightness(1);
-  border: 2px solid var(--color-verde);
-  /* box-shadow: var(--sombra-verde-hover); */
+  /* filter: brightness(1);
+  border: 2px solid var(--color-verde); */
+
+  border: 1.5px solid #2d5a27; /* Tu verde de marca */
+  filter: grayscale(0%) brightness(1.1); /* Se iluminan y cobran color */
+  transform: translateY(-5px); /* Un pequeño salto para indicar selección */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* imagen (miniatura)*/
@@ -1693,21 +1705,10 @@ a,
 /* info */
 
 /* Contenedor Maestro */
-
+/* --- Contenedor Maestro --- */
 .nosotros-cards {
   width: 100%;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
-  /* max-width: 1524px; */
-  /* margin: 0 auto; */
   margin-top: 60px;
-}
-
-.nosotros-cards__container {
-  /* width: 100%; */
-  /* border: 1px solid #ccc; */
-  /* border: 1px solid #ccc; */
 }
 
 .nosotros-cards__grid {
@@ -1743,35 +1744,42 @@ a,
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border-radius: 15px;
+  border-radius: 40px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidad */
-  /* box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* FRENTE */
+/* --- FRENTE (Corregido para imágenes HTML) --- */
 .card-flip__front {
-  background-size: cover;
-  background-position: center;
   display: flex;
-  align-items: flex-end;
+  align-items: flex-end; /* Texto abajo */
   justify-content: center;
   padding-bottom: 2rem;
-  z-index: 2;
-  background-color: #222; /* Fondo de seguridad */
+  background-color: #222;
 }
 
+.card-flip__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Mantiene la proporción sin deformar */
+  z-index: 0;
+}
+
+/* El degradado debe ir sobre la imagen para que el texto sea legible */
 .card-flip__front::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 60%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 60%);
   z-index: 1;
 }
 
 .card-flip__front-text {
   position: relative;
-  z-index: 2;
+  z-index: 2; /* Por encima de la imagen y el degradado */
   color: var(--blanco);
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -1781,7 +1789,31 @@ a,
   padding-bottom: 5px;
 }
 
-/* REVERSO */
+/* --- INDICADOR + --- */
+.nosotros__card-indicator {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  width: 35px;
+  height: 35px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3; /* Capa más alta */
+}
+
+.nosotros__indicator-icon {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+/* --- REVERSO --- */
 .card-flip__back {
   background-color: var(--verde-minoe);
   transform: rotateY(180deg);
@@ -1824,21 +1856,6 @@ a,
   font-weight: 300;
   opacity: 0.9;
 }
-
-/* IMÁGENES EMBEBIDAS (Gourmet y Sets) */
-.img-gourmet {
-  background-image: url("../assets/img/nos_gourmet.png");
-}
-.img-sets {
-  background-image: url("../assets/img/nos_sets.png");
-}
-.img-joyeria {
-  background-image: url("../assets/img/nos_joy.png");
-}
-.img-studio {
-  background-image: url("../assets/img/nos_estudio.png");
-}
-
 /* =========================================
    9. CATALOGO
    ========================================= */
@@ -2071,10 +2088,14 @@ a,
 .contact__title {
   font-size: 2em;
   color: var(--color-verde-minoe);
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
   text-transform: uppercase;
   letter-spacing: 4px;
   text-align: center;
+}
+
+.contact__form {
+  font-size: 0.8em;
 }
 
 .contact__row {
@@ -2129,7 +2150,7 @@ a,
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 5px;
   width: 100%;
   padding: 1.1rem;
   margin-top: 1rem;
@@ -2138,6 +2159,7 @@ a,
   border: none;
   border-radius: 0.9375rem;
   text-transform: uppercase;
+  font-size: 1.2em;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -2148,10 +2170,10 @@ a,
   transform: translateY(-3px);
 }
 
-.contact__btn-icon {
+/* .contact__btn-icon {
   width: 20px;
   filter: brightness(0) invert(1);
-}
+} */
 
 /* Errores */
 .error-field {
@@ -2168,29 +2190,6 @@ a,
   /* visibility: hidden; se controla por JS */
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .contact__container {
-    grid-template-columns: 1fr;
-  }
-
-  .contact__image-container {
-    aspect-ratio: 21/9;
-    width: 100%;
-    /* height: 350px; */
-    order: 1;
-  }
-
-  .contact__image {
-    /* aspect-ratio: 21/9;
-    width: 100%; */
-  }
-
-  .contact__form-container {
-    order: 2;
-    margin: 0 auto;
-  }
-}
 /*------ secciones ------*/
 
 .footer {
@@ -2609,6 +2608,7 @@ a,
   /* --- Contenedor de la Imagen --- */
   .nosotros__about-image {
     aspect-ratio: 32 / 14;
+    border-radius: 20px 20px 0 0;
   }
 
   /* .catalog__title {
@@ -2632,8 +2632,30 @@ a,
     max-width: 5px;
   } */
 
-  .contacto__content {
-    justify-content: center;
+  .contact__container {
+    grid-template-columns: 1fr;
+    border-radius: 20px;
+  }
+
+  .contact__image-container {
+    aspect-ratio: 21/9;
+    width: 100%;
+    /* height: 350px; */
+    order: 1;
+  }
+
+  .contact__image {
+    /* aspect-ratio: 21/9;
+    width: 100%; */
+  }
+
+  .contact__form-container {
+    order: 2;
+    margin: 0 auto;
+  }
+
+  .contact__char-count {
+    font-size: 0.75em;
   }
 }
 
@@ -2781,6 +2803,12 @@ a,
   .contact-form__title::after {
     max-width: 25px;
   } */
+
+  .contact__char-count {
+    /* font-size: 0.7em; */
+    width: 30%;
+    text-align: end;
+  }
 }
 
 /* ==========================================================

@@ -516,9 +516,18 @@
           <div class="nosotros-cards">
             <div class="nosotros-cards__container">
               <div class="nosotros-cards__grid">
+                <!-- CARD: JOYERÍA -->
                 <article class="card-flip">
                   <div class="card-flip__inner">
-                    <figure class="card-flip__front img-joyeria">
+                    <figure class="card-flip__front">
+                      <img
+                        src="assets/img/nos_joy.png"
+                        alt="Minoe Joyería"
+                        class="card-flip__img"
+                      />
+                      <div class="nosotros__card-indicator">
+                        <span class="nosotros__indicator-icon">+</span>
+                      </div>
                       <span class="card-flip__front-text">Minoe Joyería</span>
                     </figure>
                     <div class="card-flip__back">
@@ -533,9 +542,18 @@
                   </div>
                 </article>
 
+                <!-- CARD: STUDIO -->
                 <article class="card-flip">
                   <div class="card-flip__inner">
-                    <figure class="card-flip__front img-studio">
+                    <figure class="card-flip__front">
+                      <img
+                        src="assets/img/nos_estudio.png"
+                        alt="Minoe Studio"
+                        class="card-flip__img"
+                      />
+                      <div class="nosotros__card-indicator">
+                        <span class="nosotros__indicator-icon">+</span>
+                      </div>
                       <span class="card-flip__front-text">Minoe Studio</span>
                     </figure>
                     <div class="card-flip__back">
@@ -550,9 +568,18 @@
                   </div>
                 </article>
 
+                <!-- CARD: GOURMET -->
                 <article class="card-flip">
                   <div class="card-flip__inner">
-                    <figure class="card-flip__front img-gourmet">
+                    <figure class="card-flip__front">
+                      <img
+                        src="assets/img/nos_gourmet.png"
+                        alt="Minoe Gourmet"
+                        class="card-flip__img"
+                      />
+                      <div class="nosotros__card-indicator">
+                        <span class="nosotros__indicator-icon">+</span>
+                      </div>
                       <span class="card-flip__front-text">Minoe Gourmet</span>
                     </figure>
                     <div class="card-flip__back">
@@ -567,9 +594,18 @@
                   </div>
                 </article>
 
+                <!-- CARD: SETS -->
                 <article class="card-flip">
                   <div class="card-flip__inner">
-                    <figure class="card-flip__front img-sets">
+                    <figure class="card-flip__front">
+                      <img
+                        src="assets/img/nos_sets.png"
+                        alt="Minoe Sets de Regalo"
+                        class="card-flip__img"
+                      />
+                      <div class="nosotros__card-indicator">
+                        <span class="nosotros__indicator-icon">+</span>
+                      </div>
                       <span class="card-flip__front-text"
                         >Minoe Sets de Regalo</span
                       >
@@ -632,7 +668,7 @@
                       type="text"
                       id="nombre"
                       class="contact__input"
-                      placeholder="Nombre"
+                      placeholder="* Nombre"
                     />
                   </div>
                   <div class="contact__group">
@@ -646,12 +682,12 @@
                 </div>
 
                 <div class="contact__group">
+                  <!-- Cambiado de tel a text y id de telefono a ciudad -->
                   <input
-                    type="tel"
-                    id="telefono"
+                    type="text"
+                    id="ciudad"
                     class="contact__input"
-                    placeholder="Teléfono (10 dígitos)"
-                    maxlength="10"
+                    placeholder="Ciudad"
                   />
                 </div>
                 <div class="contact__group">
@@ -659,14 +695,14 @@
                     type="email"
                     id="email"
                     class="contact__input"
-                    placeholder="Correo Electrónico"
+                    placeholder="* Correo Electrónico"
                   />
                 </div>
                 <div class="contact__group">
                   <textarea
                     id="motivo"
                     class="contact__textarea"
-                    placeholder="Escribe tu mensaje aquí..."
+                    placeholder="* Escribe tu mensaje aquí..."
                     maxlength="1000"
                   ></textarea>
                   <div class="contact__footer-info">
@@ -675,7 +711,7 @@
                       class="form-error-msg"
                       style="margin: 0; visibility: hidden"
                     >
-                      Revisa los campos marcados.
+                      <!-- El texto se insertará por JS -->
                     </p>
                     <small id="char-count" class="contact__char-count">
                       0 / 1000
@@ -684,12 +720,8 @@
                 </div>
 
                 <button type="submit" class="contact__button">
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
-                    alt=""
-                    class="contact__btn-icon"
-                  />
-                  Enviar a WhatsApp
+                  <span class="footer__icon footer__wapp-icon"></span>
+                  Enviar
                 </button>
               </form>
             </div>

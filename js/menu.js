@@ -79,7 +79,7 @@ btnSubmenu.addEventListener("click", () => {
   arrow.classList.toggle("arrow-rotate");
 });
 
-// carrar carrito con la X
+// carrar menú con la X
 
 // 1. Referencia al botón de cierre por ID
 const btnCloseMenu = document.getElementById("close-menu");
@@ -284,6 +284,10 @@ navLinks.forEach((link) => {
     if (href && href.startsWith("#")) {
       e.preventDefault();
       estaNavegandoPorClick = true;
+
+      // --- CAMBIO AQUÍ: Cierre del submenú siempre que se haga clic ---
+      subMenu.classList.remove("submenu-open");
+      arrow.classList.remove("arrow-rotate");
 
       // 1. Si el menú está abierto, lo cerramos primero
       if (navMenu.classList.contains("nav-visible")) {
