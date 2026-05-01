@@ -68,7 +68,10 @@ contactForm.addEventListener("submit", function (e) {
   // Ocultamos el mensaje y quitamos bordes rojos antes de validar
   contactErrorMsg.style.visibility = "hidden";
   contactErrorMsg.innerText = "";
-  allInputs.forEach((i) => i.classList.remove("error-field"));
+  allInputs.forEach((i) => {
+    i.classList.remove("error-field");
+    i.style.backgroundColor = "white"; // Refuerzo manual
+  });
 
   // --- VALIDACIONES ---
 

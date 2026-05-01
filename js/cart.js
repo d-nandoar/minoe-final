@@ -276,11 +276,11 @@ function updateUI() {
     if (typeof resetFormErrors === "function") resetFormErrors();
 
     cartList.innerHTML = `
-      <div class="cart-empty">
-        <p class="cart-empty__message">Tu carrito está vacío</p>
-        <a href="#catalogo" class="cart-empty__link" onclick="toggleCart()">Explorar catálogo</a>
-      </div>
-    `;
+  <div class="cart-empty">
+    <p class="cart-empty__message">Tu carrito está vacío</p>
+    <a href="#catalogo" class="cart-empty__link" id="js-close-empty">Explorar catálogo</a>
+  </div>
+`;
 
     // OCULTAMOS AQUÍ SI ESTÁ VACÍO
     cartCount.style.display = "none";
@@ -294,9 +294,10 @@ function updateUI() {
   // 2. LÓGICA CUANDO HAY PRODUCTOS
   if (cartFooter) cartFooter.style.display = "block";
 
+  // Dentro de la función updateUI()
   cart.forEach((i) => {
     total += i.price * i.qty;
-    count += i.qty; // Aquí es donde 'count' deja de ser 0
+    count += i.qty;
 
     const btnMinusDisabled = i.qty <= 1 ? "disabled" : "";
     const btnPlusDisabled = i.qty >= 99 ? "disabled" : "";
@@ -309,11 +310,13 @@ function updateUI() {
         </div>
         <div class="cart-item__controls">
           <div class="qty-selector">
-            <button class="qty-selector__btn" onclick="updateQty('${i.id}', -1)" ${btnMinusDisabled}>−</button>
+            <!-- Eliminamos onclick y usamos clases/data-id -->
+            <button class="qty-selector__btn js-minus" data-id="${i.id}" ${btnMinusDisabled}>−</button>
             <span class="qty-selector__value">${i.qty}</span>
-            <button class="qty-selector__btn" onclick="updateQty('${i.id}', 1)" ${btnPlusDisabled}>+</button>
+            <button class="qty-selector__btn js-plus" data-id="${i.id}" ${btnPlusDisabled}>+</button>
           </div>
-          <button class="cart-item__remove" onclick="removeFromCart('${i.id}')">
+          <!-- Eliminamos onclick y usamos clase para borrar -->
+          <button class="cart-item__remove js-remove" data-id="${i.id}">
             <span class="cart__trash-item cart__trash-item--url"></span>
           </button>
         </div>
@@ -338,6 +341,13 @@ function updateUI() {
   cartTotal.innerText = formatCurrency(total);
   localStorage.setItem("MINOE_CART", JSON.stringify(cart));
 }
+
+// Añadir evento fuera del updateUI para ese ID específico
+document.addEventListener("click", (e) => {
+  if (e.target && e.target.id === "js-close-empty") {
+    toggleCart();
+  }
+});
 
 // animación del carrito (añadir)
 function triggerCartAnimation() {
@@ -442,7 +452,32 @@ function sendWhatsApp() {
 }
 
 // --- EVENTOS ---
+
 // Aquí asignamos las funciones a los botones físicos de la página.
+
+// Delegación de eventos para acciones dentro del carrito[cite: 3]
+cartList.addEventListener("click", (e) => {
+  // 1. Identificar el botón (o el icono dentro del botón)
+  const btnMinus = e.target.closest(".js-minus");
+  const btnPlus = e.target.closest(".js-plus");
+  const btnRemove = e.target.closest(".js-remove");
+
+  // 2. Ejecutar acción según el botón presionado
+  if (btnMinus) {
+    const id = btnMinus.dataset.id;
+    updateQty(id, -1);
+  }
+
+  if (btnPlus) {
+    const id = btnPlus.dataset.id;
+    updateQty(id, 1);
+  }
+
+  if (btnRemove) {
+    const id = btnRemove.dataset.id;
+    removeFromCart(id);
+  }
+});
 
 // Escuchamos clicks en el contenedor de productos (técnica de delegación de eventos)
 productContainer.addEventListener("click", (e) => {
