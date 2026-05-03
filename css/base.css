@@ -1,0 +1,374 @@
+/* ==========================================================================
+   MASTER STYLESHEET - MINOE STUDIO
+   1. CONFIGURACIÓN DE FUENTES (@font-face)
+   2. VARIABLES MAESTRAS (:root)
+   3. ESTILOS BASE Y JERARQUÍA
+   ========================================================================== */
+
+/* =========================================
+   1. CONFIGURACIÓN DE FUENTES (@font-face)
+   ========================================= */
+
+/* Montserrat - Regular (400) */
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    local("Montserrat Regular"),
+    local("Montserrat-Regular"),
+    url("../assets/fonts/montserrat/montserrat-v31-latin-regular.woff2")
+      format("woff2"),
+    url("../assets/fonts/montserrat/montserrat-v31-latin-regular.woff")
+      format("woff");
+}
+
+/* Montserrat - Medium (500) */
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src:
+    local("Montserrat Medium"),
+    local("Montserrat-Medium"),
+    url("../assets/fonts/montserrat/montserrat-v31-latin-500.woff2")
+      format("woff2"),
+    url("../assets/fonts/montserrat/montserrat-v31-latin-500.woff")
+      format("woff");
+}
+
+/* Montserrat - Bold (700) */
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    local("Montserrat Bold"),
+    local("Montserrat-Bold"),
+    url("../assets/fonts/montserrat/montserrat-v31-latin-700.woff2")
+      format("woff2"),
+    url("../assets/fonts/montserrat/montserrat-v31-latin-700.woff")
+      format("woff");
+}
+
+/* Playfair Display - Regular (400) */
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    local("Playfair Display Regular"),
+    local("PlayfairDisplay-Regular"),
+    url("../assets/fonts/playfair-display/playfair-display-v40-latin-regular.woff2")
+      format("woff2"),
+    url("../assets/fonts/playfair-display/playfair-display-v40-latin-regular.woff")
+      format("woff");
+}
+
+/* Playfair Display - Medium (500) */
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src:
+    local("Playfair Display Medium"),
+    local("PlayfairDisplay-Medium"),
+    url("../assets/fonts/playfair-display/playfair-display-v40-latin-500.woff2")
+      format("woff2"),
+    url("../assets/fonts/playfair-display/playfair-display-v40-latin-500.woff")
+      format("woff");
+}
+
+/* Playfair Display - Bold (700) */
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    local("Playfair Display Bold"),
+    local("PlayfairDisplay-Bold"),
+    url("../assets/fonts/playfair-display/playfair-display-v40-latin-700.woff2")
+      format("woff2"),
+    url("../assets/fonts/playfair-display/playfair-display-v40-latin-700.woff")
+      format("woff");
+}
+
+/* =========================================
+   2. VARIABLES MAESTRAS (COLORES Y FUENTES)
+   ========================================= */
+
+:root {
+  /* ESCALA DE CAPAS (Z-INDEX) */
+  --z-critical: 9999; /* Bloqueo de rotación */
+  --z-preloader: 2000; /* Muro de carga */
+  --z-sidebar: 1400; /* Carrito lateral */
+  --z-overlay-sidebar: 1300; /* Fondo oscuro carrito */
+  --z-nav-mobile: 1200; /* Menú móvil */
+  --z-overlay: 1100; /* Fondo oscuro menú */
+  --z-header: 1000; /* Header principal */
+  --z-slider-thumb: 100; /* Miniaturas Hero */
+  --z-slider-arrows: 30; /* Flechas navegación */
+  --z-hero-active: 20; /* Slide frontal */
+  --z-hero-content: 15; /* Textos Hero */
+  --z-base: 1; /* Contenido general */
+
+  /* PALETAS DE COLORES */
+  --color-dorado: #c5a059;
+  --color-verde: #0e3b32;
+  --verde-minoe: #0e3b32;
+  --color-crema: #f2f1e6;
+  --crema: #f2f1ed;
+  --color-blanco: #ffffff;
+  --blanco: #ffffff;
+  --color-gris-oscuro: #2d2d2d;
+  --color-gris-claro: #f9f9f9;
+  --color-gris-placeholder: #051411;
+  --color-rojo: #e74c3c;
+  --color-error-field: #a13d3d;
+  --color-bg-error-field: #fffafb;
+  --color-wapp: #25d366;
+  --color-wapp-hover: #128c7e;
+  --color-overlay: rgba(0, 0, 0, 0.4);
+  --bg-contacto: #043927;
+  --accent-gold: #d4af37;
+  --dorado: #d4af37;
+  --rgb-verde-minoe: 4, 57, 39;
+
+  /* ESCALA TIPOGRÁFICA UNIVERSAL (Estrictamente EM) */
+  --text-xs: 0.75em; /* 12px */
+  --text-sm: 0.875em; /* 14px */
+  --text-sm-g: 0.957em; /* 15.31px */
+  --text-base: 1em; /* 16px */
+  --text-md: 1.333em; /* 21.32px */
+  --text-lg: 1.777em; /* 28.43px */
+  --text-xl: 2.369em; /* 37.90px */
+  --text-xxl: 3.157em; /* 50.51px */
+  --text-xxxl: 4.125em; /* 66px */
+
+  /* Alturas de Línea */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-loose: 1.8;
+
+  /* SOMBRAS DE CAJA (BOX SHADOWS) */
+  --sombra-logo: 0 0 5px var(--color-dorado);
+  --sombra-dorada: 0 4px 15px rgba(197, 160, 89, 0.2);
+  --sombra-verde-hover: 0 8px 25px rgba(14, 59, 50, 0.3);
+  --sombra-card: 0 2px 10px rgba(0, 0, 0, 0.05);
+  --sombra-nav: 0 2px 10px rgba(0, 0, 0, 0.2);
+  --sombra-gold-glow: drop-shadow(0 0 3px rgba(212, 175, 55, 0.5));
+  --sombra-input: 0 0 0px 1000px #ffffff inset;
+  --shadow-dark-soft: rgba(0, 0, 0, 0.25);
+  --shadow-light-soft: rgba(255, 255, 255, 0.05);
+
+  /* TRANSICIONES Y BEZIERS */
+  --transition-main: 0.3s ease-out;
+  --transition-second: 0.5s ease-out;
+  --bezier-lujo: cubic-bezier(0.65, 0, 0.35, 1);
+  --transition-open-curve: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-close-curve: 0.5s cubic-bezier(0.32, 0, 0.67, 0);
+
+  /* DEGRADADOS (GRADIENTES) */
+  --gradient-especial: linear-gradient(
+    to right top,
+    #f2f1e6,
+    #e9e8de,
+    #dfdfd6,
+    #d6d6cf,
+    #cdcdc7,
+    #cfcdc9,
+    #d1cecb,
+    #d2cfcd,
+    #dedbda,
+    #e9e7e7,
+    #f3f3f3,
+    #ffffff
+  );
+  --gradiente-hero-a: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.81),
+    rgba(0, 0, 0, 0)
+  );
+  --gradiente-hero-b: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0)
+  );
+  --gradiente-nos-a: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    transparent 100%
+  );
+  --gradiente-nos-b: linear-gradient(
+    to top left,
+    rgba(var(--rgb-verde-minoe), 0.4) 0%,
+    transparent 100%
+  );
+
+  /* BORDES Y OTROS */
+  --borde-dorado-tenue: rgba(197, 160, 89, 0.2);
+  --borde-verde-tenue: rgba(14, 59, 50, 0.3);
+  --borde-input: #e2e2e2;
+  --borde-input-focus: #d4af37;
+  --shake-distance: 2px;
+  --shake-duration: 0.2s;
+
+  /* FUENTES ASIGNADAS */
+  --fuente-titulos: "Playfair Display", serif;
+  --fuente-cuerpo: "Montserrat", sans-serif;
+  --fuente-arrow: monospace, sans-serif;
+
+  /* ESPACIADO SISTEMÁTICO (Estrictamente REM para márgenes/paddings) */
+  --space-xs: 0.25rem; /* 4px */
+  --space-sm: 0.5rem; /* 8px */
+  --space-md: 1rem; /* 16px */
+  --space-lg: 1.5rem; /* 24px */
+  --space-xl: 2rem; /* 32px */
+  --space-xxl: 3rem; /* 48px */
+  --space-section: 5rem; /* 80px */
+
+  /* ESTADOS DE INTERACCIÓN Y FEEDBACK */
+  --color-hover-dorado: #b38e4a;
+  --color-verde-profundo: #051a16;
+  --bg-overlay-dark: rgba(0, 0, 0, 0.7);
+  --sombra-texto-boton: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+  /* REFINAMIENTOS DE DISEÑO (Luxury Aesthetic) */
+  --borde-radio-lg: 1.5625rem; /* 25px */
+  --borde-radio-md: 0.9375rem; /* 15px */
+  --opacidad-tenue: 0.6;
+  --blur-fondo: 8px;
+
+  /* VARIABLES PARA COMPONENTES DINÁMICOS */
+  --header-height: 4.5rem; /* 72px */
+  --sidebar-width-desktop: 26.25rem; /* 420px */
+  --ancho-maximo-sitio: 1524px;
+}
+
+/* =========================================
+   3. ESTILOS BASE Y JERARQUÍA
+   ========================================= */
+
+body {
+  background-color: var(--color-blanco);
+  color: var(--color-gris-oscuro);
+  font-family: var(--fuente-cuerpo);
+  /* margin: 0; */
+}
+
+/* Control de Scroll para Modales/Sidebar */
+html.no-scroll,
+body.no-scroll {
+  touch-action: none;
+  overflow: hidden !important;
+  scroll-behavior: auto !important;
+  /* position: relative; */
+}
+
+/* Encabezados */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--fuente-titulos);
+  /* Prioridad identidad Minoe */
+  /* color: var(--color-verde);  */
+  /* margin: 0; */
+}
+
+h1 {
+  font-size: var(--text-xxl);
+  line-height: var(--leading-none);
+  font-weight: 700;
+}
+h2 {
+  font-size: var(--text-xxxl);
+  line-height: var(--leading-none);
+  font-weight: 700;
+}
+h3 {
+  font-size: var(--text-lg);
+  line-height: var(--leading-tight);
+  font-weight: 700;
+}
+h4 {
+  font-size: var(--text-md);
+  line-height: var(--leading-tight);
+  font-weight: 700;
+}
+h5 {
+  font-size: var(--text-base);
+  font-weight: 700;
+}
+h6 {
+  font-size: var(--text-sm-g);
+  font-weight: 500;
+}
+
+/* Textos de Cuerpo */
+p,
+li,
+blockquote {
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  font-family: var(--fuente-cuerpo);
+}
+
+small,
+caption {
+  font-size: var(--text-sm);
+}
+
+/* Elementos de Acción */
+a,
+button {
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: var(--transition-main);
+}
+
+button {
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+a,
+.header__btn-submenu {
+  font-weight: 500;
+}
+
+/* Clases Utilitarias (BEM Helper) */
+.u-text-xxl {
+  font-size: var(--text-xxl);
+}
+.u-text-xl {
+  font-size: var(--text-xl);
+}
+.u-text-lg {
+  font-size: var(--text-lg);
+}
+.u-text-md {
+  font-size: var(--text-md);
+}
+.u-text-sm {
+  font-size: var(--text-sm);
+}
+.u-text-xs {
+  font-size: var(--text-xs);
+}
+.u-font-playfair {
+  font-family: var(--fuente-titulos);
+}
+.u-font-italic {
+  font-style: italic;
+}

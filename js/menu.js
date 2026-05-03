@@ -18,7 +18,7 @@ let estaNavegandoPorClick = false;
 
 // guardar posición
 
-let scrollPos = 0; // Debe estar fuera de la función
+// let scrollPos = 0;
 
 function gestionBloqueoScroll(bloquear) {
   const html = document.documentElement;
@@ -98,41 +98,6 @@ if (btnCloseMenu) {
     }
   });
 }
-
-/*
-    cierre del menú al hacer click en cualquier link
-    que no sea el de abrir sub-menú (.btn-submenu)
-*/
-// --- EVENTO PARA LOS LINKS ---
-/*
-navLinks.forEach((link) => {
-  link.addEventListener("click", (e) => {
-    const href = link.getAttribute("href");
-
-    if (href && href.startsWith("#")) {
-      e.preventDefault();
-
-      estaNavegandoPorClick = true; // ACTIVAMOS ESCUDO
-
-      if (typeof gestionBloqueoScroll === "function") {
-        gestionBloqueoScroll(false, true);
-      }
-
-      navegarA(href, link);
-
-      // Cerramos el menú
-      navMenu.classList.remove("nav-visible");
-      overlay.classList.remove("overlay--active");
-      subMenu.classList.remove("submenu-open");
-      arrow.classList.remove("arrow-rotate");
-
-      // Esperamos un poco más para que la página se detenga totalmente
-      setTimeout(() => {
-        estaNavegandoPorClick = false; // DESACTIVAMOS ESCUDO
-      }, 1200);
-    }
-  });
-});*/
 
 /*
     cierre del menú al hacer click en cualquier

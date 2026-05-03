@@ -18,34 +18,30 @@ const inNm = document.getElementById("cust-name");
 const inLn = document.getElementById("cust-lastname");
 const errorMsg = document.getElementById("form-error-msg"); // El texto de error que aparece si falta algo
 
-// --- GESTIÓN DE SCROLL LOCAL PARA CARRITO ---
-let scrollPosCart = 0; // Variable exclusiva para el carrito
+// --- GESTIÓN DE SCROLL LOCAL PARA CARRITO (OPTIMIZADA) ---
+let scrollPosCart = 0;
 
+// --- GESTIÓN DE SCROLL LOCAL PARA CARRITO (MÉTODO MENU) ---
 function gestionBloqueoScrollCart(bloquear) {
+  const html = document.documentElement;
   const body = document.body;
 
   if (bloquear) {
-    scrollPosCart = window.pageYOffset || document.documentElement.scrollTop;
-    body.style.position = "fixed";
-    body.style.top = `-${scrollPosCart}px`;
-    body.style.width = "100%";
-    body.style.overflowY = "scroll";
-    const scrollBarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
-    body.style.paddingRight = `${scrollBarWidth}px`;
-  } else {
-    body.style.removeProperty("position");
-    body.style.removeProperty("top");
-    body.style.removeProperty("width");
-    body.style.removeProperty("overflow-y");
-    body.style.removeProperty("padding-right");
+    // Calculamos el ancho del scroll antes de bloquear para evitar el salto lateral
+    const scrollBarWidth = window.innerWidth - html.clientWidth;
 
-    // Aplica la misma corrección aquí
-    window.scrollTo({
-      top: scrollPosCart,
-      behavior: "instant",
-    });
-    body.style.removeProperty("padding-right");
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+    body.style.paddingRight = `${scrollBarWidth}px`;
+
+    // Añadimos tu clase de CSS por si acaso
+    body.classList.add("no-scroll");
+  } else {
+    // Restauramos todo de forma limpia
+    html.style.overflow = "";
+    body.style.overflow = "";
+    body.style.paddingRight = "";
+    body.classList.remove("no-scroll");
   }
 }
 // --- UTILIDADES ---
@@ -116,51 +112,6 @@ if (btnCloseCart) {
   });
 }
 
-// Abre o cierra el carrito lateral.
-/*
-function toggleCart() {
-  const navMenu = document.querySelector(".header__nav");
-  const navOverlay = document.querySelector(".overlay__nav");
-
-  // 1. Si el menú de navegación móvil está abierto, lo cerramos
-  if (navMenu?.classList.contains("nav-visible")) {
-    navMenu.classList.remove("nav-visible");
-    navOverlay?.classList.remove("overlay--active");
-    // No ponemos return para que pueda abrir el carrito inmediatamente
-  }
-
-  // 2. Limpiamos errores previos del formulario de facturación
-  if (typeof resetFormErrors === "function") {
-    resetFormErrors();
-  }
-  const isActive = sidebar.classList.toggle("sidebar--active");
-  cartOverlay.classList.toggle("overlay--active");
-
-  // Lógica simplificada
-  if (isActive) {
-    // 1. Calculamos el ancho real de la barra
-    const scrollBarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
-
-    // 2. Aplicamos bloqueo y compensación
-    document.body.style.paddingRight = `${scrollBarWidth}px`;
-    document.body.classList.add("no-scroll");
-
-    updateUI();
-  } else {
-    // 3. Restauramos todo al cerrar
-    document.body.classList.remove("no-scroll");
-    document.body.style.paddingRight = "0px";
-  }
-}*/
-
-// function preventDefault(e) {
-//   e.preventDefault();
-// }
-
-// Variable para controlar el evento de bloqueo
-// const preventDefault = (e) => e.preventDefault();
-
 // Versión inteligente que permite el scroll interno
 const preventDefault = (e) => {
   // Verificamos si el toque ocurre dentro de la zona de productos
@@ -174,6 +125,8 @@ const preventDefault = (e) => {
   // Si toca el total, el header del cart o el overlay, bloqueamos el movimiento
   e.preventDefault();
 };
+
+// Abre o cierra el carrito lateral.
 
 function toggleCart() {
   if (typeof resetFormErrors === "function") {

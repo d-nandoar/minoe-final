@@ -11,17 +11,11 @@ const inMotivo = document.getElementById("motivo");
 const allInputs = [inNombre, inApellidos, inCiudad, inEmail, inMotivo];
 
 // Emojis y configuración
-const iconSpark = "\u2728";
-const iconUser = "\uD83D\uDC64";
-const iconMail = "\uD83D\uDCE7";
-const iconMap = "\uD83D\uDCCD";
-const iconMsg = "\uD83D\uDCAC";
-
-// const iconSpark = "\u{2728}"; // ✨
-// const iconUser = "\u{1F464}"; // 👤
-// const iconMail = "\u{1F4E7}"; // 📧
-// const iconMap = "\u{1F4CC}"; // 📍
-// const iconMsg = "\u{1F4AC}"; // 💬
+const iconSpark = "\u2728"; // ✨
+const iconUser = "\uD83D\uDC64"; // 👤
+const iconMail = "\uD83D\uDCE7"; // 📧
+const iconMap = "\uD83D\uDCCD"; // 📍
+const iconMsg = "\uD83D\uDCAC"; // 💬
 
 function validateEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);

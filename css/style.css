@@ -1,330 +1,4 @@
 /* =========================================
-   1. CONFIGURACIÓN DE FUENTES (@font-face)
-   ========================================= */
-
-/* Montserrat - Regular (400) */
-@font-face {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src:
-    local("Montserrat Regular"),
-    local("Montserrat-Regular"),
-    url("../assets/fonts/montserrat/montserrat-v31-latin-regular.woff2")
-      format("woff2"),
-    url("../assets/fonts/montserrat/montserrat-v31-latin-regular.woff")
-      format("woff");
-}
-
-/* Montserrat - Medium (500) */
-@font-face {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src:
-    local("Montserrat Medium"),
-    local("Montserrat-Medium"),
-    url("../assets/fonts/montserrat/montserrat-v31-latin-500.woff2")
-      format("woff2"),
-    url("../assets/fonts/montserrat/montserrat-v31-latin-500.woff")
-      format("woff");
-}
-
-/* Montserrat - Bold (700) */
-@font-face {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src:
-    local("Montserrat Bold"),
-    local("Montserrat-Bold"),
-    url("../assets/fonts/montserrat/montserrat-v31-latin-700.woff2")
-      format("woff2"),
-    url("../assets/fonts/montserrat/montserrat-v31-latin-700.woff")
-      format("woff");
-}
-
-/* Playfair Display - Regular (400) */
-@font-face {
-  font-family: "Playfair Display";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src:
-    local("Playfair Display Regular"),
-    local("PlayfairDisplay-Regular"),
-    url("../assets/fonts/playfair-display/playfair-display-v40-latin-regular.woff2")
-      format("woff2"),
-    url("../assets/fonts/playfair-display/playfair-display-v40-latin-regular.woff")
-      format("woff");
-}
-
-/* Playfair Display - Medium (500) */
-@font-face {
-  font-family: "Playfair Display";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src:
-    local("Playfair Display Medium"),
-    local("PlayfairDisplay-Medium"),
-    url("../assets/fonts/playfair-display/playfair-display-v40-latin-500.woff2")
-      format("woff2"),
-    url("../assets/fonts/playfair-display/playfair-display-v40-latin-500.woff")
-      format("woff");
-}
-
-/* Playfair Display - Bold (700) */
-@font-face {
-  font-family: "Playfair Display";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src:
-    local("Playfair Display Bold"),
-    local("PlayfairDisplay-Bold"),
-    url("../assets/fonts/playfair-display/playfair-display-v40-latin-700.woff2")
-      format("woff2"),
-    url("../assets/fonts/playfair-display/playfair-display-v40-latin-700.woff")
-      format("woff");
-}
-
-/* =========================================
-   2. VARIABLES MAESTRAS (COLORES Y FUENTES)
-   ========================================= */
-:root {
-  /* =====================
-         ESCALA DE CAPAS (Z-INDEX)
-     ===================== */
-
-  /* --- CAPAS DE SISTEMA (Nivel Crítico) --- */
-  --z-critical: 9999; /* Bloqueo de rotación: Visible siempre */
-  --z-preloader: 2000; /* Muro de carga: Oculta todo hasta que esté listo */
-
-  /* --- CAPAS DE INTERACCIÓN (Sidebars y Overlays) --- */
-  --z-sidebar: 1400; /* Carrito: Prioridad máxima de usuario */
-  --z-overlay-sidebar: 1300; /* Fondo oscuro del carrito */
-
-  --z-nav-mobile: 1200; /* Menú lateral: Fuera del header */
-  --z-overlay: 1100; /* Fondo oscuro del menú móvil */
-
-  /* --- CAPAS DE INTERFAZ (Navegación y Flujo) --- */
-  --z-header: 1000; /* Barra de navegación principal */
-
-  /* --- CAPAS DE COMPONENTES (Hero y Contenido) --- */
-  --z-slider-thumb: 100; /* Miniaturas: Deben pasar bajo el header */
-  --z-slider-arrows: 30; /* Flechas de navegación del Hero */
-  --z-hero-active: 20; /* Slide en primer plano */
-  --z-hero-content: 15; /* Textos y botones del Hero */
-
-  /* --- CAPA BASE --- */
-  /* --z-base-x2: 2; Resto del contenido de la página */
-  --z-base: 1; /* Resto del contenido de la página */
-
-  /* =====================
-         PALETAS DE COLORES
-     ===================== */
-
-  --color-dorado: #c5a059; /* Lujo y Detalles */
-  --color-verde: #0e3b32; /* Autoridad y Fondos */
-  --color-crema: #f2f1e6; /* Fondos Suaves y Elegancia */
-  --color-blanco: #ffffff; /* Limpieza Visual */
-  --color-gris-oscuro: #2d2d2d; /* Texto Principal */
-  --color-gris-claro: #f9f9f9; /* Fondos Alternos */
-  --color-gris-placeholder: #051411; /* input placeholder */
-  --color-rojo: #e74c3c; /* trash items */
-  --color-error-field: #a13d3d; /* trash items */
-  --color-bg-error-field: #fffafb; /* trash items */
-  --color-wapp: #25d366; /* botón whatsapp */
-  --color-wapp-hover: #128c7e; /* botón whatsapp */
-  --color-overlay: rgba(0, 0, 0, 0.4);
-
-  /* contacto */
-  --bg-contacto: #043927;
-  /* Sombras mucho más sutiles */
-  --shadow-dark-soft: rgba(0, 0, 0, 0.25);
-  --shadow-light-soft: rgba(255, 255, 255, 0.05);
-  --accent-gold: #d4af37;
-
-  /* nosotros */
-
-  --verde-minoe: #0e3b32;
-  --dorado: #d4af37;
-  --crema: #f2f1ed;
-  --blanco: #ffffff;
-  --bezier-lujo: cubic-bezier(0.65, 0, 0.35, 1);
-
-  /* =====================
-         SOMBRAS DE CAJA (BOX SHADOWS)
-     ===================== */
-
-  --sombra-logo: 0 0 5px var(--color-dorado);
-  --sombra-dorada: 0 4px 15px rgba(197, 160, 89, 0.2); /*btn*/
-  --sombra-verde-hover: 0 8px 25px rgba(14, 59, 50, 0.3); /*btn*/
-  --sombra-card: 0 2px 10px rgba(0, 0, 0, 0.05);
-  --sombra-nav: 0 2px 10px rgba(0, 0, 0, 0.2);
-
-  /* --- Sombra de Texto (Text Shadow) --- */
-  /* 0px horizontal, 1px vertical, 2px de desenfoque, negro al 10% */
-
-  --sombra-texto-boton: 0 1px 2px rgba(0, 0, 0, 0.1); /*btn*/
-
-  /* Sombra dorada suave para resaltar elementos sobre el verde bosque */
-  --sombra-gold-glow: drop-shadow(0 0 3px rgba(212, 175, 55, 0.5));
-
-  --sombra-input: 0 0 0px 1000px #ffffff inset;
-
-  /* =====================
-         TRANSICIONES
-     ===================== */
-
-  --transition-main: 0.3s ease-out;
-  --transition-second: 0.5s ease-out;
-
-  /* Una curva de velocidad elegante: inicia lento, acelera y frena con suavidad */
-  --bezier-lujo: cubic-bezier(0.65, 0, 0.35, 1); /* hero en preloader*/
-
-  /* Curva con un ligero "pop" al final */
-  --transition-open-curve: 0.6s cubic-bezier(0.22, 1, 0.36, 1); /*nav y sidebar*/
-  /* Curva más elegante y rápida para cerrar */
-  --transition-close-curve: 0.5s cubic-bezier(0.32, 0, 0.67, 0); /*nav y sidebar*/
-
-  /* =====================
-         DEGRADADOS (GRADIENTES)
-     ===================== */
-
-  --gradient-especial: linear-gradient(
-    to right top,
-    #f2f1e6,
-    #e9e8de,
-    #dfdfd6,
-    #d6d6cf,
-    #cdcdc7,
-    #cfcdc9,
-    #d1cecb,
-    #d2cfcd,
-    #dedbda,
-    #e9e7e7,
-    #f3f3f3,
-    #ffffff
-  ); /* sets de regalo */
-
-  --gradiente-hero-a: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.81),
-    rgba(0, 0, 0, 0)
-  ); /* hero */
-
-  --gradiente-hero-b: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.3),
-    rgba(0, 0, 0, 0)
-  ); /* hero */
-
-  /* nosotros */
-
-  /* El verde esmeralda de Minoe en formato RGB */
-  --rgb-verde-minoe: 4, 57, 39;
-
-  /* Gradiente de luz (Superior Izquierda) */
-  --gradiente-nos-a: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.15) 0%,
-    transparent 100%
-  );
-
-  /* Gradiente de profundidad verde (Inferior Derecha) */
-  --gradiente-nos-b: linear-gradient(
-    to top left,
-    rgba(var(--rgb-verde-minoe), 0.4) 0%,
-    transparent 100%
-  );
-
-  /* Variables de Opacidad para Bordes */
-  --borde-dorado-tenue: rgba(197, 160, 89, 0.2);
-  --borde-verde-tenue: rgba(14, 59, 50, 0.3);
-  --borde-input: #e2e2e2;
-  --borde-input-focus: #d4af37;
-
-  /* =====================
-         ANIMACIONES
-     ===================== */
-
-  /* inputs */
-
-  /* Intensidad de la sacudida (4px es estándar, 2px es más sutil) */
-  --shake-distance: 2px;
-  /* Velocidad de la animación */
-  --shake-duration: 0.2s;
-
-  /* animación hero textos*/
-
-  /* =====================
-         TIPOGRAFÍAS
-     ===================== */
-
-  --fuente-titulos: "Playfair Display", serif;
-  --fuente-cuerpo: "Montserrat", sans-serif;
-  --fuente-arrow: monospace, sans-serif;
-}
-
-/* =========================================
-   3. ESTILOS BASE Y JERARQUÍA
-   ========================================= */
-
-body {
-  background-color: var(--color-blanco);
-  color: var(--color-gris-oscuro);
-  font-family: var(--fuente-cuerpo);
-}
-
-/* sidebar cart - bloqueo total */
-
-html.no-scroll,
-body.no-scroll {
-  touch-action: none; /* Desactiva gestos nativos del navegador */
-  overflow: hidden !important;
-  scroll-behavior: auto !important; /* Fuerza el salto instantáneo */
-  /* height: 100svh !important; */
-  /* position: fixed; */
-  /* width: 100%; */
-}
-
-/* sidebar cart - bloqueo scroll */
-
-/* body.no-scroll {
-  overflow: hidden !important;
-  height: 100svh;
-} */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--fuente-titulos);
-  font-weight: 700;
-}
-
-a,
-button {
-  text-transform: uppercase;
-}
-
-button {
-  font-weight: 700;
-}
-
-a,
-.header__btn-submenu {
-  font-weight: 500;
-}
-
-/* =========================================
    4. GENERALES
    ========================================= */
 
@@ -554,16 +228,14 @@ a,
 .header__logo-h3 {
   color: var(--color-gris-oscuro);
   letter-spacing: 2px;
-  /* font-size: ; */
-  transition:
-    color var(--transition-main),
-    transform var(--transition-main);
+  font-size: 1.5em;
+  transition: color var(--transition-main);
 }
 
 @media (hover: hover) {
   .header__logo-h3:hover {
     color: var(--color-dorado);
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
     /* transform: scale(1.05); */
     /* box-shadow: var(--sombra-dorada); */
   }
@@ -1955,10 +1627,10 @@ a,
   letter-spacing: 1px;
 }
 
-.product-card__sku {
+/* .product-card__sku {
   text-transform: uppercase;
   font-weight: 500;
-}
+} */
 
 .product-card__name {
   flex-grow: 1; /* EMPUJA el precio y el botón hacia abajo */
@@ -2493,6 +2165,9 @@ a,
     display: block;
   }
 
+  .header__logo-h3 {
+    font-size: 1.3em;
+  }
   .header__close-menu {
     display: block;
   }
