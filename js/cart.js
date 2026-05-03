@@ -8,7 +8,7 @@ const cartTotal = document.getElementById("cart-total"); // El precio total acum
 const cartCount = document.getElementById("cart-count"); // El circulito rojo con el número de productos
 const sidebar = document.getElementById("sidebar"); // El panel lateral del carrito
 const cartOverlay = document.getElementById("overlay__cart"); // El fondo oscuro detrás del carrito
-console.log(cartOverlay);
+// console.log(cartOverlay);
 
 const toastContainer = document.getElementById("toast-container"); // Para mostrar notificaciones rápidas
 
@@ -367,6 +367,9 @@ function triggerCartAnimation() {
 
 // Esta función se activa al dar click en "FINALIZAR PEDIDO".
 function sendWhatsApp() {
+  // 1. Evita que la página se recargue (vital al usar <form>)
+  // if (e) e.preventDefault();
+
   resetFormErrors();
 
   const idVal = inId.value.trim();
@@ -447,7 +450,9 @@ function sendWhatsApp() {
 
   // Una vez enviado, vaciamos el carrito y notificamos.
   cart = [];
+  clearFormValues(); // Limpia los inputs físicamente
   updateUI();
+  toggleCart(); // Cerramos el carrito para una experiencia fluida
   // showToast("¡Pedido Enviado!");
 }
 

@@ -275,29 +275,14 @@
    3. ESTILOS BASE Y JERARQUÍA
    ========================================= */
 
-* {
-  -webkit-tap-highlight-color: transparent !important;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-/* Fuerza la eliminación de estilos automáticos del navegador */
-input:invalid,
-textarea:invalid {
-  box-shadow: none !important;
-  outline: none !important;
-}
-
-/* Evita el resaltado azul/rosado al mantener presionado en móvil */
-input,
-textarea {
-  -webkit-tap-highlight-color: transparent !important;
-  /* Añade esto para evitar que iOS cambie el diseño de los inputs */
-  -webkit-appearance: none;
-  appearance: none;
-  border-radius: 0.9375rem; /* Mantén el radio de tus bordes */
+body {
+  background-color: var(--color-blanco);
+  color: var(--color-gris-oscuro);
+  font-family: var(--fuente-cuerpo);
 }
 
 /* sidebar cart - bloqueo total */
+
 html.no-scroll,
 body.no-scroll {
   touch-action: none; /* Desactiva gestos nativos del navegador */
@@ -306,12 +291,6 @@ body.no-scroll {
   /* height: 100svh !important; */
   /* position: fixed; */
   /* width: 100%; */
-}
-
-body {
-  background-color: var(--color-blanco);
-  color: var(--color-gris-oscuro);
-  font-family: var(--fuente-cuerpo);
 }
 
 /* sidebar cart - bloqueo scroll */
@@ -556,7 +535,7 @@ a,
   display: block;
 }
 
-.header__logo-img {
+/* .header__logo-img {
   width: 3.5rem;
   cursor: pointer;
   border-radius: 50%;
@@ -569,6 +548,24 @@ a,
   .header__logo-img:hover {
     transform: scale(1.05);
     box-shadow: var(--sombra-dorada);
+  }
+} */
+
+.header__logo-h3 {
+  color: var(--color-gris-oscuro);
+  letter-spacing: 2px;
+  /* font-size: ; */
+  transition:
+    color var(--transition-main),
+    transform var(--transition-main);
+}
+
+@media (hover: hover) {
+  .header__logo-h3:hover {
+    color: var(--color-dorado);
+    transform: scale(1.05);
+    /* transform: scale(1.05); */
+    /* box-shadow: var(--sombra-dorada); */
   }
 }
 
@@ -1492,7 +1489,8 @@ a,
 
 .hero__thumbnail {
   position: absolute;
-  bottom: 8%;
+  /* bottom: 8%; */
+  bottom: 4%;
   left: calc(75% - 20%);
   z-index: var(--z-slider-thumb);
   display: flex;
@@ -1772,6 +1770,7 @@ a,
   align-items: flex-end; /* Texto abajo */
   justify-content: center;
   padding-bottom: 2rem;
+  font-size: 0.85em;
   background-color: #222;
 }
 
@@ -1800,7 +1799,7 @@ a,
   color: var(--blanco);
   text-transform: uppercase;
   letter-spacing: 3px;
-  font-size: 0.85em;
+  /* font-size: 0.85em !important; */
   font-weight: 700;
   border-bottom: 2px solid var(--dorado);
   padding-bottom: 5px;

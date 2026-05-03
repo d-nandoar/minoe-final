@@ -5,8 +5,8 @@
 
 // 1. SELECCIÓN DE ELEMENTOS
 let items = document.querySelectorAll(".hero__item-list");
-let next = document.getElementById("hero__next-arow");
-let prev = document.getElementById("hero__prev-arow");
+// let next = document.getElementById("hero__next-arow");
+// let prev = document.getElementById("hero__prev-arow");
 let thumbnails = document.querySelectorAll(".hero__item-thumbnail");
 
 // SELECCIÓN DE LAS CAJAS DE TEXTO: Aplicamos el hover a todas las cajas de contenido
@@ -73,8 +73,8 @@ cajasDeTexto.forEach((caja) => {
 /**
  * 6. EVENTOS DE CLIC
  */
-next.onclick = () => moverSiguiente();
-prev.onclick = () => moverAnterior();
+// next.onclick = () => moverSiguiente();
+// prev.onclick = () => moverAnterior();
 
 thumbnails.forEach((thumbnail, index) => {
   thumbnail.addEventListener("click", () => {
@@ -108,7 +108,7 @@ function showSlider() {
 // 8. ARRANQUE EN ESPERA
 // El slider no se moverá hasta que el preloader le de la orden
 window.addEventListener("paginaRevelada", () => {
-  console.log("Minoe Luxury: Iniciando Slider...");
+  // console.log("Minoe Luxury: Iniciando Slider...");
   // iniciarAutoRun();
 
   // 1. Seleccionamos el contenedor principal del hero
